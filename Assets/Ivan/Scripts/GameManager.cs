@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour {
     public Texture2D iconHoverCastle;
 
     public GameObject Ediifios;
+    bool casillaElegida;
 
     private void Awake()
     {
@@ -32,6 +33,7 @@ public class GameManager : MonoBehaviour {
         recursos[1] = 1000;
         recursos[2] = 1000;
         recursos[3] = 1000;
+
 
     }
 
@@ -72,11 +74,38 @@ public class GameManager : MonoBehaviour {
             {
                 Debug.Log("Pulsado");
                 Debug.Log("ID: " + id);
+
+                casillaElegida = false;
+                //casillaElegida = true;
+
+                //ELEGIR CASILLA
+                if (Input.GetMouseButtonDown(0))
+                {
+                    RaycastHit hit;
+                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                    if (Physics.Raycast(ray, out hit, 100.0f))
+                    {
+                        if (hit.transform.tag == "Grid")
+                        {
+                            x = (int) hit.transform.position.x;
+                            y = (int) hit.transform.position.z;
+                            //cell = hit.ALGO
+                            casillaElegida = true;
+                        }
+                    }
+                }
+
+
+
                 //CREAR EDIFICIO
 
-
-                Edificio edificio = GetComponent<Edificio>();
-                edificio.newEdificio(id, x, y);
+                if (casillaElegida)
+                {
+                    Edificio edificio = GetComponent<Edificio>();
+                    edificio.newEdificio(id, x, y);
+                    casillaElegida = false;
+                }
             }
 
             j++;
