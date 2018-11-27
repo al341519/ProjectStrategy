@@ -31,9 +31,10 @@ public class Edificio : MonoBehaviour {
         recursos = game.GetRecursos();
     }
 
-    public Edificio(string identificador, int x, int y)
+    public void newEdificio(string identificador, int x, int y)
     {
-        transform.position = new Vector3 (x, 0, y);
+        Debug.Log("identificador: " + identificador + " x: " + x + " y: " + y);
+        transform.position = new Vector3 (x,0,y);
         id = identificador;
 
         switch (id)
@@ -96,12 +97,12 @@ public class Edificio : MonoBehaviour {
 
     void crearEdificio()
     {
-
         if (recursos[0] >= madera &&
             recursos[1] >= trigo &&
             recursos[2] >= metal &&
             recursos[3] >= aldeano)
         {
+            Debug.Log("Recursos0: " + recursos[0]);
 
             game.UpdateRecursos(madera, trigo, metal, aldeano);
 

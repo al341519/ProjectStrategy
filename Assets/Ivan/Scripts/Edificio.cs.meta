@@ -3,7 +3,21 @@ guid: 49ab2a5af2298674e8925de4197e94c9
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - aserraderoPrefab: {fileID: 1974150642326260, guid: 6a6c3f3b44171f84a81f20634071bb2b,
+      type: 2}
+  - forjaPrefab: {fileID: 1152652269165850, guid: 551c46c6f83238446b2cede7db27f6a2,
+      type: 2}
+  - molinoPrefab: {fileID: 1218923391066058, guid: ff3b3075f95da9d45b7c77db82af2c25,
+      type: 2}
+  - infanteriaPrefab: {fileID: 1277795826712250, guid: 441466f191becb5449b6c1ff49043527,
+      type: 2}
+  - arqueriaPrefab: {fileID: 1399776201307478, guid: df895d45315c8844d89e1b20b0a760b7,
+      type: 2}
+  - caballeriaPrefab: {fileID: 1267259959536856, guid: 575472225b64ecb42be5cca12c3a8652,
+      type: 2}
+  - castilloPrefab: {fileID: 1539531712916810, guid: 952a9c641abd4e94fa99b98fdd842377,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

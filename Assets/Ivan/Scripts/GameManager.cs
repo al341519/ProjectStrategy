@@ -14,7 +14,6 @@ public class GameManager : MonoBehaviour {
     int aldeanos;
     int vida;
 
-    Edificio edificio;
     int x;
     int y;
 
@@ -24,9 +23,16 @@ public class GameManager : MonoBehaviour {
     public Texture2D iconCastle;
     public Texture2D iconHoverCastle;
 
+    public GameObject Ediifios;
+
     private void Awake()
     {
-        recursos = new int [4];
+        recursos = new int[4];
+        recursos[0] = 1000;
+        recursos[1] = 1000;
+        recursos[2] = 1000;
+        recursos[3] = 1000;
+
     }
 
     private void OnGUI()
@@ -65,10 +71,12 @@ public class GameManager : MonoBehaviour {
             if (GUI.Button(new Rect(Screen.width / 2 - 199 + (offset * j), Screen.height - 39, 46, 39), "", Icon))
             {
                 Debug.Log("Pulsado");
-
+                Debug.Log("ID: " + id);
                 //CREAR EDIFICIO
-                
-                edificio = new Edificio(id, x, y);
+
+
+                Edificio edificio = GetComponent<Edificio>();
+                edificio.newEdificio(id, x, y);
             }
 
             j++;

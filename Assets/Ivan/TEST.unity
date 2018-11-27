@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -122,6 +122,7 @@ GameObject:
   m_Component:
   - component: {fileID: 109660052}
   - component: {fileID: 109660051}
+  - component: {fileID: 109660053}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -145,6 +146,7 @@ MonoBehaviour:
   iconHoverMine: {fileID: 2800000, guid: 732035057b954e94098f9ea8acd80b6d, type: 3}
   iconCastle: {fileID: 2800000, guid: 3dafc575c6f86dc45a9cac24b09b2f11, type: 3}
   iconHoverCastle: {fileID: 2800000, guid: c4ff6c88dd3cc5140bf52f3adf68bd37, type: 3}
+  Ediifios: {fileID: 1972545249}
 --- !u!4 &109660052
 Transform:
   m_ObjectHideFlags: 0
@@ -158,6 +160,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &109660053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 109660050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49ab2a5af2298674e8925de4197e94c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  game: {fileID: 0}
+  aserraderoPrefab: {fileID: 1974150642326260, guid: 6a6c3f3b44171f84a81f20634071bb2b,
+    type: 2}
+  forjaPrefab: {fileID: 1152652269165850, guid: 551c46c6f83238446b2cede7db27f6a2,
+    type: 2}
+  molinoPrefab: {fileID: 1218923391066058, guid: ff3b3075f95da9d45b7c77db82af2c25,
+    type: 2}
+  infanteriaPrefab: {fileID: 1277795826712250, guid: 441466f191becb5449b6c1ff49043527,
+    type: 2}
+  arqueriaPrefab: {fileID: 1399776201307478, guid: df895d45315c8844d89e1b20b0a760b7,
+    type: 2}
+  caballeriaPrefab: {fileID: 1267259959536856, guid: 575472225b64ecb42be5cca12c3a8652,
+    type: 2}
+  castilloPrefab: {fileID: 1539531712916810, guid: 952a9c641abd4e94fa99b98fdd842377,
+    type: 2}
 --- !u!4 &119760014 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4321724283546836, guid: 61bdfd7fa6339fe4f811e67145f6a8ad,
@@ -285,6 +313,26 @@ Prefab:
     - target: {fileID: 114414201577439008, guid: c63894ac29f9a594cb827d45422f4cc6,
         type: 2}
       propertyPath: grid
+      value: 
+      objectReference: {fileID: 1335749238}
+    - target: {fileID: 114305410435771256, guid: c63894ac29f9a594cb827d45422f4cc6,
+        type: 2}
+      propertyPath: hexGrid
+      value: 
+      objectReference: {fileID: 1335749238}
+    - target: {fileID: 114970822863711146, guid: c63894ac29f9a594cb827d45422f4cc6,
+        type: 2}
+      propertyPath: hexGrid
+      value: 
+      objectReference: {fileID: 1335749238}
+    - target: {fileID: 114970822863711146, guid: c63894ac29f9a594cb827d45422f4cc6,
+        type: 2}
+      propertyPath: mapGenerator
+      value: 
+      objectReference: {fileID: 1332548659}
+    - target: {fileID: 114733811612372888, guid: c63894ac29f9a594cb827d45422f4cc6,
+        type: 2}
+      propertyPath: hexGrid
       value: 
       objectReference: {fileID: 1335749238}
     m_RemovedComponents: []
@@ -542,6 +590,12 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3778f8db1ccabee42b0c70b4eee8d0cc, type: 2}
   m_IsPrefabAsset: 0
+--- !u!114 &1332548659 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114185625255793412, guid: 3778f8db1ccabee42b0c70b4eee8d0cc,
+    type: 2}
+  m_PrefabInternal: {fileID: 1291337682}
+  m_Script: {fileID: 11500000, guid: 5ce9de9c7694b42c9ac45ddfca692a98, type: 3}
 --- !u!114 &1335749238 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114036583340281020, guid: b2cba758c21e1a449bcffe9dbc471bb6,
@@ -821,13 +875,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1972545250}
+  - component: {fileID: 1972545251}
   m_Layer: 0
   m_Name: Edificios
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1972545250
 Transform:
   m_ObjectHideFlags: 0
@@ -848,6 +903,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1972545251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1972545249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49ab2a5af2298674e8925de4197e94c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  game: {fileID: 0}
+  aserraderoPrefab: {fileID: 1974150642326260, guid: 6a6c3f3b44171f84a81f20634071bb2b,
+    type: 2}
+  forjaPrefab: {fileID: 1152652269165850, guid: 551c46c6f83238446b2cede7db27f6a2,
+    type: 2}
+  molinoPrefab: {fileID: 1218923391066058, guid: ff3b3075f95da9d45b7c77db82af2c25,
+    type: 2}
+  infanteriaPrefab: {fileID: 1277795826712250, guid: 441466f191becb5449b6c1ff49043527,
+    type: 2}
+  arqueriaPrefab: {fileID: 1399776201307478, guid: df895d45315c8844d89e1b20b0a760b7,
+    type: 2}
+  caballeriaPrefab: {fileID: 1267259959536856, guid: 575472225b64ecb42be5cca12c3a8652,
+    type: 2}
+  castilloPrefab: {fileID: 1539531712916810, guid: 952a9c641abd4e94fa99b98fdd842377,
+    type: 2}
 --- !u!1 &2055277295
 GameObject:
   m_ObjectHideFlags: 0
