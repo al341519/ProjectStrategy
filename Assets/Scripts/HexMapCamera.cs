@@ -14,7 +14,7 @@ public class HexMapCamera : MonoBehaviour {
 
 	public HexGrid grid;
 
-	float zoom = 1f;
+	float zoom = 0.5f;//Original 1f
 
 	float rotationAngle;
 

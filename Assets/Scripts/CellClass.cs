@@ -32,7 +32,7 @@ public class CellClass : MonoBehaviour {
 	private void TerrainType(){
 		switch (typeIndex) {
 		case 0://Arena/Desierto
-			mobility=-1;
+			mobility=50;//-1
 			range=0;
 			defense=0;
 			vision=0;
@@ -44,19 +44,19 @@ public class CellClass : MonoBehaviour {
 			vision=0;
 			break;
 		case 2://Barro no hay datos por lo que lo considero terreno dificil similar a la piedra sin aumento de vision y defensa
-			mobility=-1;
+			mobility=50;//-1
 			range=2;
 			defense=0;
 			vision=0;
 			break;
 		case 3://Piedra
-			mobility=-1;
+			mobility=50;//-1
 			range=2;
 			defense=2;
 			vision=2;
 			break;
 		case 4://Nieve
-			mobility=-1;
+			mobility=50;//-1
 			range=0;
 			defense=0;
 			vision=0;
