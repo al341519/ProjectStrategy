@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MilitiaClass : UnityClass {
+public class InfantryClass : UnityClass {
 
 	// Use this for initialization
 	void Start () {
         velocity = 1;
-        defence = 1f;
-        attack = 0f;
+        defence = 2f;
+        attack = 1f;
         life = 1;
         visionRange = 2;
         attackRange = 1;

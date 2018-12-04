@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : UnityClass {
+public class VillagerClass : UnityClass {
 
 	// Use this for initialization
 	void Start () {
         velocity = 1;
-        defence = 2f;
-        attack = 1f;
+        defence = 1f;
+        attack = 0f;
         life = 1;
         visionRange = 2;
         attackRange = 1;
