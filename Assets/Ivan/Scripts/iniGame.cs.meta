@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 3ea8ba5510151c4498d94a9e95fb500d
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - iconCastle: {fileID: 2800000, guid: 3dafc575c6f86dc45a9cac24b09b2f11, type: 3}
+  - iconHoverCastle: {fileID: 2800000, guid: c4ff6c88dd3cc5140bf52f3adf68bd37, type: 3}
+  - iconMine: {fileID: 2800000, guid: 53f194e60a57c234aaa7776215e46865, type: 3}
+  - iconHoverMine: {fileID: 2800000, guid: 732035057b954e94098f9ea8acd80b6d, type: 3}
+  - iconInfanteria: {fileID: 2800000, guid: 3dafc575c6f86dc45a9cac24b09b2f11, type: 3}
+  - iconHoverInfanteria: {fileID: 2800000, guid: c4ff6c88dd3cc5140bf52f3adf68bd37,
+      type: 3}
+  - IconContainer: {fileID: 2800000, guid: 1d45a45ec24d2d944ba763a52dffa21b, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

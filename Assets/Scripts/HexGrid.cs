@@ -142,6 +142,10 @@ public class HexGrid : MonoBehaviour {
 		}
 	}
 
+    public HexCell[] GetCells() {
+        return cells;
+    }
+
 	public HexCell GetCell (Ray ray) {
 		RaycastHit hit;
 		if (Physics.Raycast(ray, out hit)) {

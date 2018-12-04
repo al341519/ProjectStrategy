@@ -10,9 +10,16 @@ public class HexCell : MonoBehaviour {
 
 	public HexGridChunk chunk;
 
+    public GameManager gameManager;
+
+    
+
 	public int Index { get; set; }
 
 	public int ColumnIndex { get; set; }
+
+
+    
 
 	public int Elevation {
 		get {
@@ -592,4 +599,33 @@ public class HexCell : MonoBehaviour {
 	public void SetMapData (float data) {
 		ShaderData.SetMapData(this, data);
 	}
+
+    public void Do() {
+        switch (this.specialIndex)
+        {
+            case 1:             //Castillo
+                
+                break;
+            case 2:             // "aserradero"
+                Debug.Log("MADERA ++");
+                break;
+            case 3:             // "forja":
+                Debug.Log("HIERRO ++");
+                break;
+            case 4:             //"molino":
+                Debug.Log("PIEDRA ++");
+                break;
+            case 5:             //"infantería":
+
+                break;
+            case 6:             //"arquería":
+
+                break;
+            case 7:             //"caballería":
+
+                break;
+            default:
+                break;
+        }
+    }
 }

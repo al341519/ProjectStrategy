@@ -28,7 +28,6 @@ public class Edificio : MonoBehaviour {
     {
         game = GetComponent<GameManager>();
 
-        recursos = game.GetRecursos();
     }
 
     public void newEdificio(string identificador, int x, int y)
@@ -104,7 +103,6 @@ public class Edificio : MonoBehaviour {
         {
             Debug.Log("Recursos0: " + recursos[0]);
 
-            game.UpdateRecursos(madera, trigo, metal, aldeano);
 
             switch (id)
             {
