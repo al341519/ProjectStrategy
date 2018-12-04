@@ -13,9 +13,10 @@ public class HexGrid : MonoBehaviour {
 	public HexCell cellPrefab;
 	public Text cellLabelPrefab;
 	public HexGridChunk chunkPrefab;
-	public HexUnit unitPrefab;
+	public HexUnit[] unitPrefab;//Modificado por José
 
-	public Texture2D noiseSource;
+
+    public Texture2D noiseSource;
 
 	public int seed;
 
@@ -47,7 +48,11 @@ public class HexGrid : MonoBehaviour {
 	void Awake () {
 		HexMetrics.noiseSource = noiseSource;
 		HexMetrics.InitializeHashGrid(seed);
-		HexUnit.unitPrefab = unitPrefab;
+        for(int i = 0; i < unitPrefab.Length; i++) //Modificado por José
+        {
+            HexUnit.unitPrefab = unitPrefab[i];
+        }//
+		
 		cellShaderData = gameObject.AddComponent<HexCellShaderData>();
 		cellShaderData.Grid = this;
 		CreateMap(cellCountX, cellCountZ, wrapping);
@@ -136,8 +141,12 @@ public class HexGrid : MonoBehaviour {
 		if (!HexMetrics.noiseSource) {
 			HexMetrics.noiseSource = noiseSource;
 			HexMetrics.InitializeHashGrid(seed);
-			HexUnit.unitPrefab = unitPrefab;
-			HexMetrics.wrapSize = wrapping ? cellCountX : 0;
+
+            for (int i = 0; i < unitPrefab.Length; i++)//Modificado por José
+            {
+                HexUnit.unitPrefab = unitPrefab[i];
+            }//
+            HexMetrics.wrapSize = wrapping ? cellCountX : 0;
 			ResetVisibility();
 		}
 	}

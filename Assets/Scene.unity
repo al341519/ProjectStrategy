@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -10560,8 +10560,12 @@ MonoBehaviour:
   cellLabelPrefab: {fileID: 11470134, guid: f68794ca03b6f4510b9a5bd6ee9ba2f4, type: 2}
   chunkPrefab: {fileID: 114000010052569294, guid: 7622d007cafd044a1b1189c0b93d2912,
     type: 2}
-  unitPrefab: {fileID: 114701888605048992, guid: 5661a1efcb9464721b4db3f694ded559,
-    type: 2}
+  unitPrefab:
+  - {fileID: 114701888605048992, guid: 5661a1efcb9464721b4db3f694ded559, type: 2}
+  - {fileID: 114390095577662952, guid: 557ac45aa76c42543959952f70e8d5a9, type: 2}
+  - {fileID: 114479418827241522, guid: 06f4969ee78f9d347bc7dc7d16900a66, type: 2}
+  - {fileID: 114077501093298094, guid: 3697149dd42f0434c99edf86d34bd924, type: 2}
+  - {fileID: 114561686366303708, guid: 92e1fac0158604c45b73dacc67f0bb44, type: 2}
   noiseSource: {fileID: 2800000, guid: 38701cdeb1fb9427cbb585f917aa59cb, type: 3}
   seed: 1234
 --- !u!4 &1571186512
@@ -15243,3 +15247,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hexGrid: {fileID: 1571186511}
   terrainMaterial: {fileID: 2100000, guid: 6a3f5c7892e4b478e9e745026e6fe9f7, type: 2}
+  unitPrefab:
+  - {fileID: 114701888605048992, guid: 5661a1efcb9464721b4db3f694ded559, type: 2}
+  - {fileID: 114390095577662952, guid: 557ac45aa76c42543959952f70e8d5a9, type: 2}
+  - {fileID: 114479418827241522, guid: 06f4969ee78f9d347bc7dc7d16900a66, type: 2}
+  - {fileID: 114077501093298094, guid: 3697149dd42f0434c99edf86d34bd924, type: 2}
+  - {fileID: 114561686366303708, guid: 92e1fac0158604c45b73dacc67f0bb44, type: 2}

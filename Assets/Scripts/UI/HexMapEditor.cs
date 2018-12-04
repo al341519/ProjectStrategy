@@ -8,6 +8,8 @@ public class HexMapEditor : MonoBehaviour {
 
 	public Material terrainMaterial;
 
+    public HexUnit[] unitPrefab;
+
 	int activeElevation;
 	int activeWaterLevel;
 
@@ -125,16 +127,64 @@ public class HexMapEditor : MonoBehaviour {
 				HandleInput();
 				return;
 			}
-			if (Input.GetKeyDown(KeyCode.U)) {
+			if (Input.GetKeyDown(KeyCode.Y)) {//Modificado por José
 				if (Input.GetKey(KeyCode.LeftShift)) {
 					DestroyUnit();
 				}
 				else {
-					CreateUnit();
+					CreateUnit(0);
 				}
 				return;
 			}
-		}
+            if (Input.GetKeyDown(KeyCode.U))
+            {
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    DestroyUnit();
+                }
+                else
+                {
+                    CreateUnit(1);
+                }
+                return;
+            }
+            if (Input.GetKeyDown(KeyCode.I))
+            {
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    DestroyUnit();
+                }
+                else
+                {
+                    CreateUnit(2);
+                }
+                return;
+            }
+            if (Input.GetKeyDown(KeyCode.O))
+            {
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    DestroyUnit();
+                }
+                else
+                {
+                    CreateUnit(3);
+                }
+                return;
+            }
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    DestroyUnit();
+                }
+                else
+                {
+                    CreateUnit(4);
+                }
+                return;
+            }//
+        }
 		previousCell = null;
 	}
 
@@ -143,14 +193,16 @@ public class HexMapEditor : MonoBehaviour {
 			hexGrid.GetCell(Camera.main.ScreenPointToRay(Input.mousePosition));
 	}
 
-	void CreateUnit () {
+	void CreateUnit (int i) {//Modificado por José
 		HexCell cell = GetCellUnderCursor();
-		if (cell && !cell.Unit) {
+        
+        if (cell && !cell.Unit) {
+            
 			hexGrid.AddUnit(
-				Instantiate(HexUnit.unitPrefab), cell, Random.Range(0f, 360f)
+				Instantiate(unitPrefab[i]), cell, Random.Range(0f, 360f)
 			);
 		}
-	}
+	}//
 
 	void DestroyUnit () {
 		HexCell cell = GetCellUnderCursor();
