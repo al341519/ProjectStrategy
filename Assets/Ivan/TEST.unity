@@ -346,17 +346,17 @@ Prefab:
     - target: {fileID: 224680868464931544, guid: c63894ac29f9a594cb827d45422f4cc6,
         type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 224058193461164042, guid: c63894ac29f9a594cb827d45422f4cc6,
         type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 224982109884877900, guid: c63894ac29f9a594cb827d45422f4cc6,
         type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c63894ac29f9a594cb827d45422f4cc6, type: 2}
@@ -1379,6 +1379,11 @@ Prefab:
       propertyPath: m_TagString
       value: Grid
       objectReference: {fileID: 0}
+    - target: {fileID: 114036583340281020, guid: b2cba758c21e1a449bcffe9dbc471bb6,
+        type: 2}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 109660051}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2cba758c21e1a449bcffe9dbc471bb6, type: 2}
   m_IsPrefabAsset: 0

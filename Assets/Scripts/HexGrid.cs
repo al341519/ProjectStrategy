@@ -9,11 +9,13 @@ public class HexGrid : MonoBehaviour {
 	public int cellCountX = 20, cellCountZ = 15;
 
 	public bool wrapping;
+    public GameManager gameManager;
 
-	public HexCell cellPrefab;
+    public HexCell cellPrefab;
 	public Text cellLabelPrefab;
 	public HexGridChunk chunkPrefab;
 	public HexUnit unitPrefab;
+
 
 	public Texture2D noiseSource;
 
@@ -198,8 +200,10 @@ public class HexGrid : MonoBehaviour {
 		cell.Index = i;
 		cell.ColumnIndex = x / HexMetrics.chunkSizeX;
 		cell.ShaderData = cellShaderData;
+        cell.gameManager = gameManager;
 
-		if (wrapping) {
+
+        if (wrapping) {
 			cell.Explorable = z > 0 && z < cellCountZ - 1;
 		}
 		else {

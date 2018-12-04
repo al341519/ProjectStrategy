@@ -13,6 +13,7 @@ public class HexCell : MonoBehaviour {
     public GameManager gameManager;
 
     
+    public int Owner { get; set; }
 
 	public int Index { get; set; }
 
@@ -601,19 +602,21 @@ public class HexCell : MonoBehaviour {
 	}
 
     public void Do() {
+        Player player = gameManager.getPlayer(Owner);
+
         switch (this.specialIndex)
         {
             case 1:             //Castillo
                 
                 break;
             case 2:             // "aserradero"
-                Debug.Log("MADERA ++");
+                player.updateRecursos(10, 0, 0, 0);
                 break;
             case 3:             // "forja":
-                Debug.Log("HIERRO ++");
+                player.updateRecursos(0,10,0,0);
                 break;
             case 4:             //"molino":
-                Debug.Log("PIEDRA ++");
+                player.updateRecursos(0, 0, 10, 0);
                 break;
             case 5:             //"infantería":
 

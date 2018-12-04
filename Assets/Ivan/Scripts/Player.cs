@@ -133,7 +133,7 @@ public class Player {
         if (madera >= maderaEd && metal >= metalEd
             && trigo >= trigoEd && aldeano >= aldeanoEd)
         {
-            updateRecursos(maderaEd, metalEd, trigoEd, aldeanoEd);
+            updateRecursos(-maderaEd, -metalEd, -trigoEd, -aldeanoEd);
             return true;
         }
         else
@@ -143,11 +143,11 @@ public class Player {
         }
     }
 
-    void updateRecursos(int maderaEd, int metalEd, int trigoEd, int aldeanoEd)
+    public void updateRecursos(int maderaEd, int metalEd, int trigoEd, int aldeanoEd)
     {
-        madera -= maderaEd;
-        metal -= metalEd;
-        trigo -= trigoEd;
-        aldeano -= aldeanoEd;
+        madera += maderaEd;
+        metal += metalEd;
+        trigo += trigoEd;
+        aldeano += aldeanoEd;
     }
 }

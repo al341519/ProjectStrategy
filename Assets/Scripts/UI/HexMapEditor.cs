@@ -228,17 +228,20 @@ public class HexMapEditor : MonoBehaviour {
                 {
                     if (activeSpecialIndex == 1 && player.construir(activeSpecialIndex))
                     {
+                        cell.Owner = 1;
                         cell.SpecialIndex = activeSpecialIndex;
                     }
                     else if (activeSpecialIndex < 3 && cell.Walled && player.construir(activeSpecialIndex))
                     {
+                        cell.Owner = 1;
                         cell.SpecialIndex = activeSpecialIndex;
-                        Debug.Log(cell.Walled);
                     }
                     else if (activeSpecialIndex >= 3 && !cell.Walled && player.construir(activeSpecialIndex))
                     {
+                        cell.Owner = 1;
                         cell.SpecialIndex = activeSpecialIndex;
                     }
+
                 }
             }
 			if (applyUrbanLevel) {
@@ -257,10 +260,15 @@ public class HexMapEditor : MonoBehaviour {
 				cell.RemoveRoads();
 			}
             if (walledMode == OptionalToggle.Arround) {
-                foreach (HexDirection direction in Enum.GetValues(typeof(HexDirection))) {
-                    cell.GetNeighbor(direction).Walled= true;
+
+                if (cell.SpecialIndex == 1)
+                {
+                    foreach (HexDirection direction in Enum.GetValues(typeof(HexDirection)))
+                    {
+                        cell.GetNeighbor(direction).Walled = true;
+                    }
+                    cell.Walled = true;
                 }
-                cell.Walled = true;
             }
 			else if (walledMode != OptionalToggle.Ignore) {
 				cell.Walled = walledMode == OptionalToggle.Yes;
