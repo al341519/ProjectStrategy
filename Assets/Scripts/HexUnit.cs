@@ -6,7 +6,7 @@ using System.IO;
 public class HexUnit : MonoBehaviour {
 
 	const float rotationSpeed = 180f;
-	const float travelSpeed = 4f;
+	const float travelSpeed = 1f;//4f original
 
 	public static HexUnit unitPrefab;
 
@@ -43,7 +43,7 @@ public class HexUnit : MonoBehaviour {
 
 	public int Speed {
 		get {
-			return 24;
+			return 6;//origen 24
 		}
 	}
 
@@ -189,9 +189,11 @@ public class HexUnit : MonoBehaviour {
 			return -1;
 		}
 		else {
+			CellClass tCell = toCell.GetComponent<CellClass> ();
+			Debug.Log ("El coste es: "+tCell.mobility);
 			moveCost = edgeType == HexEdgeType.Flat ? 5 : 10;
 			moveCost +=
-				toCell.UrbanLevel + toCell.FarmLevel + toCell.PlantLevel;
+				toCell.UrbanLevel + toCell.FarmLevel + toCell.PlantLevel+tCell.mobility;//Tocar el valor de coste de aquí para tener en cuenta el tipo de casilla
 		}
 		return moveCost;
 	}
