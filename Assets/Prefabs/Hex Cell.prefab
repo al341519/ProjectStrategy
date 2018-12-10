@@ -9,6 +9,7 @@ GameObject:
   m_Component:
   - component: {fileID: 430146}
   - component: {fileID: 11422220}
+  - component: {fileID: 114053929738829420}
   m_Layer: 9
   m_Name: Hex Cell
   m_TagString: Grid
@@ -45,6 +46,7 @@ MonoBehaviour:
     z: 0
   uiRect: {fileID: 0}
   chunk: {fileID: 0}
+  gameManager: {fileID: 0}
   neighbors:
   - {fileID: 0}
   - {fileID: 0}
@@ -68,3 +70,18 @@ Prefab:
   m_SourcePrefab: {fileID: 0}
   m_RootGameObject: {fileID: 157666}
   m_IsPrefabAsset: 1
+--- !u!114 &114053929738829420
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 157666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 555985544d83ba8408a3e0e7603e9efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mobility: 50
+  vision: 0
+  defense: 0
+  range: 0
