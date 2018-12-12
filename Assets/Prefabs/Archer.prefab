@@ -155,3 +155,4 @@ MonoBehaviour:
   life: 0
   visionRange: 0
   attackRange: 0
+  mode: 0

@@ -9,6 +9,7 @@ public class UnityClass : MonoBehaviour {
     public int life;
     public int visionRange;
     public int attackRange;
+    public Mode mode;
 
 	// Use this for initialization
 	void Start () {

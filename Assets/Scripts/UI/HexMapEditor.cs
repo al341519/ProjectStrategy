@@ -15,6 +15,8 @@ public class HexMapEditor : MonoBehaviour {
 
 	int activeUrbanLevel, activeFarmLevel, activePlantLevel, activeSpecialIndex;
 
+    int activeModeIndex;
+
 	int activeTerrainTypeIndex;
 
 	int brushSize;
@@ -33,6 +35,11 @@ public class HexMapEditor : MonoBehaviour {
 	bool isDrag;
 	HexDirection dragDirection;
 	HexCell previousCell;
+
+    public void SetModeIndex(int index) //Añadido por José
+    {
+        activeModeIndex = index;
+    }//
 
 	public void SetTerrainTypeIndex (int index) {
 		activeTerrainTypeIndex = index;
