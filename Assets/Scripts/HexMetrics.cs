@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 
 public static class HexMetrics {
+	//Constante de tiempo para todos, actualmente un segundo
+	public const float tiempo= 1f;
 
 	public const float outerToInner = 0.866025404f;
 	public const float innerToOuter = 1f / outerToInner;

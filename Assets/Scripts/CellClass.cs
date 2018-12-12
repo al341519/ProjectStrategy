@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CellClass : MonoBehaviour {
+	[Header("Propiedades de la celda")]
 	public int mobility;
 	public int vision;
 	public int defense;
 	public int range;
+	[Header("Propiedades relacionadas con las unidades")]
+	public bool ocupada;
 
 	private HexCell thisCell;
 	private int typeIndex;

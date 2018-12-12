@@ -10,6 +10,7 @@ GameObject:
   - component: {fileID: 430146}
   - component: {fileID: 11422220}
   - component: {fileID: 114203519457600136}
+  - component: {fileID: 114433824724004076}
   m_Layer: 0
   m_Name: Hex Cell
   m_TagString: Untagged
@@ -84,3 +85,15 @@ MonoBehaviour:
   vision: 0
   defense: 0
   range: 0
+  ocupada: 0
+--- !u!114 &114433824724004076
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 157666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3adda96c55f4e1545b77e64eb7248bc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

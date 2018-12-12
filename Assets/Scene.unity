@@ -15243,3 +15243,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hexGrid: {fileID: 1571186511}
   terrainMaterial: {fileID: 2100000, guid: 6a3f5c7892e4b478e9e745026e6fe9f7, type: 2}
+  enemyUnitPrefab: {fileID: 114519228670333460, guid: 3aae20caeda0b244db54e1cab36888d4,
+    type: 2}

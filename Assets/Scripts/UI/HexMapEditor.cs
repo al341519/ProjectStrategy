@@ -7,6 +7,7 @@ public class HexMapEditor : MonoBehaviour {
 	public HexGrid hexGrid;
 
 	public Material terrainMaterial;
+	public HexUnit enemyUnitPrefab;
 
 	int activeElevation;
 	int activeWaterLevel;
@@ -134,6 +135,15 @@ public class HexMapEditor : MonoBehaviour {
 				}
 				return;
 			}
+			if (Input.GetKeyDown(KeyCode.Y)) {
+				if (Input.GetKey(KeyCode.LeftShift)) {
+					DestroyUnit();
+				}
+				else {
+					CreateUnitEmemy();
+				}
+				return;
+			}
 		}
 		previousCell = null;
 	}
@@ -148,6 +158,16 @@ public class HexMapEditor : MonoBehaviour {
 		if (cell && !cell.Unit) {
 			hexGrid.AddUnit(
 				Instantiate(HexUnit.unitPrefab), cell, Random.Range(0f, 360f)
+			);
+		}
+	}
+
+	//Añadido por marcos para enemigos
+	void CreateUnitEmemy () {
+		HexCell cell = GetCellUnderCursor();
+		if (cell && !cell.Unit) {
+			hexGrid.AddUnit(
+				Instantiate(enemyUnitPrefab), cell, Random.Range(0f, 360f)
 			);
 		}
 	}

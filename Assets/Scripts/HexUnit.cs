@@ -62,13 +62,27 @@ public class HexUnit : MonoBehaviour {
 	}
 
 	public bool IsValidDestination (HexCell cell) {
-		return cell.IsExplored && !cell.IsUnderwater && !cell.Unit;
+		//return cell.IsExplored && !cell.IsUnderwater && !cell.Unit; Mod Marcos
+
+		if (cell.IsExplored && !cell.IsUnderwater && !cell.Unit) {
+			return true;
+		} else if (cell.Unit) {
+			if (cell.Unit.tag != this.tag) {
+				return true;	
+			}
+		}
+		return false;
 	}
 
 	public void Travel (List<HexCell> path) {
-		location.Unit = null;
+		if (!location) {
+			location.Unit = null;
+			location = path[path.Count - 1];
+			location.Unit = this;
+		}
+		/*location.Unit = null;
 		location = path[path.Count - 1];
-		location.Unit = this;
+		location.Unit = this;*/
 		pathToTravel = path;
 		StopAllCoroutines();
 		StartCoroutine(TravelPath());
@@ -89,6 +103,25 @@ public class HexUnit : MonoBehaviour {
 			currentTravelLocation = pathToTravel[i];
 			a = c;
 			b = pathToTravel[i - 1].Position;
+
+
+			//Marcos
+			if (pathToTravel [i].Unit) {//Mirar para rodear a unidades enemigas
+				Debug.Log ("HOLAAAAA hay una unidad");
+				if (pathToTravel [i].Unit.tag != this.tag) {
+					Debug.Log ("Estoy en el if de las tags");
+					location.Unit = null;
+					location = pathToTravel [i - 1];
+					location.Unit = this;
+					this.GetComponent<UnitClass>().targetPut(pathToTravel [i].Unit.GetComponent<HexUnit> ());
+					break;
+				}
+			}else{
+				location.Unit=null;
+				location = pathToTravel [i];
+				location.Unit = this;
+
+			}
 
 			int nextColumn = currentTravelLocation.ColumnIndex;
 			if (currentColumn != nextColumn) {
@@ -194,6 +227,10 @@ public class HexUnit : MonoBehaviour {
 			moveCost = edgeType == HexEdgeType.Flat ? 5 : 10;
 			moveCost +=
 				toCell.UrbanLevel + toCell.FarmLevel + toCell.PlantLevel+tCell.mobility;//Tocar el valor de coste de aquí para tener en cuenta el tipo de casilla
+			if (toCell.Unit && toCell.Unit.tag!=this.tag){
+				Debug.Log ("Aumenta el coste");
+				moveCost += 20000;
+			}
 		}
 		return moveCost;
 	}
