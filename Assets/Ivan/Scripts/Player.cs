@@ -126,6 +126,60 @@ public class Player {
                 metalEd = 50;
                 aldeanoEd = 1;
                 break;
+            case 8:             //"torre":
+                maderaEd = 80;
+                trigoEd = 80;
+                metalEd = 80;
+                aldeanoEd = 1;
+                break;
+            case 9:             //"torre de palomas":
+                maderaEd = 40;
+                trigoEd = 40;
+                metalEd = 0;
+                aldeanoEd = 1;
+                break;
+            case 10:             //"cobertura":
+                maderaEd = 80;
+                trigoEd = 0;
+                metalEd = 0;
+                aldeanoEd = 1;
+                break;
+            case 11:             //"mina":
+                maderaEd = 40;
+                trigoEd = 0;
+                metalEd = 0;
+                aldeanoEd = 1;
+                break;
+            case 12:             //"sierra":
+                maderaEd = 0;
+                trigoEd = 40;
+                metalEd = 0;
+                aldeanoEd = 1;
+                break;
+            case 13:             //"arquero":
+                maderaEd = 70;
+                trigoEd = 70;
+                metalEd = 70;
+                aldeanoEd = 0;
+                break;
+            case 14:             //"soldado":
+                maderaEd = 0;
+                trigoEd = 70;
+                metalEd = 10;
+                aldeanoEd = 0;
+                break;
+            case 15:             //"caballero":
+                maderaEd = 120;
+                trigoEd = 120;
+                metalEd = 120;
+                aldeanoEd = 0;
+                break;
+            case 16:             //"aldeano":
+                maderaEd = 0;
+                trigoEd = 50;
+                metalEd = 0;
+                aldeanoEd = 0;
+                break;
             default:
                 break;
         }
