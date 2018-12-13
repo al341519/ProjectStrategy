@@ -2,15 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-<<<<<<< HEAD
+
 public class UIManager:MonoBehaviour {
-=======
-public class UIManager : MonoBehaviour
-{
 
     public GameObject UIMenu;
     public GameObject UIMain;
->>>>>>> d1abc60554da287637901a3a73c27d1cb2eb95ee
 
     public GameObject UIInicio;
     public GameObject UIRecursos;
