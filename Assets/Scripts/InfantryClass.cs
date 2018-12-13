@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : UnityClass {
+public class InfantryClass : UnityClass {
 
 	// Use this for initialization
 	void Start () {

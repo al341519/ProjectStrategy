@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MilitiaClass : UnityClass {
+public class VillagerClass : UnityClass {
 
 	// Use this for initialization
 	void Start () {
