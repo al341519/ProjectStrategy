@@ -40,52 +40,24 @@ public class Edificio : MonoBehaviour {
         {
             case "aserradero":
                 vida = 50;
-                madera = 0;
-                trigo = 0;
-                metal = 0;
-                aldeano = 1;
                 break;
             case "forja":
                 vida = 50;
-                madera = 0;
-                trigo = 0;
-                metal = 0;
-                aldeano = 1;
                 break;
             case "molino":
                 vida = 50;
-                madera = 0;
-                trigo = 0;
-                metal = 0;
-                aldeano = 1;
                 break;
             case "infantería":
                 vida = 50;
-                madera = 0;
-                trigo = 0;
-                metal = 0;
-                aldeano = 1;
                 break;
             case "arquería":
                 vida = 50;
-                madera = 0;
-                trigo = 0;
-                metal = 0;
-                aldeano = 1;
                 break;
             case "caballería":
                 vida = 50;
-                madera = 0;
-                trigo = 0;
-                metal = 0;
-                aldeano = 1;
                 break;
             case "castillo":
                 vida = 100;
-                madera = 0;
-                trigo = 0;
-                metal = 0;
-                aldeano = 0;
                 break;
             default:
                 break;

@@ -39,9 +39,9 @@ GameObject:
   - component: {fileID: 33347537196134196}
   - component: {fileID: 23059907141295802}
   - component: {fileID: 95846728663001500}
-  - component: {fileID: 64955820946489878}
+  - component: {fileID: 114878955784615898}
   m_Layer: 0
-  m_Name: Light (3)
+  m_Name: TorrePaloma
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -158,20 +158,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1462023577598714}
   m_Mesh: {fileID: 4300000, guid: d75e51d1a7753524c93c0c5eb43340c1, type: 3}
---- !u!64 &64955820946489878
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1535814184726668}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300002, guid: d75e51d1a7753524c93c0c5eb43340c1, type: 3}
 --- !u!95 &95846728663001500
 Animator:
   serializedVersion: 3
@@ -190,3 +176,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114878955784615898
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1535814184726668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0149c56c276d915449160afe46a6149c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 100
