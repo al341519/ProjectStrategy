@@ -15,7 +15,7 @@ public class HexMapEditor : MonoBehaviour {
 
 	int activeUrbanLevel, activeFarmLevel, activePlantLevel, activeSpecialIndex;
 
-    int activeModeIndex;
+    Mode activeMode;//Añadido por José
 
 	int activeTerrainTypeIndex;
 
@@ -36,9 +36,9 @@ public class HexMapEditor : MonoBehaviour {
 	HexDirection dragDirection;
 	HexCell previousCell;
 
-    public void SetModeIndex(int index) //Añadido por José
+    public void SetMode(int mode) //Añadido por José
     {
-        activeModeIndex = index;
+        activeMode = (Mode)mode;
     }//
 
 	public void SetTerrainTypeIndex (int index) {
@@ -131,7 +131,8 @@ public class HexMapEditor : MonoBehaviour {
 	void Update () {
 		if (!EventSystem.current.IsPointerOverGameObject()) {
 			if (Input.GetMouseButton(0)) {
-				HandleInput();
+                HandleInput();
+                ManageMode(); //Áñadido por José
 				return;
 			}
 			if (Input.GetKeyDown(KeyCode.Y)) {//Modificado por José
@@ -217,6 +218,16 @@ public class HexMapEditor : MonoBehaviour {
 			hexGrid.RemoveUnit(cell.Unit);
 		}
 	}
+
+    void ManageMode() //Añadido por José
+    {
+        HexCell cell = GetCellUnderCursor();
+        if(cell && cell.Unit)
+        {
+            cell.Unit.Mode = activeMode;
+        }
+        
+    }//
 
 	void HandleInput () {
 		HexCell currentCell = GetCellUnderCursor();

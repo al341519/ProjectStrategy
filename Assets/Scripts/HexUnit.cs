@@ -9,7 +9,7 @@ public class HexUnit : MonoBehaviour {
 	const float travelSpeed = 4f;
 
 	public static HexUnit unitPrefab;
-
+    
 	public HexGrid Grid { get; set; }
 
 	public HexCell Location {
@@ -52,6 +52,42 @@ public class HexUnit : MonoBehaviour {
 			return 3;
 		}
 	}
+    
+    public Mode Mode //Añadido por José 
+    {
+        get
+        {
+            return unitPrefab.Mode;//Fallo
+        }
+        set
+        {
+            if(unitPrefab.Mode != value) 
+            {
+                unitPrefab.Mode = value;
+            }
+        }
+    }//
+    
+    public void SwitchMode() //Añadido por José
+    {
+        Mode mode = unitPrefab.Mode;
+
+        switch (mode)
+        {
+            case Mode.Offensive:
+                
+                break;
+            case Mode.Deffensive:
+
+                break;
+            case Mode.Evasive:
+
+                break;
+            case Mode.Patrol:
+
+                break;
+        }
+    }//
 
 	float orientation;
 
