@@ -1,10 +1,14 @@
-ï»¿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 
 public class HexUnit : MonoBehaviour {
+	[Header("Marcos")]//Cambio para dañar edif
+	private UnitClass unidadDamage=this.GetComponent<UnitClass>();
 
+
+	[Header("Code origen")]
 	const float rotationSpeed = 180f;
 	const float travelSpeed = 1f;//4f original
 
@@ -70,6 +74,13 @@ public class HexUnit : MonoBehaviour {
 			if (cell.Unit.tag != this.tag) {
 				return true;	
 			}
+		} else if(cell.SpecialIndex!=0){
+			if(this.tag=="AllyUnit" && cell.Owner!=1){
+				return true;
+			}
+			else if(this.tag=="EnemyUnit" && cell.Owner!=2){
+				return true;
+			}
 		}
 		return false;
 	}
@@ -116,7 +127,18 @@ public class HexUnit : MonoBehaviour {
 					this.GetComponent<UnitClass>().targetPut(pathToTravel [i].Unit.GetComponent<HexUnit> ());
 					break;
 				}
-			}else{
+			}//Cambio para dañar edif
+
+			else if(pathToTravel [i].SpecialIndex!=0){
+				if(pathToTravel [i].Owner!=1 && this.tag=="AllyUnit"){
+					location.Unit=null;
+					location=pathToTravel [i-1];
+					location.Unit=this;
+					pathToTravel [i].edificio.GetComponent<Health>().TakeDamage(unidadDamage.attack));
+				}
+			}
+
+			else{
 				location.Unit=null;
 				location = pathToTravel [i];
 				location.Unit = this;
@@ -226,7 +248,7 @@ public class HexUnit : MonoBehaviour {
 			Debug.Log ("El coste es: "+tCell.mobility);
 			moveCost = edgeType == HexEdgeType.Flat ? 5 : 10;
 			moveCost +=
-				toCell.UrbanLevel + toCell.FarmLevel + toCell.PlantLevel+tCell.mobility;//Tocar el valor de coste de aquÃ­ para tener en cuenta el tipo de casilla
+				toCell.UrbanLevel + toCell.FarmLevel + toCell.PlantLevel+tCell.mobility;//Tocar el valor de coste de aquí para tener en cuenta el tipo de casilla
 			if (toCell.Unit && toCell.Unit.tag!=this.tag){
 				Debug.Log ("Aumenta el coste");
 				moveCost += 20000;
