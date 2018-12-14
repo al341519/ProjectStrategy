@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: 35aa35576883b0343a01fae6123cfec0
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - UIInicio: {fileID: 1577674341823612, guid: 80ecd73ee8377594cb8d120bed8153cf, type: 2}
+  - UIRecursos: {fileID: 1144233977346568, guid: 982b9f16a0da3014a975056970627469,
+      type: 2}
+  - UIAtaque: {fileID: 1741833397980658, guid: 61fc8f9677d894146b1dbf1d1fe015b5, type: 2}
+  - UIDefensa: {fileID: 1586787761796490, guid: d7d8f6358b8b936449794d0f87976c37,
+      type: 2}
+  - UITropa: {fileID: 1702068592557560, guid: 1f5195f6427b15849bc15c38e59ff509, type: 2}
+  - UIEspecial: {fileID: 1290318109537978, guid: 3f5df7aaa6667ea448382f1b3167aa54,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

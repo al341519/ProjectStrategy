@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using System.IO;
+using System;
 
 public class HexMapEditor : MonoBehaviour {
 
@@ -8,6 +9,10 @@ public class HexMapEditor : MonoBehaviour {
 
 	public Material terrainMaterial;
 	public HexUnit enemyUnitPrefab;
+
+    public GameManager gameManager;
+
+    Player player;
 
 	int activeElevation;
 	int activeWaterLevel;
@@ -24,7 +29,7 @@ public class HexMapEditor : MonoBehaviour {
 	bool applyUrbanLevel, applyFarmLevel, applyPlantLevel, applySpecialIndex;
 
 	enum OptionalToggle {
-		Ignore, Yes, No
+		Ignore, Yes, No, Arround
 	}
 
 	OptionalToggle riverMode, roadMode, walledMode;
@@ -114,10 +119,11 @@ public class HexMapEditor : MonoBehaviour {
 		}
 	}
 
-	void Awake () {
+	void Start () {
 		terrainMaterial.DisableKeyword("GRID_ON");
 		Shader.EnableKeyword("HEX_MAP_EDIT_MODE");
 		SetEditMode(true);
+        player = gameManager.getPlayer(1);
 	}
 
 	void Update () {
@@ -157,7 +163,7 @@ public class HexMapEditor : MonoBehaviour {
 		HexCell cell = GetCellUnderCursor();
 		if (cell && !cell.Unit) {
 			hexGrid.AddUnit(
-				Instantiate(HexUnit.unitPrefab), cell, Random.Range(0f, 360f)
+				Instantiate(HexUnit.unitPrefab), cell, UnityEngine.Random.Range(0f, 360f)
 			);
 		}
 	}
@@ -238,8 +244,27 @@ public class HexMapEditor : MonoBehaviour {
 				cell.WaterLevel = activeWaterLevel;
 			}
 			if (applySpecialIndex) {
-				cell.SpecialIndex = activeSpecialIndex;
-			}
+                if (cell.SpecialIndex == 0)
+                {
+                    if (activeSpecialIndex == 1 && player.construir(activeSpecialIndex))
+                    {
+                        //cell.ed = 
+                        cell.Owner = 1;
+                        cell.SpecialIndex = activeSpecialIndex;
+                    }
+                    else if (activeSpecialIndex < 7 && cell.Walled && player.construir(activeSpecialIndex))
+                    {
+                        cell.Owner = 1;
+                        cell.SpecialIndex = activeSpecialIndex;
+                    }
+                    else if (activeSpecialIndex >= 7 && !cell.Walled && player.construir(activeSpecialIndex))
+                    {
+                        cell.Owner = 1;
+                        cell.SpecialIndex = activeSpecialIndex;
+                    }
+
+                }
+            }
 			if (applyUrbanLevel) {
 				cell.UrbanLevel = activeUrbanLevel;
 			}
@@ -255,7 +280,19 @@ public class HexMapEditor : MonoBehaviour {
 			if (roadMode == OptionalToggle.No) {
 				cell.RemoveRoads();
 			}
-			if (walledMode != OptionalToggle.Ignore) {
+            if (walledMode == OptionalToggle.Arround) {
+
+                if (cell.SpecialIndex == 1)
+                {
+                    foreach (HexDirection direction in Enum.GetValues(typeof(HexDirection)))
+                    {
+                        cell.GetNeighbor(direction).Walled = true;
+                        cell.Owner = 1;
+                    }
+                    cell.Walled = true;
+                }
+            }
+			else if (walledMode != OptionalToggle.Ignore) {
 				cell.Walled = walledMode == OptionalToggle.Yes;
 			}
 			if (isDrag) {
@@ -270,5 +307,11 @@ public class HexMapEditor : MonoBehaviour {
 				}
 			}
 		}
+        resetValues();
 	}
+    void resetValues() {
+        walledMode = OptionalToggle.Ignore;
+        activeSpecialIndex = 0;
+        applySpecialIndex = false;
+    }
 }

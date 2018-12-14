@@ -53,7 +53,7 @@ public class HexUnit : MonoBehaviour {
 
 	public int VisionRange {
 		get {
-			return 3;
+			return 10;
 		}
 	}
 

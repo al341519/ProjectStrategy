@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 11470134}
   m_Layer: 5
   m_Name: Hex Cell Label
-  m_TagString: Untagged
+  m_TagString: Grid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 114479855961893736}
   m_Layer: 5
   m_Name: Highlight
-  m_TagString: Untagged
+  m_TagString: Grid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

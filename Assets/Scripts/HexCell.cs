@@ -2,17 +2,36 @@
 using UnityEngine.UI;
 using System.IO;
 
+
+
 public class HexCell : MonoBehaviour {
 
-	public HexCoordinates coordinates;
+    enum Edificio
+    {
+        Castillo, Forja, Aserradero, Molino,
+        Infanteria, Arqueria, Caballeria, Sierra, Mina,
+        Torre, Paloma, Barricada, NONE
+    }
+
+
+    public GameObject edificio;
+
+    public HexCoordinates coordinates;
 
 	public RectTransform uiRect;
 
 	public HexGridChunk chunk;
 
+    public GameManager gameManager;
+    
+    public int Owner { get; set; }
+
 	public int Index { get; set; }
 
 	public int ColumnIndex { get; set; }
+
+
+    
 
 	public int Elevation {
 		get {
@@ -592,4 +611,35 @@ public class HexCell : MonoBehaviour {
 	public void SetMapData (float data) {
 		ShaderData.SetMapData(this, data);
 	}
+
+    public void Do() {
+        Player player = gameManager.getPlayer(Owner);
+
+        switch (this.specialIndex)
+        {
+            case 1:             //Castillo
+                
+                break;
+            case 2:             // "aserradero"
+                player.updateRecursos(10, 0, 0, 0);
+                break;
+            case 3:             // "forja":
+                player.updateRecursos(0,10,0,0);
+                break;
+            case 4:             //"molino":
+                player.updateRecursos(0, 0, 10, 0);
+                break;
+            case 5:             //"infantería":
+
+                break;
+            case 6:             //"arquería":
+
+                break;
+            case 7:             //"caballería":
+
+                break;
+            default:
+                break;
+        }
+    }
 }

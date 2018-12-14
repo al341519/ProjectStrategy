@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1927755313057314}
+  m_IsPrefabAsset: 1
+--- !u!1 &1927755313057314
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4126654023706818}
+  - component: {fileID: 114500883050070688}
+  - component: {fileID: 114246402159000186}
+  m_Layer: 0
+  m_Name: IniGame
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4126654023706818
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1927755313057314}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 27.180817, y: -16.842522, z: 23.61963}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114246402159000186
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1927755313057314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49ab2a5af2298674e8925de4197e94c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aserraderoPrefab: {fileID: 1974150642326260, guid: 6a6c3f3b44171f84a81f20634071bb2b,
+    type: 2}
+  forjaPrefab: {fileID: 1152652269165850, guid: 551c46c6f83238446b2cede7db27f6a2,
+    type: 2}
+  molinoPrefab: {fileID: 1218923391066058, guid: ff3b3075f95da9d45b7c77db82af2c25,
+    type: 2}
+  infanteriaPrefab: {fileID: 1277795826712250, guid: 441466f191becb5449b6c1ff49043527,
+    type: 2}
+  arqueriaPrefab: {fileID: 1399776201307478, guid: df895d45315c8844d89e1b20b0a760b7,
+    type: 2}
+  caballeriaPrefab: {fileID: 1267259959536856, guid: 575472225b64ecb42be5cca12c3a8652,
+    type: 2}
+  castilloPrefab: {fileID: 1539531712916810, guid: 952a9c641abd4e94fa99b98fdd842377,
+    type: 2}
+--- !u!114 &114500883050070688
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1927755313057314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ea8ba5510151c4498d94a9e95fb500d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  iconCastle: {fileID: 2800000, guid: 3dafc575c6f86dc45a9cac24b09b2f11, type: 3}
+  iconHoverCastle: {fileID: 2800000, guid: c4ff6c88dd3cc5140bf52f3adf68bd37, type: 3}
+  IconContainer: {fileID: 2800000, guid: 1d45a45ec24d2d944ba763a52dffa21b, type: 3}
