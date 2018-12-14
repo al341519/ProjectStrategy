@@ -2,21 +2,27 @@
 using UnityEngine.UI;
 using System.IO;
 
-enum Edificio { Castillo, Forja, Aserradero, Molino,
-    Infanteria, Arqueria, Caballeria, Sierra, Mina,
-    Torre, Paloma, Barricada, NONE}
+
 
 public class HexCell : MonoBehaviour {
 
-	public HexCoordinates coordinates;
+    enum Edificio
+    {
+        Castillo, Forja, Aserradero, Molino,
+        Infanteria, Arqueria, Caballeria, Sierra, Mina,
+        Torre, Paloma, Barricada, NONE
+    }
+
+
+    public GameObject edificio;
+
+    public HexCoordinates coordinates;
 
 	public RectTransform uiRect;
 
 	public HexGridChunk chunk;
 
     public GameManager gameManager;
-
-    Edificio ed;
     
     public int Owner { get; set; }
 
