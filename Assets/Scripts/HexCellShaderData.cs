@@ -65,6 +65,15 @@ public class HexCellShaderData : MonoBehaviour {
 		enabled = true;
 	}
 
+    public void RefreshInfluence()
+    {
+        for (int i = 0; i < Grid.cells.Length; i++)
+        {
+            HexCell cell = Grid.cells[i];
+            cellTextureData[cell.Index] = cell.influence;
+        }
+    }
+
 	public void SetMapData (HexCell cell, float data) {
 		cellTextureData[cell.Index].b =
 			data < 0f ? (byte)0 : (data < 1f ? (byte)(data * 254f) : (byte)254);

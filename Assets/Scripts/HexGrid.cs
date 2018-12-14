@@ -27,7 +27,7 @@ public class HexGrid : MonoBehaviour {
 
 	Transform[] columns;
 	HexGridChunk[] chunks;
-	HexCell[] cells;
+	[HideInInspector] public HexCell[] cells;
 
 	int chunkCountX, chunkCountZ;
 
@@ -144,7 +144,7 @@ public class HexGrid : MonoBehaviour {
 
 	public HexCell GetCell (Ray ray) {
 		RaycastHit hit;
-		if (Physics.Raycast(ray, out hit)) {
+		if (Physics.Raycast(ray, out hit, 2000f, LayerMask.GetMask("Default"))) {
 			return GetCell(hit.point);
 		}
 		return null;
