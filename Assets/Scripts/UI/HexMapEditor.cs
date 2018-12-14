@@ -173,7 +173,7 @@ public class HexMapEditor : MonoBehaviour {
 		HexCell cell = GetCellUnderCursor();
 		if (cell && !cell.Unit) {
 			hexGrid.AddUnit(
-				Instantiate(enemyUnitPrefab), cell, Random.Range(0f, 360f)
+				Instantiate(enemyUnitPrefab), cell, UnityEngine.Random.Range(0f, 360f)
 			);
 		}
 	}

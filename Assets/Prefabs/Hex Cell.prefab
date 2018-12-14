@@ -4,25 +4,23 @@
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_PrefabInternal: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 430146}
   - component: {fileID: 11422220}
-  - component: {fileID: 114203519457600136}
+  - component: {fileID: 430146}
+  - component: {fileID: 114053929738829420}
   - component: {fileID: 114433824724004076}
   m_Layer: 0
-  - component: {fileID: 114053929738829420}
-  m_Layer: 9
   m_Name: Hex Cell
-  m_TagString: Grid
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &430146
 Transform:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 157666}
@@ -35,7 +33,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &11422220
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 157666}
@@ -44,6 +42,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3d3de04c7eaa4677adc5cb5e120ecef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  edificio: {fileID: 0}
   coordinates:
     x: 0
     z: 0
@@ -75,7 +74,7 @@ Prefab:
   m_IsPrefabAsset: 1
 --- !u!114 &114053929738829420
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 157666}
@@ -88,10 +87,9 @@ MonoBehaviour:
   vision: 0
   defense: 0
   range: 0
-  ocupada: 0
 --- !u!114 &114433824724004076
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 157666}
