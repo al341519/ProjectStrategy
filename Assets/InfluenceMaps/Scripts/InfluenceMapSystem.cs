@@ -53,13 +53,14 @@ public class InfluenceMapSystem : MonoBehaviour {
 
     void LateUpdate()
     {
+        GetCellInfluence();
         if (!isFirstFrameRendered)
         {
             transform.position = GetCenter(GameObject.Find("Hex Grid"));
             transform.position += new Vector3(0, _MapHeight,0);
             isFirstFrameRendered = true;
         }
-        GetCellInfluence();
+        
     }
 
     void DrawMap(int player) //player -> 0-n
@@ -70,7 +71,7 @@ public class InfluenceMapSystem : MonoBehaviour {
     void ApplyMap(int mapIndex)
     {
         HexCell[] cells = grid.cells;
-        List<Color>[] buffer = maps[mapIndex].GetBufferColor(grid);
+        List<Color>[] buffer = maps[mapIndex].GetColorBuffer(grid);
         for (int i = 0; i < cells.Length; i++)
         {
             Color averageInfluence = AverageColor(buffer[cells[i].Index]);
@@ -89,11 +90,19 @@ public class InfluenceMapSystem : MonoBehaviour {
             b += c.b;
             a += c.a;
         }
-        //if (colorList.Count == 0) print("ColorList is Empty"); 
-        //print("(" + r / colorList.Count + "," + g / colorList.Count + "," + b / colorList.Count + "," + a / colorList.Count + ")");
-        averageColor = new Color(r/colorList.Count, g / colorList.Count, b / colorList.Count, a / colorList.Count);
-        //print(averageColor);
-        return averageColor;
+        if (colorList.Count == 0)
+        {
+            //print("ColorList is Empty");
+            return new Color(0, 0, 0, 0);
+        }
+        else
+        {
+            //print("(" + r / colorList.Count + "," + g / colorList.Count + "," + b / colorList.Count + "," + a / colorList.Count + ")");
+            averageColor = new Color(r / colorList.Count, g / colorList.Count, b / colorList.Count, a / colorList.Count);
+            //print(averageColor);
+            return averageColor;
+        }
+        
     }
 
     Vector3 GetCenter(GameObject o)
@@ -115,11 +124,14 @@ public class InfluenceMapSystem : MonoBehaviour {
 
     void GetCellInfluence()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
             HexCell cell = grid.GetCell(Camera.main.ScreenPointToRay(Input.mousePosition));
-            if (cell!=null)
+            if (cell != null)
                 print("Influence: " + cell.influence);
+                //print("Coord: " + cell.coordinates);
+            else
+                print("NULL");
         }
     }
 }

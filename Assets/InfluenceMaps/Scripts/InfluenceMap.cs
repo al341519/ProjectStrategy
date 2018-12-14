@@ -21,7 +21,7 @@ public class InfluenceMap{
     readonly float SQRT2 = Mathf.Sqrt(2);
 
     public int width, height;
-    public Color backgroundColor = new Color(1, 1, 1, 0);
+    public Color backgroundColor = new Color(0, 0, 0, 0);
     public int numberOfPlayers;
     public int updateTime = 1;
 
@@ -97,7 +97,7 @@ public class InfluenceMap{
         return new Vector2Int(pixelX, pixelY);
     }
 
-    Vector2 PixelToWorldSpace(int x, int y)
+    Vector3 PixelToWorldSpace(int x, int y)
     {
         float minDistanceX = transform.position.x - boxCollider.bounds.extents.x;
         float maxDistanceX = transform.position.x + boxCollider.bounds.extents.x;
@@ -233,8 +233,9 @@ public class InfluenceMap{
         }
     }
 
-    public List<Color>[] GetBufferColor(HexGrid grid)
+    public List<Color>[] GetColorBuffer(HexGrid grid)
     {
+        int nullCount = 0, notNullCount = 0;
         List<Color>[] buffer = new List<Color>[grid.cells.Length];
         for (int i = 0; i < buffer.Length; i++)
         {
@@ -249,16 +250,19 @@ public class InfluenceMap{
                 HexCell cell = grid.GetCell(ray);
                 if (cell != null)
                 {
+                    notNullCount++;
                     //Debug.Log("NOT NULL" + pos);
-                    if (buffer[cell.Index] == null) Debug.Log(cell.Index);
+                    if (buffer[cell.Index] == null) Debug.Log("Polla");
                     buffer[cell.Index].Add(currentTexture.GetPixel(x, y));
                 }
                 else
                 {
+                    nullCount++;
                     //Debug.Log("NULL" + pos);
                 }
             }
         }
+        //Debug.Log("NULL: " + nullCount + " - NotNULL: " + notNullCount);
         return buffer;
     }
 }

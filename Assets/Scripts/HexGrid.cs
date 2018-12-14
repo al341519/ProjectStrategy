@@ -144,7 +144,7 @@ public class HexGrid : MonoBehaviour {
 
 	public HexCell GetCell (Ray ray) {
 		RaycastHit hit;
-		if (Physics.Raycast(ray, out hit, 2000f, LayerMask.GetMask("Default"))) {
+		if (Physics.Raycast(ray, out hit)) {
 			return GetCell(hit.point);
 		}
 		return null;
