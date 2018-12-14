@@ -6,6 +6,7 @@ TagManager:
   tags:
   - AllyUnit
   - EnemyUnit
+  - edificioAliado
   layers:
   - Default
   - TransparentFX
