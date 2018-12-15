@@ -5,7 +5,7 @@ public class SaveLoadItem : MonoBehaviour {
 
 	public SaveLoadMenu menu;
 
-    public string MapName {
+	public string MapName {
 		get {
 			return mapName;
 		}
@@ -15,24 +15,9 @@ public class SaveLoadItem : MonoBehaviour {
 		}
 	}
 
-    public string Path
-    {
-        get
-        {
-            return path;
-        }
-
-        set
-        {
-            path = value;
-        }
-    }
-
-    string path;
-
-    string mapName;
+	string mapName;
 
 	public void Select () {
-		menu.SelectItem(path);
+		menu.SelectItem(mapName);
 	}
 }

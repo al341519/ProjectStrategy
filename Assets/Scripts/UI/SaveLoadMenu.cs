@@ -53,8 +53,8 @@ public class SaveLoadMenu : MonoBehaviour {
 		Close();
 	}
 
-	public void SelectItem (string path) {
-		nameInput.text = path;
+	public void SelectItem (string name) {
+		nameInput.text = name;
 	}
 
 	public void Delete () {
@@ -75,27 +75,21 @@ public class SaveLoadMenu : MonoBehaviour {
 		}
 		string[] paths =
 			Directory.GetFiles(Application.persistentDataPath, "*.map");
-        print(Application.persistentDataPath);
-        string[] anotherPaths =
-            Directory.GetFiles(Application.dataPath + "/CustomMaps", "*.map");
-        Array.Resize(ref paths, paths.Length + anotherPaths.Length);
-        Array.ConstrainedCopy(anotherPaths, 0, paths, paths.Length-1, anotherPaths.Length);
 		Array.Sort(paths);
 		for (int i = 0; i < paths.Length; i++) {
 			SaveLoadItem item = Instantiate(itemPrefab);
 			item.menu = this;
-            item.MapName = Path.GetFileNameWithoutExtension(paths[i]);//Path.GetFileName(paths[i]);
-            item.Path = Path.GetFullPath(paths[i]);
+			item.MapName = Path.GetFileNameWithoutExtension(paths[i]);
 			item.transform.SetParent(listContent, false);
 		}
 	}
 
 	string GetSelectedPath () {
-		string mapPath = nameInput.text;
-		if (mapPath.Length == 0) {
+		string mapName = nameInput.text;
+		if (mapName.Length == 0) {
 			return null;
 		}
-		return mapPath;
+		return Path.Combine(Application.persistentDataPath, mapName + ".map");
 	}
 
 	void Save (string path) {
