@@ -101,7 +101,6 @@ public class HexFeatureManager : MonoBehaviour {
 
 	public void AddSpecialFeature (HexCell cell, Vector3 position) {
 		HexHash hash = HexMetrics.SampleHashGrid(position);
-
         //NUEVO
         //
         //

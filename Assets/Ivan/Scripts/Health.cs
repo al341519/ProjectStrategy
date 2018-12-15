@@ -6,6 +6,7 @@ public class Health : MonoBehaviour {
 
     public const int maxHealth = 100;
     public int currentHealth = maxHealth;
+    private HexCell cell;
 	
 	// Update is called once per frame
 	void Update () {
@@ -22,5 +23,10 @@ public class Health : MonoBehaviour {
             //UPDATE EN EL MAPA INFLUENCIA
             Destroy(this, 0.5f);
         }
+    }
+
+    public void Celda(HexCell celda)
+    {
+        cell = celda;
     }
 }

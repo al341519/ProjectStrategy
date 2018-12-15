@@ -4,7 +4,17 @@ using System.IO;
 
 public class HexCell : MonoBehaviour {
 
-	public HexCoordinates coordinates;
+    enum Edificio
+    {
+        Castillo, Forja, Aserradero, Molino,
+        Infanteria, Arqueria, Caballeria, Sierra, Mina,
+        Torre, Paloma, Barricada, NONE
+    }
+
+
+    public GameObject edificio;
+
+    public HexCoordinates coordinates;
 
 	public RectTransform uiRect;
 
