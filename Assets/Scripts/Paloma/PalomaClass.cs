@@ -32,7 +32,7 @@ public class PalomaClass : MonoBehaviour {
 			this.transform.Translate (new Vector3(0,0,speedPidgeon*Time.deltaTime));
 
 			if(distancePU()<actionRange){
-				Debug.Log ("He llegado al sitio");
+				//Debug.Log ("He llegado al sitio");
 				if(unidadObjetivo){
 					HexCell holaCell = unidadObjetivo.Location;
 					grid.ClearPath ();

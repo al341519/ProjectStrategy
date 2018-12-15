@@ -1,10 +1,14 @@
-ï»¿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 
 public class HexUnit : MonoBehaviour {
+	[Header("Marcos")]//Cambio para dañar edif
+	private UnitClass unidadDamage;
 
+
+	[Header("Code origen")]
 	const float rotationSpeed = 180f;
 	const float travelSpeed = 1f;//4f original
 
@@ -49,7 +53,7 @@ public class HexUnit : MonoBehaviour {
 
 	public int VisionRange {
 		get {
-			return 10;
+			return 3;
 		}
 	}
 
@@ -62,19 +66,41 @@ public class HexUnit : MonoBehaviour {
 	}
 
 	public bool IsValidDestination (HexCell cell) {
-		return cell.IsExplored && !cell.IsUnderwater && !cell.Unit;
+		//return cell.IsExplored && !cell.IsUnderwater && !cell.Unit; Mod Marcos
+
+		if (cell.IsExplored && !cell.IsUnderwater && !cell.Unit) {
+			return true;
+		} else if (cell.Unit) {
+			if (cell.Unit.tag != this.tag) {
+				return true;	
+			}
+		} else if(cell.SpecialIndex!=0){
+			if(this.tag=="AllyUnit" && cell.edificio.tag=="edificioEnemigo"/*cell.Owner!=1*/){
+				return true;
+			}
+			else if(this.tag=="EnemyUnit" && cell.Owner!=2){
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public void Travel (List<HexCell> path) {
-		location.Unit = null;
+		if (!location) {
+			location.Unit = null;
+			location = path[path.Count - 1];
+			location.Unit = this;
+		}
+		/*location.Unit = null;
 		location = path[path.Count - 1];
-		location.Unit = this;
+		location.Unit = this;*/
 		pathToTravel = path;
 		StopAllCoroutines();
 		StartCoroutine(TravelPath());
 	}
 
 	IEnumerator TravelPath () {
+		unidadDamage = this.GetComponent<UnitClass> ();
 		Vector3 a, b, c = pathToTravel[0].Position;
 		yield return LookAt(pathToTravel[1].Position);
 
@@ -89,6 +115,40 @@ public class HexUnit : MonoBehaviour {
 			currentTravelLocation = pathToTravel[i];
 			a = c;
 			b = pathToTravel[i - 1].Position;
+
+
+			//Marcos
+			if (pathToTravel [i].Unit) {//Mirar para rodear a unidades enemigas
+				Debug.Log ("HOLAAAAA hay una unidad");
+				if (pathToTravel [i].Unit.tag != this.tag) {
+					Debug.Log ("Estoy en el if de las tags");
+					location.Unit = null;
+					location = pathToTravel [i - 1];
+					location.Unit = this;
+					this.GetComponent<UnitClass>().targetPut(pathToTravel [i].Unit.GetComponent<HexUnit> ());
+					break;
+				}
+			}//Cambio para dañar edif
+
+			else if(pathToTravel [i].edificio){
+				//Debug.Log ("he visto que hay un edificio");
+				if(pathToTravel [i].Owner!=1 && this.tag=="AllyUnit"){
+					location.Unit=null;
+					location=pathToTravel [i-1];
+					location.Unit=this;
+					//Debug.Log ("El edificio seleccionado es: "+pathToTravel[i].edificio.name);
+					this.GetComponent<UnitClass> ().targetPut (pathToTravel [i].edificio.GetComponent<Health>());
+					break;
+				}
+			}
+
+
+			else{
+				location.Unit=null;
+				location = pathToTravel [i];
+				location.Unit = this;
+
+			}
 
 			int nextColumn = currentTravelLocation.ColumnIndex;
 			if (currentColumn != nextColumn) {
@@ -190,10 +250,14 @@ public class HexUnit : MonoBehaviour {
 		}
 		else {
 			CellClass tCell = toCell.GetComponent<CellClass> ();
-			Debug.Log ("El coste es: "+tCell.mobility);
+			//Debug.Log ("El coste es: "+tCell.mobility);
 			moveCost = edgeType == HexEdgeType.Flat ? 5 : 10;
 			moveCost +=
-				toCell.UrbanLevel + toCell.FarmLevel + toCell.PlantLevel+tCell.mobility;//Tocar el valor de coste de aquÃ­ para tener en cuenta el tipo de casilla
+				toCell.UrbanLevel + toCell.FarmLevel + toCell.PlantLevel+tCell.mobility;//Tocar el valor de coste de aquí para tener en cuenta el tipo de casilla
+			if (toCell.Unit && toCell.Unit.tag!=this.tag){
+				Debug.Log ("Aumenta el coste");
+				moveCost += 20000;
+			}
 		}
 		return moveCost;
 	}

@@ -92,13 +92,16 @@ public class HexGameUI : MonoBehaviour {
 	}
 	private GameObject ClosestBuild (HexUnit unit){
 		List<GameObject> edificios = new List<GameObject> (GameObject.FindGameObjectsWithTag ("edificioAliado"));//Tag de los edificios
+		//Debug.Log(edificios.Count);
 		float distanciaUniEdi = 999999999999999999;
+		//Debug.Log("Estoy Buscando un edificio cercano");
 
 		foreach(GameObject edificio in edificios){
 			float distanciaActual = distanciaUB (unit, edificio);
 			if(distanciaUniEdi>distanciaActual){
 				distanciaUniEdi = distanciaActual;
 				edificioOrigen = edificio;
+				//Debug.Log("El edificio cercano es: "+edificioOrigen.name);
 			}
 		}
 		return edificioOrigen;		

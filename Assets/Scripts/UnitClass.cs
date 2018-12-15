@@ -7,6 +7,7 @@ public class UnitClass : MonoBehaviour {
 	private bool combat;
 	private HexUnit target=null;
 	private UnitClass targetClass;
+	private Health targetEdi;
 	private float cdAtack;
 	[Header("Unit Type")]
 	public string type="infantryHOLA";//infantry,raider,archer,villager
@@ -70,10 +71,17 @@ public class UnitClass : MonoBehaviour {
 			Death();
 		}
 		if (cdAtack <= 0) {
-			if (combat && target) {
-				targetClass = target.GetComponent<UnitClass> ();
-				targetClass.dealDMG (this.attack, this.GetComponent<HexUnit> ());
-				cdAtack = HexMetrics.tiempo;
+			if (combat) {
+				if (target) {
+					targetClass = target.GetComponent<UnitClass> ();
+					targetClass.dealDMG (this.attack, this.GetComponent<HexUnit> ());
+					cdAtack = HexMetrics.tiempo;
+				}
+				else if(targetEdi){
+					targetEdi.TakeDamage ((int)this.attack);
+					cdAtack = HexMetrics.tiempo;
+				}
+
 			}
 		} else {
 			cdAtack -= Time.deltaTime;
@@ -94,6 +102,11 @@ public class UnitClass : MonoBehaviour {
 		target = unit;
 		combat = true;
 	}
+	public void targetPut(Health edif){
+		targetEdi = edif;
+		combat = true;
+	}
+
 	private void Death(){
 		this.GetComponent<HexUnit> ().Die ();
 	}

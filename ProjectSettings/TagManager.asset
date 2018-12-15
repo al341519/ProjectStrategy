@@ -9,6 +9,7 @@ TagManager:
   - edificioAliado
   - Grid
   - Castillo
+  - edificioEnemigo
   layers:
   - Default
   - TransparentFX
@@ -22,8 +23,6 @@ TagManager:
   - 
   - 
   - Grid
-  - 
-  - 
   - 
   - 
   - 
