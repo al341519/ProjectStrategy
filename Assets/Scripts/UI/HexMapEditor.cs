@@ -248,7 +248,6 @@ public class HexMapEditor : MonoBehaviour {
                 {
                     if (activeSpecialIndex == 1 && player.construir(activeSpecialIndex))
                     {
-                        //cell.ed = 
                         cell.Owner = 1;
                         cell.SpecialIndex = activeSpecialIndex;
                     }
