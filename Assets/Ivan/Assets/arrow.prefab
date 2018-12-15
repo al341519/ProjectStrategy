@@ -20,10 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4122616799123538}
   - component: {fileID: 54598222930118904}
-
   - component: {fileID: 65439561651133056}
-  - component: {fileID: 54181707697951820}
-
   m_Layer: 0
   m_Name: arrow
   m_TagString: Untagged
@@ -117,14 +114,11 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1801260543954712}
   m_Mesh: {fileID: 4300000, guid: e43b96feaeceac94396a96cf8e7531a5, type: 3}
-
 --- !u!54 &54598222930118904
---- !u!54 &54181707697951820
-
 Rigidbody:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1260135054183898}
   serializedVersion: 2
   m_Mass: 1
@@ -135,7 +129,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
-
 --- !u!65 &65439561651133056
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -148,4 +141,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.7324954, y: 0.10185759, z: 0.16850737}
   m_Center: {x: 0.0034223644, y: 0.052130252, z: 0.27932262}
- 
