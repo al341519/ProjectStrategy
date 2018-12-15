@@ -108,6 +108,8 @@ public class HexFeatureManager : MonoBehaviour {
         GameObject o = Instantiate(special[cell.SpecialIndex - 1]);
         o.GetComponent<Information>().SetCell(cell);
         o.GetComponent<Information>().SetEdificio(cell.SpecialIndex);
+        cell.SetEdificio(cell.SpecialIndex);
+
         Transform instance = o.transform;
 
         instance.localPosition = HexMetrics.Perturb(position);

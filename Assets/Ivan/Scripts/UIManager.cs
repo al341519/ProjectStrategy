@@ -29,7 +29,9 @@ public class UIManager:MonoBehaviour {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray,out hit))
             {
-                if (hit.transform.name == "Castillo") //.HexGrid.HexCell.cell.GetComponent<Information>().GetCell()
+
+
+                if (hit.transform.gameObject.GetComponent<HexGrid>().GetCell(ray).ed == Ed.Castillo) //.HexGrid.HexCell.cell.GetComponent<Information>().GetCell()
                 {
                     Debug.Log("Castillo");
                     OpenInicio();
@@ -59,17 +61,17 @@ public class UIManager:MonoBehaviour {
                     Debug.Log("Otros");
                     OpenOtros();
                 }
-                else if (hit.transform.name == "Infanteria")
+                else if (hit.transform.gameObject.GetComponent<HexGrid>().GetCell(ray).ed == Ed.Infanteria)
                 {
                     Debug.Log("Castillo");
                     OpenTropa1();
                 }
-                else if (hit.transform.name == "Arqueria")
+                else if (hit.transform.gameObject.GetComponent<HexGrid>().GetCell(ray).ed == Ed.Arqueria)
                 {
                     Debug.Log("Arqueria");
                     OpenTropa2();
                 }
-                else if (hit.transform.name == "Caballeria")
+                else if (hit.transform.gameObject.GetComponent<HexGrid>().GetCell(ray).ed == Ed.Caballeria)
                 {
                     Debug.Log("Caballeria");
                     OpenTropa3();
