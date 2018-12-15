@@ -29,7 +29,7 @@ public class UIManager:MonoBehaviour {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray,out hit))
             {
-                if (hit.transform.HexGrid.HexCell == "Castillo")
+                if (hit.transform.name == "Castillo") //.HexGrid.HexCell.cell.GetComponent<Information>().GetCell()
                 {
                     Debug.Log("Castillo");
                     OpenInicio();

@@ -67,11 +67,14 @@ public class Shoot : MonoBehaviour {
                 }
            }
         */
-
-        foreach (HexDirection direction in Enum.GetValues(typeof(HexDirection)))
+        //ES AQUIIIIIII
+        //
+        //
+        //
+       /* foreach (HexDirection direction in Enum.GetValues(typeof(HexDirection)))
         {
             Debug.Log(cell.GetNeighbor(direction).Unit);
-        }
+        }*/
 
         if (Input.GetKeyDown("b") && destroy)
         {  // press b to shoot

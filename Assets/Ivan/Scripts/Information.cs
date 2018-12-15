@@ -21,6 +21,7 @@ public class Information : MonoBehaviour {
     public HexCell GetCell() { return cell; }
 
     Ed ed;
+    string edificio;
 
     public void SetEdificio(int id)
     {
@@ -79,5 +80,5 @@ public class Information : MonoBehaviour {
         }
     }
 
-    public HexCell GetCell() { return cell; }
+   
 }
