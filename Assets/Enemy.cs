@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 
 public class Enemy : MonoBehaviour
 {
@@ -70,10 +71,14 @@ public class Enemy : MonoBehaviour
 
         if (timerTurno < 1) { return; }                 //Cada segundo realiza una acción
 
-        chooseBuilding();
         UpdateResources();
+        chooseUnit();
+        chooseBuilding();
 
         timerTurno = 0f;
+    }
+
+    void chooseUnit() {
     }
 
 
@@ -126,7 +131,6 @@ public class Enemy : MonoBehaviour
 
     void build(Edificio name)
     {
-        Debug.Log("aldeanos -> " + aldeanos + " comida -> " + comida);
         foreach (HexDirection direction in Enum.GetValues(typeof(HexDirection)))
         {
             HexCell cell = castillos[castillo - 1].GetNeighbor(direction);
@@ -156,23 +160,26 @@ public class Enemy : MonoBehaviour
                     case Edificio.cuartel:
                         piedra -= 35;
                         madera -= 35;
+                        cell.SpecialIndex = 5;
                         aldeanos--;
                         break;
                     case Edificio.arqueria:
                         piedra -= 35;
                         madera -= 35;
+                        cell.SpecialIndex = 6;
                         aldeanos--;
                         break;
                     case Edificio.caballeria:
                         piedra -= 35;
                         madera -= 35;
+                        cell.SpecialIndex = 7;
                         aldeanos--;
                         break;
                     default:
                         break;
                 }
+                edificio++;
                 break;
-                //edificio++;
             }
         }
     }
@@ -199,9 +206,9 @@ public class Enemy : MonoBehaviour
 
     void UpdateResources() {
         Debug.Log("madera: " + madera + " piedra: " + piedra + " comida: " + comida);
-        madera = recursos_turno[0] * 10;
-        piedra = recursos_turno[1] * 10;
-        comida = recursos_turno[2] * 10;
+        madera += recursos_turno[0] * 10;
+        piedra += recursos_turno[1] * 10;
+        comida += recursos_turno[2] * 10;
     }
 
     void chooseBuilding() {
@@ -216,18 +223,18 @@ public class Enemy : MonoBehaviour
             {
                 buildCastillo(castillo);
 
-            }
+            }        
             else
             {
-                if (recursos_turno[0] == 0 && haveResources(Edificio.molino))
+                if ((recursos_turno[0] == 0 || recursos_turno[0] == castillo-1)&& haveResources(Edificio.molino))
                 {
                     build(Edificio.molino);
                 }
-                if (recursos_turno[1] == 0 && haveResources(Edificio.aserradero))
+                if ((recursos_turno[1] == 0 || recursos_turno[1] == castillo - 1) && haveResources(Edificio.aserradero))
                 {
                     build(Edificio.aserradero);
                 }
-                if (recursos_turno[2] == 0 && haveResources(Edificio.mina))
+                if ((recursos_turno[2] == 0 || recursos_turno[2] == castillo - 1 ) && haveResources(Edificio.mina))
                 {
                     build(Edificio.mina);
                 }
