@@ -14746,7 +14746,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5069366424a544be0b028f5cef956c44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  paloma: {fileID: 0}
+  paloma: {fileID: 1427444866856406, guid: 8dc55aa68eb68f84f97dbf947afaaeaf, type: 2}
   alturaPaloma: 50
   grid: {fileID: 1335749238}
 --- !u!4 &1363263248
@@ -20674,7 +20674,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hexGrid: {fileID: 1335749238}
   terrainMaterial: {fileID: 2100000, guid: 6a3f5c7892e4b478e9e745026e6fe9f7, type: 2}
-  enemyUnitPrefab: {fileID: 0}
+  enemyUnitPrefab: {fileID: 114519228670333460, guid: 3aae20caeda0b244db54e1cab36888d4,
+    type: 2}
   gameManager: {fileID: 109660051}
 --- !u!114 &1895790503
 MonoBehaviour:

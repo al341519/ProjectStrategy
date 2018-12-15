@@ -14,10 +14,8 @@ public class Enemy : MonoBehaviour
 
     public enum Unidades { soldado, arquero, jinete }
 
-    public enum Edificio { aserradero, mina, molino, cuartel, arqueria, caballeria }
+    public enum Edificio { castillo, aserradero, mina, molino, cuartel, arqueria, caballeria }
 
-    Vector3 castilloInicial = new Vector3(192, 15, 180); 
-    Vector3 segundoCastillo = new Vector3(295, 15, 120);
     HexCell[] castillos = new HexCell[2];
 
     Unidades Unidad_deseada = Unidades.jinete;
@@ -29,7 +27,7 @@ public class Enemy : MonoBehaviour
     int castillo = 0;
     int edificio;
 
-    float timerTurno = 1f;
+    float timerTurno = HexMetrics.tiempo;
 
     HexGrid HexGrid;
 
@@ -52,9 +50,9 @@ public class Enemy : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        madera = 100;
-        piedra = 100;
-        comida = 100;
+        madera = 375;
+        piedra = 375;
+        comida = 250;
         aldeanos = 1;
         castillos[0] = hexGrid.GetCell(5, 12);
         castillos[1] = hexGrid.GetCell(13, 8);
@@ -69,7 +67,7 @@ public class Enemy : MonoBehaviour
 
         timerTurno += Time.deltaTime;
 
-        if (timerTurno < 1) { return; }                 //Cada segundo realiza una acción
+        if (timerTurno < HexMetrics.tiempo) { return; }                 //Cada segundo realiza una acción
 
         UpdateResources();
         chooseUnit();
@@ -79,6 +77,7 @@ public class Enemy : MonoBehaviour
     }
 
     void chooseUnit() {
+
     }
 
 
@@ -86,6 +85,11 @@ public class Enemy : MonoBehaviour
     {
         switch (name)
         {
+            case Edificio.castillo:
+                if (madera > 300 && piedra > 300 && comida > 200 && aldeanos >= 1) {
+                    return true;
+                }
+                break;
             case Edificio.aserradero:            
                 if (piedra > 50 && aldeanos >= 1)
                 {
@@ -161,18 +165,21 @@ public class Enemy : MonoBehaviour
                         piedra -= 35;
                         madera -= 35;
                         cell.SpecialIndex = 5;
+                        offensive_building[0]++;
                         aldeanos--;
                         break;
                     case Edificio.arqueria:
                         piedra -= 35;
                         madera -= 35;
                         cell.SpecialIndex = 6;
+                        offensive_building[1]++;
                         aldeanos--;
                         break;
                     case Edificio.caballeria:
                         piedra -= 35;
                         madera -= 35;
                         cell.SpecialIndex = 7;
+                        offensive_building[2]++;
                         aldeanos--;
                         break;
                     default:
@@ -198,7 +205,10 @@ public class Enemy : MonoBehaviour
 
         castillos[castillo].Walled = true;
         castillos[castillo].Owner = 2;
-
+        madera -= 300;
+        piedra -= 300;
+        comida -= 200;
+        aldeanos--;
         castillo++;
         aldeanos--;
         //castillos[numero].SpecialIndex = 1;
@@ -216,25 +226,23 @@ public class Enemy : MonoBehaviour
         {
             comida -= 30;
             aldeanos++;
-            Debug.Log(comida);
         }
         else {
-            if (castillo < 1 || edificio >= castillo * 6)
+            if ((castillo < 1 || edificio >= castillo * 6)&& haveResources(Edificio.castillo))
             {
                 buildCastillo(castillo);
-
             }        
             else
             {
-                if ((recursos_turno[0] == 0 || recursos_turno[0] == castillo-1)&& haveResources(Edificio.molino))
+                if ((recursos_turno[0] == 0 || recursos_turno[0] <= castillo-1)&& haveResources(Edificio.molino))
                 {
                     build(Edificio.molino);
                 }
-                if ((recursos_turno[1] == 0 || recursos_turno[1] == castillo - 1) && haveResources(Edificio.aserradero))
+                if ((recursos_turno[1] == 0 || recursos_turno[1] <= castillo - 1) && haveResources(Edificio.aserradero))
                 {
                     build(Edificio.aserradero);
                 }
-                if ((recursos_turno[2] == 0 || recursos_turno[2] == castillo - 1 ) && haveResources(Edificio.mina))
+                if ((recursos_turno[2] == 0 || recursos_turno[2] <= castillo - 1 ) && haveResources(Edificio.mina))
                 {
                     build(Edificio.mina);
                 }
@@ -257,5 +265,7 @@ public class Enemy : MonoBehaviour
     }
 
 }
+
+
 
 

@@ -7,7 +7,17 @@ public class Health : MonoBehaviour {
     public const int maxHealth = 100;
     public int currentHealth = maxHealth;
     private HexCell cell;
-	
+
+    void Start() {
+        if (cell.Owner == 1)
+        {
+            this.tag = "edificioAliado";
+        }
+        else if (cell.Owner == 2) {
+            this.tag = "edificioEnemigo";
+        }
+    }
+
 	// Update is called once per frame
 	void Update () {
 		
@@ -22,7 +32,13 @@ public class Health : MonoBehaviour {
             currentHealth = 0;
             Debug.Log("Dead!");
             //UPDATE EN EL MAPA INFLUENCIA
-            Destroy(this, 0.5f);
+            cell.SpecialIndex = 0;
+            cell.Owner = 0;
+            cell.edificio = null;
+
+
+            Destroy(this.gameObject, 0.5f);
+
         }
     }
 
