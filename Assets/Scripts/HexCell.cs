@@ -510,7 +510,10 @@ public class HexCell : MonoBehaviour {
 	}
 
 	void RefreshSelfOnly () {
-		chunk.Refresh();
+        if (chunk != null)
+        {
+            chunk.Refresh();
+        }
 		if (Unit) {
 			Unit.ValidateLocation();
 		}
