@@ -779,6 +779,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4884088191074190}
   - component: {fileID: 114316370193939626}
+  - component: {fileID: 114146982581472632}
   m_Layer: 0
   m_Name: Arqueria
   m_TagString: Untagged
@@ -4464,6 +4465,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114146982581472632
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1399776201307478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43116ec4c38a1dd459ebdd20572d62ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114316370193939626
 MonoBehaviour:
   m_ObjectHideFlags: 1

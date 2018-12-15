@@ -19,6 +19,8 @@ public class UIManager:MonoBehaviour {
 
     public GameObject UIEspecial;
 
+    //cell = gameObject.GetComponent<Information>().GetCell();
+
     public void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -27,7 +29,7 @@ public class UIManager:MonoBehaviour {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray,out hit))
             {
-                if (hit.transform.gameObject.tag == "Castillo")
+                if (hit.transform.HexGrid.HexCell == "Castillo")
                 {
                     Debug.Log("Castillo");
                     OpenInicio();
