@@ -29,7 +29,7 @@ public class HexGrid : MonoBehaviour {
 
 	Transform[] columns;
 	HexGridChunk[] chunks;
-	HexCell[] cells;
+	[HideInInspector] public HexCell[] cells;
 
 	int chunkCountX, chunkCountZ;
 

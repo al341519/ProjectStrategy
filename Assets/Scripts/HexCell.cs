@@ -10,6 +10,8 @@ public class HexCell : MonoBehaviour {
 
     public HexCoordinates coordinates;
 
+    [HideInInspector] public Color influence = new Color(0,0,0,0);
+
 	public RectTransform uiRect;
 
 	public HexGridChunk chunk;

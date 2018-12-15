@@ -10,6 +10,9 @@ TagManager:
   - Grid
   - Castillo
   - edificioEnemigo
+
+  - Influencer
+  - InfluenceSystem
   layers:
   - Default
   - TransparentFX
