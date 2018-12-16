@@ -107,6 +107,8 @@ public class HexGrid : MonoBehaviour {
             columns[x] = new GameObject("Column").transform;
             columns[x].SetParent(transform, false);
         }
+        Debug.Log(columns.Length);
+
 
         chunks = new HexGridChunk[chunkCountX * chunkCountZ];
         for (int z = 0, i = 0; z < chunkCountZ; z++) {
@@ -201,6 +203,9 @@ public class HexGrid : MonoBehaviour {
 		cell.coordinates = HexCoordinates.FromOffsetCoordinates(x, z);
 		cell.Index = i;
 		cell.ColumnIndex = x / HexMetrics.chunkSizeX;
+        cell.influenceInfo = new InfluenceCell[2];
+        for (int it = 0; it < cell.influenceInfo.Length; it++)
+            cell.influenceInfo[it] = new InfluenceCell();
 		cell.ShaderData = cellShaderData;
         cell.gameManager = gameManager;
 
@@ -512,8 +517,10 @@ public class HexGrid : MonoBehaviour {
 	public void CenterMap (float xPosition) {
 		int centerColumnIndex = (int)
 			(xPosition / (HexMetrics.innerDiameter * HexMetrics.chunkSizeX));
-		
-		if (centerColumnIndex == currentCenterColumnIndex) {
+
+        Debug.Log(columns.Length);
+
+        if (centerColumnIndex == currentCenterColumnIndex) {
 			return;
 		}
 		currentCenterColumnIndex = centerColumnIndex;

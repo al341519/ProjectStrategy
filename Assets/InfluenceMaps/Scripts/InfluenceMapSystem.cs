@@ -46,25 +46,28 @@ public class InfluenceMapSystem : MonoBehaviour {
             militaryMaps[i].height = _Size.y;
 
             economyMaps[i] = new InfluenceMap(mapPlanes[i], _Size, Buildings[i], Buildings[_NumberOfPlayers - 1 - i], MapResources);
-            militaryMaps[i].numberOfPlayers = _NumberOfPlayers;
-            militaryMaps[i].width = _Size.x;
-            militaryMaps[i].height = _Size.y;
+            economyMaps[i].numberOfPlayers = _NumberOfPlayers;
+            economyMaps[i].width = _Size.x;
+            economyMaps[i].height = _Size.y;
         }
     }
 
 	void Update () {
-        //UpdateMap(militaryMaps, true);
-        UpdateMap(economyMaps, false);
+        for (int i = 0; i < _NumberOfPlayers; i++)
+        {
+            UpdateMap(militaryMaps, true, i);
+            UpdateMap(economyMaps, false, i);
+        }
 	}
 
-    void UpdateMap(InfluenceMap[] maps, bool isMilitary)
+    void UpdateMap(InfluenceMap[] maps, bool isMilitary, int player)
     {
         foreach (InfluenceMap map in maps)
         {
             map.Update();
         }
-        DrawMap(0, maps);
-        ApplyMap(0, maps, isMilitary);
+        DrawMap(1, maps);
+        ApplyMap(maps, isMilitary, player);
     }
 
     void LateUpdate()
@@ -83,16 +86,15 @@ public class InfluenceMapSystem : MonoBehaviour {
         mapPlanes[player].GetComponent<MeshRenderer>().material.SetTexture("_MainTex", mapArray[player].CurrentTexture);
     }
 
-    void ApplyMap(int mapIndex, InfluenceMap[] mapArray, bool isMilitary)
+    void ApplyMap(InfluenceMap[] mapArray, bool isMilitary, int player)
     {
         HexCell[] cells = grid.cells;
-        List<Color>[] buffer = mapArray[mapIndex].GetColorBuffer(grid);
+        List<Color>[] buffer = mapArray[player].GetColorBuffer(grid);
         for (int i = 0; i < cells.Length; i++)
         {
             Color averageInfluence = AverageColor(buffer[cells[i].Index]);
-            if(isMilitary) cells[i].MilitaryInfluence = averageInfluence;
-            else cells[i].EconomicInfluence = averageInfluence;
-
+            if(isMilitary) cells[i].influenceInfo[player].MilitaryInfluence = averageInfluence;
+            else cells[i].influenceInfo[player].EconomicInfluence = averageInfluence;
         }
     }
 
@@ -149,7 +151,7 @@ public class InfluenceMapSystem : MonoBehaviour {
             HexCell cell = grid.GetCell(Camera.main.ScreenPointToRay(Input.mousePosition));
             if (cell != null)
                 //print("Influence: " + cell.influence);
-                print("IsFrontier: " + cell.IsMilitaryFrontier);
+                print("IsFrontier: " + cell.influenceInfo[1].IsBuildingFrontier);
             else
                 print("NULL");
         }

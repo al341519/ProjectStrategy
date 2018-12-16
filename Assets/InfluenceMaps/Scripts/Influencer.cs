@@ -63,9 +63,4 @@ public class Influencer : MonoBehaviour {
         }
         //system.Units[_Team].Add(this);
     }
-
-    void Update()
-    {
-
-    }
 }

@@ -18,7 +18,7 @@ public class UIManager : MonoBehaviour {
     public GameObject Arquero;
     public GameObject Caballero;
 
-    public GameObject UIEspecial;
+    public GameObject UIStart;
     HexGrid grid;
     HexCell cell;
 
@@ -29,7 +29,6 @@ public class UIManager : MonoBehaviour {
 
     public void Update()
     {
-        Debug.Log(UIRecursos.activeSelf);
 
 
         if (Input.GetMouseButtonDown(0))
@@ -77,7 +76,7 @@ public class UIManager : MonoBehaviour {
         Soldado.SetActive(false);
         Arquero.SetActive(false);
         Caballero.SetActive(false);
-        UIEspecial.SetActive(false);
+        UIStart.SetActive(false);
     }
 
 
@@ -94,7 +93,7 @@ public class UIManager : MonoBehaviour {
         Soldado.SetActive(false);
         Arquero.SetActive(false);
         Caballero.SetActive(false);
-        UIEspecial.SetActive(false);
+        UIStart.SetActive(false);
     }
 
 
@@ -110,7 +109,7 @@ public class UIManager : MonoBehaviour {
         Soldado.SetActive(false);
         Arquero.SetActive(false);
         Caballero.SetActive(false);
-        UIEspecial.SetActive(false);
+        UIStart.SetActive(false);
     }
 
     public void OpenAtaque()
@@ -125,7 +124,7 @@ public class UIManager : MonoBehaviour {
         Soldado.SetActive(false);
         Arquero.SetActive(false);
         Caballero.SetActive(false);
-        UIEspecial.SetActive(false);
+        UIStart.SetActive(false);
     }
 
     public void OpenDefensa()
@@ -140,7 +139,7 @@ public class UIManager : MonoBehaviour {
         Soldado.SetActive(false);
         Arquero.SetActive(false);
         Caballero.SetActive(false);
-        UIEspecial.SetActive(false);
+        UIStart.SetActive(false);
     }
 
     public void OpenTropa1()
@@ -155,7 +154,7 @@ public class UIManager : MonoBehaviour {
         Soldado.SetActive(true);
         Arquero.SetActive(false);
         Caballero.SetActive(false);
-        UIEspecial.SetActive(false);
+        UIStart.SetActive(false);
     }
 
     public void OpenTropa2()
@@ -170,7 +169,7 @@ public class UIManager : MonoBehaviour {
         Soldado.SetActive(false);
         Arquero.SetActive(true);
         Caballero.SetActive(false);
-        UIEspecial.SetActive(false);
+        UIStart.SetActive(false);
     }
 
     public void OpenTropa3()
@@ -185,7 +184,7 @@ public class UIManager : MonoBehaviour {
         Soldado.SetActive(false);
         Arquero.SetActive(false);
         Caballero.SetActive(true);
-        UIEspecial.SetActive(false);
+        UIStart.SetActive(false);
     }
 
     public void OpenOtros()
@@ -200,7 +199,7 @@ public class UIManager : MonoBehaviour {
         Soldado.SetActive(false);
         Arquero.SetActive(false);
         Caballero.SetActive(false);
-        UIEspecial.SetActive(true);
+        UIStart.SetActive(true);
     }
 
     public void CloseMenu()
@@ -215,7 +214,7 @@ public class UIManager : MonoBehaviour {
         Soldado.SetActive(false);
         Arquero.SetActive(false);
         Caballero.SetActive(false);
-        UIEspecial.SetActive(false);
+        UIStart.SetActive(false);
     }
 
 }
