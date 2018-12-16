@@ -203,6 +203,9 @@ public class HexGrid : MonoBehaviour {
 		cell.coordinates = HexCoordinates.FromOffsetCoordinates(x, z);
 		cell.Index = i;
 		cell.ColumnIndex = x / HexMetrics.chunkSizeX;
+        cell.influenceInfo = new InfluenceCell[2];
+        for (int it = 0; it < cell.influenceInfo.Length; it++)
+            cell.influenceInfo[it] = new InfluenceCell();
 		cell.ShaderData = cellShaderData;
         cell.gameManager = gameManager;
 

@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
-
-
+using System.Collections.Generic;
 
 public class HexCell : MonoBehaviour {
 
@@ -22,40 +21,7 @@ public class HexCell : MonoBehaviour {
 
 	public int ColumnIndex { get; set; }
 
-    public Color EconomicInfluence { get; set; }
-
-    public Color MilitaryInfluence { get; set; }
-
-    public bool IsMilitaryFrontier
-    {
-        get
-        {
-            if (MilitaryInfluence.g>0 && MilitaryInfluence.g<1)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-    }
-
-    public bool IsBuildingFrontier
-    {
-        get
-        {
-            if (EconomicInfluence.g > 0 && EconomicInfluence.g < 1)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-    }
+    [HideInInspector] public InfluenceCell[] influenceInfo;
 
     public int Elevation {
 		get {
