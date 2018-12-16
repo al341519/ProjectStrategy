@@ -149,15 +149,29 @@ public class HexUnit : MonoBehaviour
             if (pathToTravel[i].Unit)
             {//Mirar para rodear a unidades enemigas
                 Debug.Log("HOLAAAAA hay una unidad");
-                if (pathToTravel[i].Unit.tag != this.tag)
-                {
-                    Debug.Log("Estoy en el if de las tags");
-                    location.Unit = null;
-                    location = pathToTravel[i - 1];
-                    location.Unit = this;
-                    this.GetComponent<UnitClass>().targetPut(pathToTravel[i].Unit.GetComponent<HexUnit>());
-                    break;
-                }
+				if (pathToTravel [i].Unit.tag != this.tag) {
+					//Coger el rango de ataque y en base a eso calcular
+					if (this.GetComponent<UnitClass> ().attackRange > 1/* && pathToTravel [i - 1] != location */&& i > this.GetComponent<UnitClass> ().attackRange) {
+						Debug.Log ("Estoy en el if del rango");
+						location.Unit = null;
+						location = pathToTravel [i - (int)this.GetComponent<UnitClass> ().attackRange];
+						location.Unit = this;
+						this.GetComponent<UnitClass> ().targetPut (pathToTravel [i].Unit.GetComponent<HexUnit> ());
+						break;
+					} else {
+						
+						location.Unit = null;
+						location = pathToTravel [i - 1];
+						location.Unit = this;
+						this.GetComponent<UnitClass> ().targetPut (pathToTravel [i].Unit.GetComponent<HexUnit> ());
+						break;
+					}
+				} else if (pathToTravel [i].Unit.tag == this.tag) {
+					location.Unit = null;
+					location = pathToTravel [i - 1];
+					location.Unit = this;
+					break;
+				}
             }//Cambio para dañar edif
 
             else if (pathToTravel[i].edificio)
@@ -291,7 +305,7 @@ public class HexUnit : MonoBehaviour
         {
             moveCost = 1;
         }
-        else if (fromCell.Walled != toCell.Walled)
+		else if (fromCell.Walled != toCell.Walled )
         {
             return -1;
         }
