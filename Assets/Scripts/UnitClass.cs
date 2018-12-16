@@ -172,7 +172,7 @@ public class UnitClass : MonoBehaviour {
 			}
 
 		}
-
+        /*
 		if (patrulla) {
 			//Patrullar zonas de influencia similar a la celda actual ¿Si ve un enemigo va a por el?
 			HexCell[] listaCeldas= this.GetComponent<HexUnit>().Location.GetVecinos();
@@ -222,10 +222,10 @@ public class UnitClass : MonoBehaviour {
 			}
 		} else {
 			cdAtack -= Time.deltaTime;
-		}
-	}
+		}*/
+    }
 
-	public void dealDMG(float damageRecive,HexUnit enemy){
+    public void dealDMG(float damageRecive,HexUnit enemy){
 		this.life -= (damageRecive / this.defence);
 
 		if (!combat){
