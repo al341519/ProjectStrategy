@@ -99,26 +99,18 @@ public class HexFeatureManager : MonoBehaviour {
 		instance.SetParent(container, false);
 	}
 
-	public void AddSpecialFeature (HexCell cell, Vector3 position) {
-		HexHash hash = HexMetrics.SampleHashGrid(position);
-        //NUEVO
-        //
-        //
-        //
-        GameObject o = Instantiate(special[cell.SpecialIndex - 1]);
-        o.GetComponent<Information>().SetCell(cell);
-        o.GetComponent<Information>().SetEdificio(cell.SpecialIndex);
-        cell.SetEdificio(cell.SpecialIndex);
-
-        Transform instance = o.transform;
-
+    public void AddSpecialFeature(HexCell cell, Vector3 position)
+    {
+        HexHash hash = HexMetrics.SampleHashGrid(position);
+        Transform instance = Instantiate(special[cell.SpecialIndex - 1]).transform;
+        instance.gameObject.GetComponent<Health>().Celda(cell);
+        cell.edificio = instance.gameObject;
         instance.localPosition = HexMetrics.Perturb(position);
-		instance.localRotation = Quaternion.Euler(0f, 360f * hash.e, 0f);
-		instance.SetParent(container, false);
-        
-	}
+        instance.localRotation = Quaternion.Euler(0f, 360f * hash.e, 0f);
+        instance.SetParent(container, false);
+    }
 
-	public void AddWall (
+    public void AddWall (
 		EdgeVertices near, HexCell nearCell,
 		EdgeVertices far, HexCell farCell,
 		bool hasRiver, bool hasRoad

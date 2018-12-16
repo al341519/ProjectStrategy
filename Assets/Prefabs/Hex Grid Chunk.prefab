@@ -765,22 +765,22 @@ MonoBehaviour:
   wallTower: {fileID: 4000011665626236, guid: 1589993158ba34786b54f448bdeb6085, type: 2}
   bridge: {fileID: 4000012598710820, guid: 234387bb7219042168570e127fbd5b58, type: 2}
   special:
-  - {fileID: 4357727116857584, guid: 575472225b64ecb42be5cca12c3a8652, type: 2}
-  - {fileID: 4973222834176872, guid: 952a9c641abd4e94fa99b98fdd842377, type: 2}
-  - {fileID: 4705272938915720, guid: 6a6c3f3b44171f84a81f20634071bb2b, type: 2}
-  - {fileID: 4386383586071594, guid: ff3b3075f95da9d45b7c77db82af2c25, type: 2}
-  - {fileID: 4132228224755082, guid: 441466f191becb5449b6c1ff49043527, type: 2}
-  - {fileID: 4884088191074190, guid: df895d45315c8844d89e1b20b0a760b7, type: 2}
-  - {fileID: 4450042408484958, guid: dd32a37466867d94d94a784b3c64a0a1, type: 2}
-  - {fileID: 4952478997220206, guid: ece1da02dbe3c7549908bc20c2ac93e1, type: 2}
-  - {fileID: 4860164432951566, guid: 89124ee502877ce4a8450469a126ccce, type: 2}
-  - {fileID: 4775124463024094, guid: f9b3f25b9618e2c4496b1fe7c57b1bd3, type: 2}
-  - {fileID: 4234264288931912, guid: 551c46c6f83238446b2cede7db27f6a2, type: 2}
-  - {fileID: 4156210312675776, guid: 789054f3cf25fb545bf4195c644e89f4, type: 2}
-  - {fileID: 4886691747024928, guid: c0b6e3b1e88f87e4ca1a45baa8dd6df6, type: 2}
-  - {fileID: 4937422035732810, guid: e256a345d6ab56e4d9a0a8884ca07e20, type: 2}
-  - {fileID: 4897030760880876, guid: 88dcdfdf3fc3c554f8c9025a51e6a876, type: 2}
-  - {fileID: 4284071033577406, guid: 5600af78f8568fd40a8f0cccbe454e74, type: 2}
+  - {fileID: 1267259959536856, guid: 575472225b64ecb42be5cca12c3a8652, type: 2}
+  - {fileID: 1974150642326260, guid: 6a6c3f3b44171f84a81f20634071bb2b, type: 2}
+  - {fileID: 1539531712916810, guid: 952a9c641abd4e94fa99b98fdd842377, type: 2}
+  - {fileID: 1218923391066058, guid: ff3b3075f95da9d45b7c77db82af2c25, type: 2}
+  - {fileID: 1277795826712250, guid: 441466f191becb5449b6c1ff49043527, type: 2}
+  - {fileID: 1399776201307478, guid: df895d45315c8844d89e1b20b0a760b7, type: 2}
+  - {fileID: 1202790500088194, guid: dd32a37466867d94d94a784b3c64a0a1, type: 2}
+  - {fileID: 1283084555897974, guid: ece1da02dbe3c7549908bc20c2ac93e1, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &114000013445900128
 MonoBehaviour:
   m_ObjectHideFlags: 1

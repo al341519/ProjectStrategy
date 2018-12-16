@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-enum Ed
+public enum Ed
 {
     Castillo, Forja, Aserradero, Molino,
     Infanteria, Arqueria, Caballeria, Sierra, Mina,

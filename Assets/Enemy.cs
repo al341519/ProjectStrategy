@@ -50,9 +50,9 @@ public class Enemy : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        madera = 375;
-        piedra = 375;
-        comida = 250;
+        madera = 395;
+        piedra = 395;
+        comida = 300;
         aldeanos = 1;
         castillos[0] = hexGrid.GetCell(5, 12);
         castillos[1] = hexGrid.GetCell(13, 8);
@@ -146,20 +146,20 @@ public class Enemy : MonoBehaviour
                         piedra -= 50;
                         aldeanos--;
                         cell.SpecialIndex = 2;
-                        recursos_turno[1]++;
+                        recursos_turno[0]++;
                         break;
                     case Edificio.mina:
                         madera -= 50;
                         aldeanos--;
                         cell.SpecialIndex = 3;
-                        recursos_turno[2]++;
+                        recursos_turno[1]++;
                         break;
                     case Edificio.molino:
                         piedra -= 25;
                         madera -= 25;
                         aldeanos--;
                         cell.SpecialIndex = 4;
-                        recursos_turno[0]++;
+                        recursos_turno[2]++;
                         break;
                     case Edificio.cuartel:
                         piedra -= 35;
@@ -199,7 +199,7 @@ public class Enemy : MonoBehaviour
         
         foreach (HexDirection direction in Enum.GetValues(typeof(HexDirection)))
         {
-            castillos[castillo].GetNeighbor(direction).Walled = true;
+      //      castillos[castillo].GetNeighbor(direction).Walled = true;
             castillos[castillo].Owner = 2;
         }
 
@@ -215,7 +215,6 @@ public class Enemy : MonoBehaviour
     }
 
     void UpdateResources() {
-        Debug.Log("madera: " + madera + " piedra: " + piedra + " comida: " + comida);
         madera += recursos_turno[0] * 10;
         piedra += recursos_turno[1] * 10;
         comida += recursos_turno[2] * 10;
@@ -234,15 +233,15 @@ public class Enemy : MonoBehaviour
             }        
             else
             {
-                if ((recursos_turno[0] == 0 || recursos_turno[0] <= castillo-1)&& haveResources(Edificio.molino))
+                if ((recursos_turno[2] == 0 || recursos_turno[2] <= castillo-1) && haveResources(Edificio.molino))
                 {
                     build(Edificio.molino);
                 }
-                if ((recursos_turno[1] == 0 || recursos_turno[1] <= castillo - 1) && haveResources(Edificio.aserradero))
+                if ((recursos_turno[0] == 0 || recursos_turno[0] <= castillo - 1) && haveResources(Edificio.aserradero))
                 {
                     build(Edificio.aserradero);
                 }
-                if ((recursos_turno[2] == 0 || recursos_turno[2] <= castillo - 1 ) && haveResources(Edificio.mina))
+                if ((recursos_turno[1] == 0 || recursos_turno[1] <= castillo - 1 ) && haveResources(Edificio.mina))
                 {
                     build(Edificio.mina);
                 }
