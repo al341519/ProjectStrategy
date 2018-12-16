@@ -13,6 +13,22 @@ public class Influencer : MonoBehaviour {
     public InfluencerType type;
 
     InfluenceMapSystem system;
+    HexGrid grid;
+
+    public bool IsVisible
+    {
+        get
+        {
+            if(type == InfluencerType.Resource)
+            {
+                return grid.GetCell(position).IsExplored;
+            }
+            else
+            {
+                return grid.GetCell(position).IsVisible;
+            }
+        }
+    }
 
     Vector3 position;
     //Color color;
@@ -27,26 +43,11 @@ public class Influencer : MonoBehaviour {
         }
     }
 
-    /*public Color Color
-    {
-        get
-        {
-            switch (type)
-            {
-                case InfluencerType.Unit:
-                    return new Color(1, 0, 0, 1);
-                case InfluencerType.Building:
-                    return new Color(0, 0, 1, 1);
-                default:
-                    return new Color(0, 0, 0, 0);
-            }
-        }
-    }*/
-
     //Functions
 
     void Start()
     {
+        grid = GameObject.Find("Hex Grid").GetComponent<HexGrid>();
         system = GameObject.FindGameObjectWithTag("InfluenceSystem").GetComponent<InfluenceMapSystem>();
         switch (type)
         {
@@ -57,7 +58,7 @@ public class Influencer : MonoBehaviour {
                 system.Units[_Team-1].Add(this);
                 break;
             case InfluencerType.Resource:
-                system.Units[_Team-1].Add(this);
+                system.MapResources.Add(this);
                 break;
         }
         //system.Units[_Team].Add(this);
