@@ -320,6 +320,10 @@ public class HexCell : MonoBehaviour {
         return neighbors;
     }
 
+    public void SetEdificio(int t) {
+        
+    }
+
     public Ed ed { get; set; }
 
     public void SetEdificios(int id) {
