@@ -11,7 +11,6 @@ public class Influencer : MonoBehaviour {
     public int _Team = 1; //1-n
     public enum InfluencerType { Unit, Building, Resource}
     public InfluencerType type;
-
     InfluenceMapSystem system;
 
     Vector3 position;
@@ -26,6 +25,8 @@ public class Influencer : MonoBehaviour {
             return transform.position;
         }
     }
+
+    public bool IsVisible { get; set; }
 
     /*public Color Color
     {
@@ -60,6 +61,7 @@ public class Influencer : MonoBehaviour {
                 system.Units[_Team-1].Add(this);
                 break;
         }
+        IsVisible = true;
         //system.Units[_Team].Add(this);
     }
 

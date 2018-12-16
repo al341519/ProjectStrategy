@@ -77,9 +77,12 @@ public class InfluenceMap{
         for (int i = 0; i < influencers.Count; i++)
         {
             currentInfluencer = influencers[i];
-            influencerPos = currentInfluencer.transform.position;
-            pos = WorldToPixelSpace(influencerPos.x, influencerPos.z);
-            DrawTexture(pos.x, pos.y, currentInfluencer._InfluencePower);
+            if (currentInfluencer.IsVisible)
+            {
+                influencerPos = currentInfluencer.transform.position;
+                pos = WorldToPixelSpace(influencerPos.x, influencerPos.z);
+                DrawTexture(pos.x, pos.y, currentInfluencer._InfluencePower);
+            }
         }
     }
 

@@ -263,6 +263,15 @@ public class HexCell : MonoBehaviour {
 
 	public HexUnit Unit { get; set; }
 
+    public bool IsFrontier
+    {
+        get
+        {
+            if (influence.g < 1 && influence.r>=0 && influence.g>0) return true;  //Only frontier against enemy units and against neutral territory (not building frontier supported yet)
+            else return false;
+        }
+    }
+
 	public HexCell PathFrom { get; set; }
 
 	public int SearchHeuristic { get; set; }
