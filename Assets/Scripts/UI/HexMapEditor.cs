@@ -123,7 +123,7 @@ public class HexMapEditor : MonoBehaviour {
 		terrainMaterial.DisableKeyword("GRID_ON");
 		Shader.EnableKeyword("HEX_MAP_EDIT_MODE");
 		SetEditMode(true);
-        player = gameManager.getPlayer(1);
+        //player = gameManager.getPlayer(1);
 	}
 
 	void Update () {

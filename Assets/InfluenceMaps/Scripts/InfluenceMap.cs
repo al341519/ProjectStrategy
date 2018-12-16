@@ -12,7 +12,8 @@ public class InfluenceMap{
     HexGrid grid;
     Transform transform;
 
-    List<Influencer> units, enemyUnits, buildings;
+    List<Influencer> units, enemy, resources;
+    bool isEconomic = false;
 
     bool updateStarted = false;
     Color currentColor;
@@ -33,8 +34,9 @@ public class InfluenceMap{
         }
     }
 
-    public InfluenceMap(GameObject plane, Vector2Int size, List<Influencer> units, List<Influencer> enemyUnits, List<Influencer> buildings)
+    public InfluenceMap(GameObject plane, Vector2Int size, List<Influencer> self, List<Influencer> enemy)
     {
+        isEconomic = false;
         transform = plane.transform;
 
         width = size.x;
@@ -48,29 +50,52 @@ public class InfluenceMap{
         meshRenderer = plane.GetComponent<MeshRenderer>();
 
         //grid = GameObject.Find("Hex Grid").GetComponent<HexGrid>();
-        this.units = units;
-        this.enemyUnits = enemyUnits;
-        this.buildings = buildings;
+        this.units = self;
+        this.enemy = enemy;
 
         boxCollider = plane.GetComponent<BoxCollider>();
+    }
 
-        
+    public InfluenceMap(GameObject plane, Vector2Int size, List<Influencer> self, List<Influencer> enemy, List<Influencer> resources)
+    {
+        isEconomic = true;
+        transform = plane.transform;
+
+        width = size.x;
+        height = size.y;
+
+        currentTexture = new Texture2D(width, height);
+        currentTexture.filterMode = FilterMode.Point;
+        currentTexture.anisoLevel = 0;
+        textureLength = currentTexture.width * currentTexture.height;
+
+        meshRenderer = plane.GetComponent<MeshRenderer>();
+
+        //grid = GameObject.Find("Hex Grid").GetComponent<HexGrid>();
+        this.resources = resources;
+        this.units = self;
+        this.enemy = enemy;
+
+        boxCollider = plane.GetComponent<BoxCollider>();
     }
 
     public void Update()
     {
         DrawFullColor(backgroundColor, currentTexture);
 
-        currentColor = new Color(0, 0, 1, 1);   //Building Color -> Blue
-        UpdateMap(buildings);
+        if (isEconomic)
+        {
+            currentColor = new Color(0, 0, 1, 0);   //Resources Color -> Blue
+            UpdateMap(resources, isEconomic);
+        }
         currentColor = new Color(1, 0, 0, 1);   //Enemy Color -> Red
-        UpdateMap(enemyUnits);
+        UpdateMap(enemy, false);
         currentColor = new Color(0, 1, 0, 1);   //Units Color -> Green
-        UpdateMap(units);
+        UpdateMap(units, false);
         currentTexture.Apply();
     }
 
-    void UpdateMap(List<Influencer> influencers)
+    void UpdateMap(List<Influencer> influencers, bool isResources)
     {
         Vector2Int pos;
         Vector3 influencerPos;
@@ -79,7 +104,7 @@ public class InfluenceMap{
             currentInfluencer = influencers[i];
             influencerPos = currentInfluencer.transform.position;
             pos = WorldToPixelSpace(influencerPos.x, influencerPos.z);
-            DrawTexture(pos.x, pos.y, currentInfluencer._InfluencePower);
+            DrawTexture(pos.x, pos.y, currentInfluencer._InfluencePower, isResources);
         }
     }
 
@@ -119,18 +144,19 @@ public class InfluenceMap{
         return true;
     }
 
-    void DrawTexture(int x, int y, float influence)
+    void DrawTexture(int x, int y, float influence, bool isResources)
     {
-        DrawTexture(x, y, 0, influence);
+        DrawTexture(x, y, 0, influence, isResources);
     }
 
-    void DrawTexture(int x, int y, int currentInfluence, float influence)
+    void DrawTexture(int x, int y, int currentInfluence, float influence, bool isResources)
     {
         if (currentInfluence <= currentInfluencer._InfluenceRadius
             && (x >= 0 && x < width) && (y >= 0 && y < height))
         {
             Color c = currentColor;
-            c.a = influence;
+            if (isResources) c.b = influence;
+            else c.a = influence;
             currentTexture.SetPixel(x, y, c);
             for (int i = -1; i < 2; i++)
             {
@@ -138,27 +164,28 @@ public class InfluenceMap{
                 {
                     if (i != 0 && j == 0) //horizontal
                     {
-                        PropagateHorizontal(i, x + i, y, currentInfluence + 1, influence * currentInfluencer._InfluencePropagationRatio);
+                        PropagateHorizontal(i, x + i, y, currentInfluence + 1, influence * currentInfluencer._InfluencePropagationRatio, isResources);
                     }
                     else if (i == 0 && j != 0) //vertical
                     {
-                        PropagateVertical(j, x, y + j, currentInfluence + 1, influence * currentInfluencer._InfluencePropagationRatio);
+                        PropagateVertical(j, x, y + j, currentInfluence + 1, influence * currentInfluencer._InfluencePropagationRatio, isResources);
                     }
                     else if (i != 0 && j != 0) //diagonal
                     {
-                        PropagateDiagonal(i, j, x + i, y + j, currentInfluence + 1, influence * currentInfluencer._InfluencePropagationRatio);
+                        PropagateDiagonal(i, j, x + i, y + j, currentInfluence + 1, influence * currentInfluencer._InfluencePropagationRatio, isResources);
                     }
                 }
             }
         }
     }
 
-    void PropagateHorizontal(int dir, int x, int y, int currentInfluence, float influence)
+    void PropagateHorizontal(int dir, int x, int y, int currentInfluence, float influence, bool isResources)
     {
         if (currentInfluence == currentInfluencer._InfluenceRadius) return;
 
         Color c = currentColor;
-        c.a = influence;
+        if (isResources) c.b = influence;
+        else c.a = influence;
 
         for (int i = -(currentInfluence - 1); i < currentInfluence; i++)
         {
@@ -170,15 +197,16 @@ public class InfluenceMap{
                     else currentTexture.SetPixel(x, y + i, CompareColors(previousColor, c));
                 }
         }
-        PropagateHorizontal(dir, x + dir, y, currentInfluence + 1, influence * currentInfluencer._InfluencePropagationRatio);
+        PropagateHorizontal(dir, x + dir, y, currentInfluence + 1, influence * currentInfluencer._InfluencePropagationRatio, isResources);
     }
 
-    void PropagateVertical(int dir, int x, int y, int currentInfluence, float influence)
+    void PropagateVertical(int dir, int x, int y, int currentInfluence, float influence, bool isResources)
     {
         if (currentInfluence == currentInfluencer._InfluenceRadius) return;
 
         Color c = currentColor;
-        c.a = influence;
+        if (isResources) c.b = influence;
+        else c.a = influence;
 
         for (int i = -(currentInfluence - 1); i < currentInfluence; i++)
         {
@@ -190,15 +218,16 @@ public class InfluenceMap{
                     else currentTexture.SetPixel(x + i, y, CompareColors(previousColor, c));
                 }
         }
-        PropagateVertical(dir, x, y + dir, currentInfluence + 1, influence * currentInfluencer._InfluencePropagationRatio);
+        PropagateVertical(dir, x, y + dir, currentInfluence + 1, influence * currentInfluencer._InfluencePropagationRatio, isResources);
     }
 
-    void PropagateDiagonal(int dirX, int dirY, int x, int y, int currentInfluence, float influence)
+    void PropagateDiagonal(int dirX, int dirY, int x, int y, int currentInfluence, float influence, bool isResources)
     {
         if (currentInfluence == currentInfluencer._InfluenceRadius || !(y >= 0 && y < currentTexture.height && x >= 0 && x < currentTexture.width)) return;
 
         Color c = currentColor;
-        c.a = influence;
+        if (isResources) c.b = influence;
+        else c.a = influence;
 
         if (IsInsideRadius(new Vector2Int(x, y)))
         {
@@ -206,12 +235,14 @@ public class InfluenceMap{
             if (previousColor == backgroundColor) currentTexture.SetPixel(x, y, c);
             else currentTexture.SetPixel(x, y, CompareColors(previousColor, c));
         }
-        PropagateDiagonal(dirX, dirY, x + dirX, y + dirY, currentInfluence + 1, influence * currentInfluencer._InfluencePropagationRatio);
+        PropagateDiagonal(dirX, dirY, x + dirX, y + dirY, currentInfluence + 1, influence * currentInfluencer._InfluencePropagationRatio, isResources);
     }
 
     Color CompareColors(Color pc, Color c)
     {
         Color nc = new Color();
+
+        if (pc.b > 0) c.b += pc.b;
 
         if (pc.a > c.a) nc = pc;
         else nc = c;

@@ -9,8 +9,10 @@ public class InfluenceMapSystem : MonoBehaviour {
 
     public List<Influencer>[] Units { get; set; }
     public List<Influencer>[] Buildings { get; set; }
+    public List<Influencer> MapResources { get; set; }
 
-    InfluenceMap[] maps;
+    InfluenceMap[] militaryMaps;
+    InfluenceMap[] economyMaps;
     HexGrid grid;
 
     public Vector2Int _Size = new Vector2Int(100, 66);
@@ -24,7 +26,10 @@ public class InfluenceMapSystem : MonoBehaviour {
         tag = "InfluenceSystem";
         Units = new List<Influencer>[_NumberOfPlayers];
         Buildings = new List<Influencer>[_NumberOfPlayers];
-        maps = new InfluenceMap[_NumberOfPlayers];
+        MapResources = new List<Influencer>();
+
+        militaryMaps = new InfluenceMap[_NumberOfPlayers];
+        economyMaps = new InfluenceMap[_NumberOfPlayers];
         grid = GameObject.Find("Hex Grid").GetComponent<HexGrid>();
         
 
@@ -35,21 +40,32 @@ public class InfluenceMapSystem : MonoBehaviour {
         }
         for (int i = 0; i < _NumberOfPlayers; i++)
         {
-            maps[i] = new InfluenceMap(mapPlanes[i], _Size, Units[i], Units[_NumberOfPlayers-1-i], Buildings[i]);
-            maps[i].numberOfPlayers = _NumberOfPlayers;
-            maps[i].width = _Size.x;
-            maps[i].height = _Size.y;
+            militaryMaps[i] = new InfluenceMap(mapPlanes[i], _Size, Units[i], Units[_NumberOfPlayers-1-i]);
+            militaryMaps[i].numberOfPlayers = _NumberOfPlayers;
+            militaryMaps[i].width = _Size.x;
+            militaryMaps[i].height = _Size.y;
+
+            economyMaps[i] = new InfluenceMap(mapPlanes[i], _Size, Buildings[i], Buildings[_NumberOfPlayers - 1 - i], MapResources);
+            militaryMaps[i].numberOfPlayers = _NumberOfPlayers;
+            militaryMaps[i].width = _Size.x;
+            militaryMaps[i].height = _Size.y;
         }
     }
 
 	void Update () {
+        //UpdateMap(militaryMaps, true);
+        UpdateMap(economyMaps, false);
+	}
+
+    void UpdateMap(InfluenceMap[] maps, bool isMilitary)
+    {
         foreach (InfluenceMap map in maps)
         {
             map.Update();
         }
-        DrawMap(0);
-        ApplyMap(0);
-	}
+        DrawMap(0, maps);
+        ApplyMap(0, maps, isMilitary);
+    }
 
     void LateUpdate()
     {
@@ -60,22 +76,23 @@ public class InfluenceMapSystem : MonoBehaviour {
             transform.position += new Vector3(0, _MapHeight,0);
             isFirstFrameRendered = true;
         }
-        
     }
 
-    void DrawMap(int player) //player -> 0-n
+    void DrawMap(int player, InfluenceMap[] mapArray) //player -> 0-n
     {
-        mapPlanes[player].GetComponent<MeshRenderer>().material.SetTexture("_MainTex", maps[player].CurrentTexture);
+        mapPlanes[player].GetComponent<MeshRenderer>().material.SetTexture("_MainTex", mapArray[player].CurrentTexture);
     }
 
-    void ApplyMap(int mapIndex)
+    void ApplyMap(int mapIndex, InfluenceMap[] mapArray, bool isMilitary)
     {
         HexCell[] cells = grid.cells;
-        List<Color>[] buffer = maps[mapIndex].GetColorBuffer(grid);
+        List<Color>[] buffer = mapArray[mapIndex].GetColorBuffer(grid);
         for (int i = 0; i < cells.Length; i++)
         {
             Color averageInfluence = AverageColor(buffer[cells[i].Index]);
-            cells[i].influence = averageInfluence;
+            if(isMilitary) cells[i].MilitaryInfluence = averageInfluence;
+            else cells[i].EconomicInfluence = averageInfluence;
+
         }
     }
 
@@ -128,8 +145,8 @@ public class InfluenceMapSystem : MonoBehaviour {
         {
             HexCell cell = grid.GetCell(Camera.main.ScreenPointToRay(Input.mousePosition));
             if (cell != null)
-                print("Influence: " + cell.influence);
-                //print("Coord: " + cell.coordinates);
+                //print("Influence: " + cell.influence);
+                print("IsFrontier: " + cell.IsMilitaryFrontier);
             else
                 print("NULL");
         }

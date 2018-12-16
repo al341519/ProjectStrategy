@@ -70,7 +70,7 @@ public class HexCellShaderData : MonoBehaviour {
         for (int i = 0; i < Grid.cells.Length; i++)
         {
             HexCell cell = Grid.cells[i];
-            cellTextureData[cell.Index] = cell.influence;
+            //cellTextureData[cell.Index] = cell.influence;
         }
     }
 

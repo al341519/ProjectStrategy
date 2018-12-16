@@ -6,116 +6,118 @@ using System.Collections.Generic;
 
 public class HexGrid : MonoBehaviour {
 
-	public int cellCountX = 20, cellCountZ = 15;
+    public int cellCountX = 20, cellCountZ = 15;
 
-	public bool wrapping;
+    public bool wrapping;
     public GameManager gameManager;
 
     public HexCell cellPrefab;
-	public Text cellLabelPrefab;
-	public HexGridChunk chunkPrefab;
-	public HexUnit unitPrefab;
+    public Text cellLabelPrefab;
+    public HexGridChunk chunkPrefab;
+    public HexUnit unitPrefab;
 
 
-	public Texture2D noiseSource;
+    public Texture2D noiseSource;
 
-	public int seed;
+    public int seed;
 
-	public bool HasPath {
-		get {
-			return currentPathExists;
-		}
-	}
+    public bool HasPath {
+        get {
+            return currentPathExists;
+        }
+    }
 
-	Transform[] columns;
-	HexGridChunk[] chunks;
-	[HideInInspector] public HexCell[] cells;
+    Transform[] columns;
+    HexGridChunk[] chunks;
+    [HideInInspector] public HexCell[] cells;
 
-	int chunkCountX, chunkCountZ;
+    int chunkCountX, chunkCountZ;
 
-	HexCellPriorityQueue searchFrontier;
+    HexCellPriorityQueue searchFrontier;
 
-	int searchFrontierPhase;
+    int searchFrontierPhase;
 
-	HexCell currentPathFrom, currentPathTo;
-	bool currentPathExists;
+    HexCell currentPathFrom, currentPathTo;
+    bool currentPathExists;
 
-	int currentCenterColumnIndex = -1;
+    int currentCenterColumnIndex = -1;
 
-	List<HexUnit> units = new List<HexUnit>();
+    List<HexUnit> units = new List<HexUnit>();
 
-	HexCellShaderData cellShaderData;
+    HexCellShaderData cellShaderData;
 
-	void Awake () {
-		HexMetrics.noiseSource = noiseSource;
-		HexMetrics.InitializeHashGrid(seed);
-		HexUnit.unitPrefab = unitPrefab;
-		cellShaderData = gameObject.AddComponent<HexCellShaderData>();
-		cellShaderData.Grid = this;
-		CreateMap(cellCountX, cellCountZ, wrapping);
-	}
+    void Awake() {
+        HexMetrics.noiseSource = noiseSource;
+        HexMetrics.InitializeHashGrid(seed);
+        HexUnit.unitPrefab = unitPrefab;
+        cellShaderData = gameObject.AddComponent<HexCellShaderData>();
+        cellShaderData.Grid = this;
+        CreateMap(cellCountX, cellCountZ, wrapping);
+    }
 
-	public void AddUnit (HexUnit unit, HexCell location, float orientation) {
-		units.Add(unit);
-		unit.Grid = this;
-		unit.Location = location;
-		unit.Orientation = orientation;
-	}
+    public void AddUnit(HexUnit unit, HexCell location, float orientation) {
+        units.Add(unit);
+        unit.Grid = this;
+        unit.Location = location;
+        unit.Orientation = orientation;
+    }
 
-	public void RemoveUnit (HexUnit unit) {
-		units.Remove(unit);
-		unit.Die();
-	}
+    public void RemoveUnit(HexUnit unit) {
+        units.Remove(unit);
+        unit.Die();
+    }
 
-	public void MakeChildOfColumn (Transform child, int columnIndex) {
-		child.SetParent(columns[columnIndex], false);
-	}
+    public void MakeChildOfColumn(Transform child, int columnIndex) {
+        child.SetParent(columns[columnIndex], false);
+    }
 
-	public bool CreateMap (int x, int z, bool wrapping) {
-		if (
-			x <= 0 || x % HexMetrics.chunkSizeX != 0 ||
-			z <= 0 || z % HexMetrics.chunkSizeZ != 0
-		) {
-			Debug.LogError("Unsupported map size.");
-			return false;
-		}
+    public bool CreateMap(int x, int z, bool wrapping) {
+        if (
+            x <= 0 || x % HexMetrics.chunkSizeX != 0 ||
+            z <= 0 || z % HexMetrics.chunkSizeZ != 0
+        ) {
+            Debug.LogError("Unsupported map size.");
+            return false;
+        }
 
-		ClearPath();
-		ClearUnits();
-		if (columns != null) {
-			for (int i = 0; i < columns.Length; i++) {
-				Destroy(columns[i].gameObject);
-			}
-		}
+        ClearPath();
+        ClearUnits();
+        if (columns != null) {
+            for (int i = 0; i < columns.Length; i++) {
+                Destroy(columns[i].gameObject);
+            }
+        }
 
-		cellCountX = x;
-		cellCountZ = z;
-		this.wrapping = wrapping;
-		currentCenterColumnIndex = -1;
-		HexMetrics.wrapSize = wrapping ? cellCountX : 0;
-		chunkCountX = cellCountX / HexMetrics.chunkSizeX;
-		chunkCountZ = cellCountZ / HexMetrics.chunkSizeZ;
-		cellShaderData.Initialize(cellCountX, cellCountZ);
-		CreateChunks();
-		CreateCells();
-		return true;
-	}
+        cellCountX = x;
+        cellCountZ = z;
+        this.wrapping = wrapping;
+        currentCenterColumnIndex = -1;
+        HexMetrics.wrapSize = wrapping ? cellCountX : 0;
+        chunkCountX = cellCountX / HexMetrics.chunkSizeX;
+        chunkCountZ = cellCountZ / HexMetrics.chunkSizeZ;
+        cellShaderData.Initialize(cellCountX, cellCountZ);
+        CreateChunks();
+        CreateCells();
+        return true;
+    }
 
-	void CreateChunks () {
-		columns = new Transform[chunkCountX];
-		for (int x = 0; x < chunkCountX; x++) {
-			columns[x] = new GameObject("Column").transform;
-			columns[x].SetParent(transform, false);
-		}
+    void CreateChunks() {
+        columns = new Transform[chunkCountX];
+        for (int x = 0; x < chunkCountX; x++) {
+            columns[x] = new GameObject("Column").transform;
+            columns[x].SetParent(transform, false);
+        }
 
-		chunks = new HexGridChunk[chunkCountX * chunkCountZ];
-		for (int z = 0, i = 0; z < chunkCountZ; z++) {
-			for (int x = 0; x < chunkCountX; x++) {
-				HexGridChunk chunk = chunks[i++] = Instantiate(chunkPrefab);
-				chunk.transform.SetParent(columns[x], false);
-			}
-		}
-	}
+        chunks = new HexGridChunk[chunkCountX * chunkCountZ];
+        for (int z = 0, i = 0; z < chunkCountZ; z++) {
+            for (int x = 0; x < chunkCountX; x++) {
+                HexGridChunk chunk = chunks[i++] = Instantiate(chunkPrefab);
+                chunk.transform.SetParent(columns[x], false);
+            }
+        }
+    }
+
+    
 
 	void CreateCells () {
 		cells = new HexCell[cellCountZ * cellCountX];
