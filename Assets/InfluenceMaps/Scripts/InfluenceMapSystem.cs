@@ -146,7 +146,7 @@ public class InfluenceMapSystem : MonoBehaviour {
             HexCell cell = grid.GetCell(Camera.main.ScreenPointToRay(Input.mousePosition));
             if (cell != null)
                 //print("Influence: " + cell.influence);
-                print("IsFrontier: " + cell.IsFrontier);
+                print("IsFrontier: " + cell.IsMilitaryFrontier);
             else
                 print("NULL");
         }

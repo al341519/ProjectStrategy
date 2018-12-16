@@ -26,11 +26,26 @@ public class HexCell : MonoBehaviour {
 
     public Color MilitaryInfluence { get; set; }
 
-    public bool IsFrontier
+    public bool IsMilitaryFrontier
     {
         get
         {
-            if (MilitaryInfluence.g>0 && MilitaryInfluence.g<1 && MilitaryInfluence.r!=0)
+            if (MilitaryInfluence.g>0 && MilitaryInfluence.g<1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
+
+    public bool IsBuildingFrontier
+    {
+        get
+        {
+            if (EconomicInfluence.g > 0 && EconomicInfluence.g < 1)
             {
                 return true;
             }
