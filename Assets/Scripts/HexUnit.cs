@@ -31,12 +31,13 @@ public class HexUnit : MonoBehaviour
         {
             if (location)
             {
-                Grid.DecreaseVisibility(location, VisionRange);
+				//this.GetComponent<UnitClass> ().visionRange; era anteriormente vision range
+				Grid.DecreaseVisibility(location, (int)this.GetComponent<UnitClass> ().visionRange);
                 location.Unit = null;
             }
             location = value;
             value.Unit = this;
-            Grid.IncreaseVisibility(value, VisionRange);
+			Grid.IncreaseVisibility(value, (int)this.GetComponent<UnitClass> ().visionRange);//VisionRange
             transform.localPosition = value.Position;
             Grid.MakeChildOfColumn(transform, value.ColumnIndex);
         }
@@ -68,8 +69,8 @@ public class HexUnit : MonoBehaviour
     public int VisionRange
     {
         get
-        {
-            return 3;
+        {//antes 3
+			return (int)this.GetComponent<UnitClass> ().visionRange;
         }
     }
 
@@ -148,8 +149,8 @@ public class HexUnit : MonoBehaviour
         if (!currentTravelLocation)
         {
             currentTravelLocation = pathToTravel[0];
-        }
-        Grid.DecreaseVisibility(currentTravelLocation, VisionRange);
+        }//visionRange
+		Grid.DecreaseVisibility(currentTravelLocation, (int)this.GetComponent<UnitClass> ().visionRange);//VisionRange
         int currentColumn = currentTravelLocation.ColumnIndex;
 
         float t = Time.deltaTime * travelSpeed;
@@ -229,7 +230,7 @@ public class HexUnit : MonoBehaviour
             }
 
             c = (b + currentTravelLocation.Position) * 0.5f;
-            Grid.IncreaseVisibility(pathToTravel[i], VisionRange);
+			Grid.IncreaseVisibility(pathToTravel[i], (int)this.GetComponent<UnitClass> ().visionRange);//VisionRange
 
             for (; t < 1f; t += Time.deltaTime * travelSpeed)
             {
@@ -239,7 +240,7 @@ public class HexUnit : MonoBehaviour
                 transform.localRotation = Quaternion.LookRotation(d);
                 yield return null;
             }
-            Grid.DecreaseVisibility(pathToTravel[i], VisionRange);
+			Grid.DecreaseVisibility(pathToTravel[i], (int)this.GetComponent<UnitClass> ().visionRange);//VisionRange
             t -= 1f;
         }
         currentTravelLocation = null;
@@ -247,7 +248,7 @@ public class HexUnit : MonoBehaviour
         a = c;
         b = location.Position;
         c = b;
-        Grid.IncreaseVisibility(location, VisionRange);
+		Grid.IncreaseVisibility(location, (int)this.GetComponent<UnitClass> ().visionRange);//VisionRange
         for (; t < 1f; t += Time.deltaTime * travelSpeed)
         {
             transform.localPosition = Bezier.GetPoint(a, b, c, t);
@@ -268,6 +269,7 @@ public class HexUnit : MonoBehaviour
 			this.GetComponent<UnitClass> ().huidizo = true;
 		} if(patrullaUnidad){
 			patrullaUnidad = false;
+			this.GetComponent<UnitClass> ().cdPatrulla = true;
 			this.GetComponent<UnitClass> ().patrulla = true;
 		}
 		if(agresivoUnidad){
@@ -363,7 +365,7 @@ public class HexUnit : MonoBehaviour
     {
         if (location)
         {
-            Grid.DecreaseVisibility(location, VisionRange);
+			Grid.DecreaseVisibility(location, (int)this.GetComponent<UnitClass> ().visionRange);//VisionRange
         }
         location.Unit = null;
         Destroy(gameObject);
@@ -391,8 +393,8 @@ public class HexUnit : MonoBehaviour
             transform.localPosition = location.Position;
             if (currentTravelLocation)
             {
-                Grid.IncreaseVisibility(location, VisionRange);
-                Grid.DecreaseVisibility(currentTravelLocation, VisionRange);
+				Grid.IncreaseVisibility(location, (int)this.GetComponent<UnitClass> ().visionRange);//VisionRange
+				Grid.DecreaseVisibility(currentTravelLocation, (int)this.GetComponent<UnitClass> ().visionRange);
                 currentTravelLocation = null;
             }
         }
