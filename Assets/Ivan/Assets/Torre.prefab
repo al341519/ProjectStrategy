@@ -1761,7 +1761,6 @@ MonoBehaviour:
   arrowPrefab: {fileID: 1260135054183898, guid: e17eae7142af55d428ea7a7091dc7755,
     type: 2}
   arrowSpawn: {fileID: 4145547509745858}
-  target: {fileID: 0}
   currentHealth: 100
 --- !u!114 &114134980097600180
 MonoBehaviour:
@@ -1774,6 +1773,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43116ec4c38a1dd459ebdd20572d62ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cell: {fileID: 0}
 --- !u!198 &198039721523979010
 ParticleSystem:
   m_ObjectHideFlags: 1

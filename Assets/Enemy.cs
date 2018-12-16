@@ -185,6 +185,7 @@ public class Enemy : MonoBehaviour
                     default:
                         break;
                 }
+                cell.Owner = 2;
                 edificio++;
                 break;
             }
