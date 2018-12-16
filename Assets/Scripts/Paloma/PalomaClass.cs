@@ -9,10 +9,13 @@ public class PalomaClass : MonoBehaviour
 
     private float actionRange;
     private Transform objetivoPaloma;
-    private HexUnit unidadObjetivo;
+    
     private HexCell lastCell;
     private HexGrid grid;
     private List<HexCell> listGrid;
+
+	[SerializeField]
+	private HexUnit unidadObjetivo;
 
     // Use this for initialization
     void Awake()
@@ -27,7 +30,7 @@ public class PalomaClass : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!objetivoPaloma)
+		if (!unidadObjetivo)
         {
             Destroy(this);
         }

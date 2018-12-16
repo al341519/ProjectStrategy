@@ -9,6 +9,11 @@ public class UnitClass : MonoBehaviour {
 	private UnitClass targetClass;
 	private Health targetEdi;
 	private float cdAtack;
+
+	private HexGrid grid;
+	private List<HexCell> listGrid;
+	public HexGameUI uiGame;
+
 	[Header("Unit Type")]
 	public string type="infantryHOLA";//infantry,raider,archer,villager
 
@@ -24,6 +29,9 @@ public class UnitClass : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
+		uiGame = GameObject.Find("Game UI").GetComponent<HexGameUI>();
+		grid = GameObject.Find("Hex Grid").GetComponent<HexGrid>();
+
 		switch(type){
 		case "infantry":
 			//susvalores
@@ -92,9 +100,32 @@ public class UnitClass : MonoBehaviour {
 		this.life -= (damageRecive / this.defence);
 
 		if (!combat){
-			combat = true;
-			target = enemy;
-			cdAtack = HexMetrics.tiempo;
+			HexCell[] vecinos = this.GetComponent<HexUnit> ().Location.GetVecinos ();
+			if (this.attackRange == 1f) {
+				foreach (HexCell unitCell in vecinos) {
+					if (unitCell.Unit == enemy) {
+						combat = true;
+						target = enemy;
+						cdAtack = HexMetrics.tiempo;
+						break;
+					}
+				}
+				if (!combat) {
+					HexUnit thisUnit = this.GetComponent<HexUnit> ();
+					//thisUnit;
+					grid.ClearPath ();
+					grid.FindPath (thisUnit.Location, enemy.Location, thisUnit);
+					listGrid = grid.GetPath();
+					thisUnit.Travel(listGrid);
+
+				}
+			} else {
+				combat = true;
+				target = enemy;
+				cdAtack = HexMetrics.tiempo;
+			}
+
+
 		}
 	}
 	public void targetPut(HexUnit unit){

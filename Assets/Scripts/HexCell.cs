@@ -18,7 +18,7 @@ public class HexCell : MonoBehaviour {
 
     public GameManager gameManager;
     
-    public int Owner { get; set; }
+	public int Owner { get; set; }
 
 	public int Index { get; set; }
 
@@ -305,7 +305,7 @@ public class HexCell : MonoBehaviour {
 
 	bool explored;
 
-	bool walled;
+	[SerializeField]bool walled;
 
 	bool hasIncomingRiver, hasOutgoingRiver;
 	HexDirection incomingRiver, outgoingRiver;
