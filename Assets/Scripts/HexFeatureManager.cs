@@ -9,7 +9,7 @@ public class HexFeatureManager : MonoBehaviour {
 
 	public Transform wallTower, bridge;
 
-	public Transform[] special;
+	public GameObject[] special;
 
 	Transform container;
 
@@ -101,10 +101,21 @@ public class HexFeatureManager : MonoBehaviour {
 
 	public void AddSpecialFeature (HexCell cell, Vector3 position) {
 		HexHash hash = HexMetrics.SampleHashGrid(position);
-		Transform instance = Instantiate(special[cell.SpecialIndex - 1]);
-		instance.localPosition = HexMetrics.Perturb(position);
+        //NUEVO
+        //
+        //
+        //
+        GameObject o = Instantiate(special[cell.SpecialIndex - 1]);
+        o.GetComponent<Information>().SetCell(cell);
+        o.GetComponent<Information>().SetEdificio(cell.SpecialIndex);
+        cell.SetEdificio(cell.SpecialIndex);
+
+        Transform instance = o.transform;
+
+        instance.localPosition = HexMetrics.Perturb(position);
 		instance.localRotation = Quaternion.Euler(0f, 360f * hash.e, 0f);
 		instance.SetParent(container, false);
+        
 	}
 
 	public void AddWall (

@@ -203,7 +203,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4952478997220206}
   - component: {fileID: 95756333051792704}
-  - component: {fileID: 114132240322641378}
+  - component: {fileID: 114092858259413002}
+  - component: {fileID: 114134980097600180}
   m_Layer: 0
   m_Name: Torre
   m_TagString: Untagged
@@ -536,7 +537,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1830891958460964}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 267.5, z: 0}
+  m_LocalPosition: {x: -4, y: 267.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4952478997220206}
@@ -1746,7 +1747,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114132240322641378
+--- !u!114 &114092858259413002
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1754,13 +1755,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 1283084555897974}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a78e2f7e8d2e92a45a9e3156dbdabe32, type: 3}
+  m_Script: {fileID: 11500000, guid: 1b6f2a4618e166d4482202843971b07f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   arrowPrefab: {fileID: 1260135054183898, guid: e17eae7142af55d428ea7a7091dc7755,
     type: 2}
   arrowSpawn: {fileID: 4145547509745858}
-  currentHealth: 180
+  target: {fileID: 0}
+  currentHealth: 100
+--- !u!114 &114134980097600180
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1283084555897974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43116ec4c38a1dd459ebdd20572d62ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!198 &198039721523979010
 ParticleSystem:
   m_ObjectHideFlags: 1

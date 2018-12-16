@@ -266,6 +266,7 @@ public class HexMapEditor : MonoBehaviour {
                     foreach (HexDirection direction in Enum.GetValues(typeof(HexDirection)))
                     {
                         cell.GetNeighbor(direction).Walled = true;
+                        cell.Owner = 1;
                     }
                     cell.Walled = true;
                 }
