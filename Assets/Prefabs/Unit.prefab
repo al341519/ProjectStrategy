@@ -138,6 +138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99935a1d6f97ff54ca58278b215fa1ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiGame: {fileID: 0}
   type: archer
   velocity: 0
   defence: 0
@@ -145,6 +146,9 @@ MonoBehaviour:
   life: 0
   visionRange: 0
   attackRange: 0
+  agresivo: 0
+  huidizo: 1
+  patrulla: 0
 --- !u!114 &114701888605048992
 MonoBehaviour:
   m_ObjectHideFlags: 1

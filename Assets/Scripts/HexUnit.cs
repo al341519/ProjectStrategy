@@ -8,6 +8,9 @@ public class HexUnit : MonoBehaviour
 
     [Header("Marcos")]//Cambio para dañar edif
     private UnitClass unidadDamage;
+	private bool huidaUnidad=false;
+	private bool patrullaUnidad=false;
+	private bool agresivoUnidad=false;
 
 
     [Header("Code origen")]
@@ -126,6 +129,18 @@ public class HexUnit : MonoBehaviour
 
     IEnumerator TravelPath()
     {
+		if (this.GetComponent<UnitClass> ().huidizo) {
+			huidaUnidad = true;
+			this.GetComponent<UnitClass> ().huidizo = false;
+		} if(this.GetComponent<UnitClass>().patrulla){
+			patrullaUnidad=true;
+			this.GetComponent<UnitClass> ().patrulla = false;
+		}
+		if(this.GetComponent<UnitClass>().agresivo){
+			agresivoUnidad = true;
+			this.GetComponent<UnitClass> ().agresivoMov = true;
+		}
+
         unidadDamage = this.GetComponent<UnitClass>();
         Vector3 a, b, c = pathToTravel[0].Position;
         yield return LookAt(pathToTravel[1].Position);
@@ -246,6 +261,19 @@ public class HexUnit : MonoBehaviour
         orientation = transform.localRotation.eulerAngles.y;
         ListPool<HexCell>.Add(pathToTravel);
         pathToTravel = null;
+
+
+		if (huidaUnidad) {
+			huidaUnidad = false;
+			this.GetComponent<UnitClass> ().huidizo = true;
+		} if(patrullaUnidad){
+			patrullaUnidad = false;
+			this.GetComponent<UnitClass> ().patrulla = true;
+		}
+		if(agresivoUnidad){
+			agresivoUnidad = false;
+			this.GetComponent<UnitClass> ().agresivoMov = false;
+		}
     }
 
     IEnumerator LookAt(Vector3 point)
@@ -320,6 +348,13 @@ public class HexUnit : MonoBehaviour
                 Debug.Log("Aumenta el coste");
                 moveCost += 20000;
             }
+			if (toCell.edificio) {
+				if (toCell.edificio.tag == "edificioEnemigo" && this.tag == "AllyUnit") {
+					moveCost += 50000;
+				} else if (toCell.edificio.tag == "edificioAliado" && this.tag == "EnemyUnit") {
+					moveCost += 50000;
+				}
+			}
         }
         return moveCost;
     }

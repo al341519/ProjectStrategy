@@ -197,7 +197,7 @@ public class Enemy : MonoBehaviour
     {
         castillos[castillo].SpecialIndex = 1;
         
-        foreach (HexDirection direction in Enum.GetValues(typeof(HexDirection)))
+       	foreach (HexDirection direction in Enum.GetValues(typeof(HexDirection)))
         {
       //      castillos[castillo].GetNeighbor(direction).Walled = true;
             castillos[castillo].Owner = 2;
