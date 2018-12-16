@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4421854725932508}
   - component: {fileID: 114701888605048992}
   - component: {fileID: 114454457830745842}
+  - component: {fileID: 114954656903657350}
   m_Layer: 0
   m_Name: Unit
   m_TagString: AllyUnit
@@ -147,8 +148,10 @@ MonoBehaviour:
   visionRange: 0
   attackRange: 0
   agresivo: 0
-  huidizo: 1
-  patrulla: 0
+  huidizo: 0
+  patrulla: 1
+  agresivoMov: 0
+  cdPatrulla: 1
 --- !u!114 &114701888605048992
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -160,3 +163,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 434bba114c5e84a0f8fb19ef55b2766a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114954656903657350
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1716964107277084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3e6dc669fb9dc848a0f9536f4cf29c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _InfluenceRadius: 30
+  _InfluencePower: 1
+  _InfluencePropagationRatio: 0.9
+  _Team: 1
+  type: 0

@@ -124,6 +124,7 @@ public class InfluenceMapSystem : MonoBehaviour {
 
     Vector3 GetCenter(GameObject o)
     {
+		Debug.Log ("O es: " + o);
         Vector3 center = Vector3.zero;
         MeshRenderer[] renderers = o.GetComponentsInChildren<MeshRenderer>();
         int count = 0;
@@ -136,6 +137,8 @@ public class InfluenceMapSystem : MonoBehaviour {
             }
         }
         center /= count;
+		Debug.Log ("El centro de la grid es: "+center);
+
         return center;
     }
 

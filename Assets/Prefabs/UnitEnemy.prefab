@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 4590677418586134}
   - component: {fileID: 114519228670333460}
   - component: {fileID: 114624768674770560}
+  - component: {fileID: 114231307737450638}
   m_Layer: 0
   m_Name: UnitEnemy
   m_TagString: EnemyUnit
@@ -127,6 +128,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114231307737450638
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1157320572594072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3e6dc669fb9dc848a0f9536f4cf29c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _InfluenceRadius: 30
+  _InfluencePower: 1
+  _InfluencePropagationRatio: 0.9
+  _Team: 2
+  type: 0
 --- !u!114 &114519228670333460
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -149,10 +166,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99935a1d6f97ff54ca58278b215fa1ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiGame: {fileID: 0}
+  type: infantry
   velocity: 0
   defence: 0
   attack: 0
   life: 0
   visionRange: 0
   attackRange: 0
-  type: infantry
+  agresivo: 0
+  huidizo: 0
+  patrulla: 0
+  agresivoMov: 0
+  cdPatrulla: 1

@@ -3715,6 +3715,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0149c56c276d915449160afe46a6149c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  visionRange: 5
   currentHealth: 500
 --- !u!137 &137017324371275276
 SkinnedMeshRenderer:
