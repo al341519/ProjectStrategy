@@ -29,7 +29,6 @@ public class UIManager : MonoBehaviour {
 
     public void Update()
     {
-        Debug.Log(UIRecursos.activeSelf);
 
 
         if (Input.GetMouseButtonDown(0))
