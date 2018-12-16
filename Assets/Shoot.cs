@@ -6,7 +6,7 @@ public class Shoot : MonoBehaviour {
 
     public GameObject arrowPrefab;
     public Transform arrowSpawn;
-    public Transform target; 
+    Transform target; 
 
     //TARGET PRIVATE IF CELL FUNCIONA
     /* Transform target;
@@ -35,53 +35,93 @@ public class Shoot : MonoBehaviour {
     public int currentHealth = maxHealth;
 
     HexCell cell;
+    int countEnemy;
 
     // Use this for initialization
     void Start()
     {
         destroy = true;
+        countEnemy = 0;
         cell = gameObject.GetComponent<Information>().GetCell();
     }
-
-    /*public void SetCell(HexCell cello)
-    {
-        cell = cello;
-    }
-
-    public HexCell GetCell() { return cell; }*/
 
     // Update is called once per frame
     void Update()
     {
-       
 
-        //En vez de KEYDOWN IF TARGET IN HEIGHBOUR
-        /*
-         * for(int i=0; i < 6; i++) //RANGO 1
-         * {
-         *      
-                if(cell.GetNeighbour(i).Unit) //IF ENEMY UNIT EN CELL
+
+        HexCell[] vecinos = cell.GetVecinos();
+        for (int i = 0; i < vecinos.Length; i++) //RANGO 1
+        { 
+            HexCell[] vecinos2 = vecinos[i].GetVecinos();
+
+            for (int k = 0; i < vecinos2.Length; k++) //RANGO 2
+            {
+                HexCell[] vecinos3 = vecinos2[k].GetVecinos();
+
+                for (int j = 0; j < vecinos3.Length; j++) //RANGO 3
                 {
-                    target = cell.GetNeighbour(i).Unit.transform //GET
-                    Fire();
-                }
-           }
-        */
-        //ES AQUIIIIIII
-        //
-        //
-        //
-       /* foreach (HexDirection direction in Enum.GetValues(typeof(HexDirection)))
-        {
-            Debug.Log(cell.GetNeighbor(direction).Unit);
-        }*/
+                    if (countEnemy == 3)
+                    {
+                        break;
+                    }
 
-        if (Input.GetKeyDown("b") && destroy)
+                    if (vecinos3[j].Unit != null) //COMPRUEBA LOS ENEMIGOS DE RANGO 3 Y 1
+                    {
+                        HexUnit unit = vecinos3[j].Unit;
+                        if (cell.Owner == 1 && unit.tag == "EnemyUnit")
+                        {
+                            target = unit.transform;
+                            shoot = true;
+                            Fire();
+                            countEnemy++;
+                        }
+                        else if (cell.Owner == 2 && unit.tag == "AllyUnit")
+                        {
+                            target = unit.transform;
+                            shoot = true;
+                            Fire();
+                            countEnemy++;
+                        }
+
+                    }
+                }
+
+                if (countEnemy == 3)
+                {
+                    countEnemy = 0;
+                    break;
+                }
+
+                if (vecinos2[i].Unit != null) //COMPRUEBA LOS ENEMIGOS DE RANGO 2
+                {
+                    HexUnit unit = vecinos2[i].Unit;
+                    if (cell.Owner == 1 && unit.tag == "EnemyUnit")
+                    {
+                        target = unit.transform;
+                        shoot = true;
+                        Fire();
+                        countEnemy++;
+                    }
+                    else if (cell.Owner == 2 && unit.tag == "AllyUnit")
+                    {
+                        target = unit.transform;
+                        shoot = true;
+                        Fire();
+                        countEnemy++;
+                    }
+
+                }
+
+            }
+        }
+
+        /*if (Input.GetKeyDown("b") && destroy)
         {  // press b to shoot
             shoot = true;
             destroy = false;
             Fire();
-        }
+        }*/
 
         if (shoot)
         {
@@ -102,7 +142,7 @@ public class Shoot : MonoBehaviour {
         velocityY = rb.velocity.y;
         rb.AddForce(Vector3.forward * velocityY * Time.deltaTime * 2);
 
-        Destroy(arrow, 10);
+        Destroy(arrow, 2);
         shoot = false;
         destroy = true;
     }

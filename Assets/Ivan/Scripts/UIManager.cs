@@ -18,8 +18,13 @@ public class UIManager:MonoBehaviour {
     public GameObject Caballero;
 
     public GameObject UIEspecial;
+    HexGrid grid;
+    HexCell cell;
 
-    //cell = gameObject.GetComponent<Information>().GetCell();
+    public void Start()
+    {
+        grid = GetComponent<HexGrid>();
+    }
 
     public void Update()
     {
@@ -27,16 +32,35 @@ public class UIManager:MonoBehaviour {
         {
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray,out hit))
+
+            if (grid.GetCell(ray) != null)
+            { 
+                cell = grid.GetCell(ray);
+            }
+            if (cell.edificio.name == "Castillo(Clone)")
             {
+                Debug.Log("PULSADO CASTILLO");
+                OpenInicio();
+            }
+            else if (cell.edificio.name == "Infanteria(Clone)")
+            {
+                Debug.Log("Infanteria");
+                OpenTropa1();
+            }
+            else if (cell.edificio.name == "Arqueria(Clone)")
+            {
+                Debug.Log("Arqueria");
+                OpenTropa2();
+            }
+            else if (cell.edificio.name == "Caballeria(Clone)")
+            {
+                Debug.Log("Caballeria");
+                OpenTropa3();
+            }
 
-
-                if (hit.transform.gameObject.GetComponent<HexGrid>().GetCell(ray).ed == Ed.Castillo) //.HexGrid.HexCell.cell.GetComponent<Information>().GetCell()
-                {
-                    Debug.Log("Castillo");
-                    OpenInicio();
-                }
-                else if (hit.transform.name == "Inicio")
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.transform.name == "Inicio")
                 {
                     Debug.Log("Inicio");
                     OpenInicio();
@@ -61,21 +85,7 @@ public class UIManager:MonoBehaviour {
                     Debug.Log("Otros");
                     OpenOtros();
                 }
-                else if (hit.transform.gameObject.GetComponent<HexGrid>().GetCell(ray).ed == Ed.Infanteria)
-                {
-                    Debug.Log("Castillo");
-                    OpenTropa1();
-                }
-                else if (hit.transform.gameObject.GetComponent<HexGrid>().GetCell(ray).ed == Ed.Arqueria)
-                {
-                    Debug.Log("Arqueria");
-                    OpenTropa2();
-                }
-                else if (hit.transform.gameObject.GetComponent<HexGrid>().GetCell(ray).ed == Ed.Caballeria)
-                {
-                    Debug.Log("Caballeria");
-                    OpenTropa3();
-                }
+                
                 else if (hit.transform.name == "Salir")
                 {
                     Debug.Log("SALIR");
