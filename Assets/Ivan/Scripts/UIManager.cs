@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class UIManager:MonoBehaviour {
+public class UIManager : MonoBehaviour {
 
     public GameObject UIMenu;
     public GameObject UIMain;
@@ -23,11 +23,12 @@ public class UIManager:MonoBehaviour {
 
     public void Start()
     {
-        grid = GetComponent<HexGrid>();
+        grid = GameObject.Find("Hex Grid").GetComponent<HexGrid>();
     }
 
     public void Update()
     {
+
         if (Input.GetMouseButtonDown(0))
         {
             RaycastHit hit;
@@ -94,7 +95,7 @@ public class UIManager:MonoBehaviour {
                 else
                 {
                     Debug.Log("CLOSED");
-                    CloseMenu();
+                    //CloseMenu();
                 }
             }
         }
