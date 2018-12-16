@@ -32,7 +32,7 @@ public class Player {
         }
     }
 
-    public int Metal
+    public int Piedra
     {
         get
         {

@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour {
     public GameObject UIMenu;
     public GameObject UIMain;
 
+    public GameObject UICastillo;
     public GameObject UIInicio;
     public GameObject UIRecursos;
     public GameObject UIAtaque;
@@ -28,84 +29,64 @@ public class UIManager : MonoBehaviour {
 
     public void Update()
     {
+        Debug.Log(UIRecursos.activeSelf);
+
 
         if (Input.GetMouseButtonDown(0))
-        {
-            RaycastHit hit;
+        {   
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            if (grid.GetCell(ray) != null)
-            { 
-                cell = grid.GetCell(ray);
-            }
-            if (cell.edificio.name == "Castillo(Clone)")
+            cell = grid.GetCell(ray);
+
+            if (cell.SpecialIndex == 1 && cell.Owner == 1)
             {
                 Debug.Log("PULSADO CASTILLO");
-                OpenInicio();
+                OpenCastillo();
             }
-            else if (cell.edificio.name == "Infanteria(Clone)")
+            else if (cell.SpecialIndex == 5 && cell.Owner == 1)
             {
                 Debug.Log("Infanteria");
                 OpenTropa1();
             }
-            else if (cell.edificio.name == "Arqueria(Clone)")
+            else if (cell.SpecialIndex == 6 && cell.Owner == 1)
             {
                 Debug.Log("Arqueria");
                 OpenTropa2();
             }
-            else if (cell.edificio.name == "Caballeria(Clone)")
+            else if (cell.SpecialIndex == 7 && cell.Owner == 1)
             {
                 Debug.Log("Caballeria");
                 OpenTropa3();
             }
 
-            if (Physics.Raycast(ray, out hit))
-            {
-                if (hit.transform.name == "Inicio")
-                {
-                    Debug.Log("Inicio");
-                    OpenInicio();
-                }
-                else if (hit.transform.name == "Recursos")
-                {
-                    Debug.Log("Recursos");
-                    OpenRecursos();
-                }
-                else if (hit.transform.name == "Ataque")
-                {
-                    Debug.Log("Ataque");
-                    OpenAtaque();
-                }
-                else if (hit.transform.name == "Defensa")
-                {
-                    Debug.Log("Defensa");
-                    OpenDefensa();
-                }
-                else if (hit.transform.name == "Otros")
-                {
-                    Debug.Log("Otros");
-                    OpenOtros();
-                }
-                
-                else if (hit.transform.name == "Salir")
-                {
-                    Debug.Log("SALIR");
-                    Application.Quit();
-                }
-                else
-                {
-                    Debug.Log("CLOSED");
-                    //CloseMenu();
-                }
-            }
+            
         }
     }
 
-    public void OpenInicio()
+
+    public void OpenCastillo()
     {
         UIMain.SetActive(true);
-        UIMenu.SetActive(true);
+        UIMenu.SetActive(false);
+        UICastillo.SetActive(true);
         UIInicio.SetActive(true);
+        UIRecursos.SetActive(false);
+        UIAtaque.SetActive(false);
+        UIDefensa.SetActive(false);
+        UITropa.SetActive(false);
+        Soldado.SetActive(false);
+        Arquero.SetActive(false);
+        Caballero.SetActive(false);
+        UIEspecial.SetActive(false);
+    }
+
+
+    public void OpenInicio()
+    {
+        
+        UIMain.SetActive(false);
+        UIMenu.SetActive(true);
+        UIInicio.SetActive(false);
         UIRecursos.SetActive(false);
         UIAtaque.SetActive(false);
         UIDefensa.SetActive(false);

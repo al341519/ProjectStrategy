@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
@@ -10,7 +11,7 @@ public class GameManager : MonoBehaviour {
 
     int madera;
     int trigo;
-    int metal;
+    int piedra;
     int aldeanos;
     int vida;
 
@@ -22,6 +23,8 @@ public class GameManager : MonoBehaviour {
     public Texture2D iconHoverMine;
     public Texture2D iconCastle;
     public Texture2D iconHoverCastle;
+
+    public Text text;
 
 
     float timer;
@@ -57,7 +60,7 @@ public class GameManager : MonoBehaviour {
 
     private void Update()
     {
-        Debug.Log("madera: " + player1.Madera + " hierro: " + player1.Metal + " comida: " + player1.Trigo);
+        text.text = "Md: " + player1.Madera + " Pd: " + player1.Piedra + " Cm: " + player1.Trigo + " Ald: " + player1.Aldeano;
 
         timer += Time.deltaTime;
 

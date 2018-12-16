@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour
 
     bool empezado = false;
 
-    public HexGrid hexGrid;
+    HexGrid hexGrid;
 
     public enum Unidades { soldado, arquero, jinete }
 
@@ -28,8 +28,6 @@ public class Enemy : MonoBehaviour
     int edificio;
 
     float timerTurno = HexMetrics.tiempo;
-
-    HexGrid HexGrid;
 
     public bool Empezado
     {
@@ -54,8 +52,11 @@ public class Enemy : MonoBehaviour
         piedra = 395;
         comida = 300;
         aldeanos = 1;
+        hexGrid = GameObject.Find("Hex Grid").GetComponent<HexGrid>();
+
         castillos[0] = hexGrid.GetCell(5, 12);
         castillos[1] = hexGrid.GetCell(13, 8);
+        
 
 
     }
