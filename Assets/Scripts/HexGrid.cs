@@ -59,6 +59,9 @@ public class HexGrid : MonoBehaviour {
         units.Add(unit);
         unit.Grid = this;
         unit.Location = location;
+
+        Debug.Log(unit.Location.Position);
+
         unit.Orientation = orientation;
     }
 
