@@ -17,7 +17,7 @@ public class UnitClass : MonoBehaviour {
 	private float radiocelda = HexMetrics.innerRadius * 2;
 
 	[Header("Unit Type")]
-	public string type="infantryHOLA";//infantry,raider,archer,villager
+	public string type="infantry";//infantry,raider,archer,villager
 
 	[Header("Stats")]
 	public float velocity;
