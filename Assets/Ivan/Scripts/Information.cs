@@ -12,7 +12,7 @@ public enum Ed
 
 public class Information : MonoBehaviour {
   
-    public HexCell cell;// { get; set; }
+    HexCell cell;// { get; set; }
 
     public void SetCell(HexCell cello) {
         cell = cello;

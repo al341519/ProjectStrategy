@@ -11,6 +11,8 @@ public class HexFeatureManager : MonoBehaviour {
 
 	public GameObject[] special;
 
+    public GameObject[] unidad;
+
 	Transform container;
 
 	public void Clear () {
@@ -109,6 +111,17 @@ public class HexFeatureManager : MonoBehaviour {
         instance.localRotation = Quaternion.Euler(0f, 360f * hash.e, 0f);
         instance.SetParent(container, false);
     }
+
+    /*public void AddUnitFeature(HexCell cell, Vector3 position)
+    {
+        HexHash hash = HexMetrics.SampleHashGrid(position);
+        Transform instance = Instantiate(unidad[cell.SpecialIndex - 1]).transform;
+        instance.gameObject.GetComponent<Health>().Celda(cell);
+        cell.edificio = instance.gameObject;
+        instance.localPosition = HexMetrics.Perturb(position);
+        instance.localRotation = Quaternion.Euler(0f, 360f * hash.e, 0f);
+        instance.SetParent(container, false);
+    }*/
 
     public void AddWall (
 		EdgeVertices near, HexCell nearCell,

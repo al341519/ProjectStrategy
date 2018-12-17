@@ -51,4 +51,9 @@ public class Health : MonoBehaviour {
     {
         cell = celda;
     }
+
+    public HexCell GetCelda()
+    {
+        return cell;
+    }
 }

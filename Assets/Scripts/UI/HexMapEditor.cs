@@ -10,6 +10,9 @@ public class HexMapEditor : MonoBehaviour {
 	public Material terrainMaterial;
 	public HexUnit enemyUnitPrefab;
 
+    //NUEVO
+    //public HexUnit[] unidad;
+
     public GameManager gameManager;
 
     Player player;
@@ -17,7 +20,7 @@ public class HexMapEditor : MonoBehaviour {
 	int activeElevation;
 	int activeWaterLevel;
 
-	int activeUrbanLevel, activeFarmLevel, activePlantLevel, activeSpecialIndex;
+    int activeUrbanLevel, activeFarmLevel, activePlantLevel, activeSpecialIndex;//, activeUnitIndex;
 
 	int activeTerrainTypeIndex;
 
@@ -26,7 +29,7 @@ public class HexMapEditor : MonoBehaviour {
 	bool applyElevation = true;
 	bool applyWaterLevel = true;
 
-	bool applyUrbanLevel, applyFarmLevel, applyPlantLevel, applySpecialIndex;
+    bool applyUrbanLevel, applyFarmLevel, applyPlantLevel, applySpecialIndex;//, applyUnitIndex;
 
 	enum OptionalToggle {
 		Ignore, Yes, No, Arround
@@ -90,7 +93,17 @@ public class HexMapEditor : MonoBehaviour {
 		activeSpecialIndex = (int)index;
 	}
 
-	public void SetBrushSize (float size) {
+   /* public void SetApplyUnitIndex(bool toggle)
+    {
+        applyUnitIndex = toggle;
+    }
+
+    public void SetUnitIndex(float index)
+    {
+        activeUnitIndex = (int)index;
+    }*/
+
+    public void SetBrushSize (float size) {
 		brushSize = (int)size;
 	}
 
@@ -167,6 +180,18 @@ public class HexMapEditor : MonoBehaviour {
 			);
 		}
 	}
+
+    //NUEVO
+    public void CreateUnidad()
+    {
+        HexCell cell = GetCellUnderCursor();
+        if (cell && !cell.Unit)
+        {
+            //HexUnit unit con unidad[id] e instanciar unit
+            //hexGrid.AddUnit(Instantiate(unidad[id]), cell, UnityEngine.Random.Range(0f, 360f));
+            hexGrid.AddUnit(Instantiate(HexUnit.unitPrefab), cell, UnityEngine.Random.Range(0f, 360f));
+        }
+    }
 
 	//Añadido por marcos para enemigos
 	void CreateUnitEmemy () {

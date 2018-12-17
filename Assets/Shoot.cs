@@ -30,9 +30,7 @@ public class Shoot : MonoBehaviour {
     float velocityX;
     float velocityZ;
     Rigidbody rb;
-
-    public const int maxHealth = 100;
-    public int currentHealth = maxHealth;
+    
 
     HexCell cell;
     int countEnemy;
@@ -42,33 +40,69 @@ public class Shoot : MonoBehaviour {
     {
         destroy = true;
         countEnemy = 0;
-        cell = gameObject.GetComponent<Information>().GetCell();
+        cell = gameObject.GetComponent<Health>().GetCelda();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (cell != null)
+        {
 
-
-        HexCell[] vecinos = cell.GetVecinos();
-        for (int i = 0; i < vecinos.Length; i++) //RANGO 1
-        { 
-            HexCell[] vecinos2 = vecinos[i].GetVecinos();
-
-            for (int k = 0; i < vecinos2.Length; k++) //RANGO 2
+            HexCell[] vecinos = cell.GetVecinos();
+            for (int i = 0; i < vecinos.Length; i++) //RANGO 1
             {
-                HexCell[] vecinos3 = vecinos2[k].GetVecinos();
+                
+                HexCell[] vecinos2 = vecinos[i].GetVecinos();
 
-                for (int j = 0; j < vecinos3.Length; j++) //RANGO 3
+                for (int k = 0; k < vecinos2.Length; k++) //RANGO 2
                 {
+                    Debug.Log(k);
+                    HexCell[] vecinos3 = vecinos2[k].GetVecinos();
+                   
+
+                    for (int j = 0; j < vecinos3.Length; j++) //RANGO 3
+                    {
+                        if (countEnemy == 3)
+                        {
+                            break;
+                        }
+
+                        //ERROR WHY?
+                        Debug.Log(j);
+                        Debug.Log(vecinos3[j]);
+                        Debug.Log(vecinos3[j].Unit);
+
+                        if (vecinos3[j].Unit != null) //COMPRUEBA LOS ENEMIGOS DE RANGO 3 Y 1
+                        {
+                            HexUnit unit = vecinos3[j].Unit;
+                            if (cell.Owner == 1 && unit.tag == "EnemyUnit")
+                            {
+                                target = unit.transform;
+                                shoot = true;
+                                Fire();
+                                countEnemy++;
+                            }
+                            else if (cell.Owner == 2 && unit.tag == "AllyUnit")
+                            {
+                                target = unit.transform;
+                                shoot = true;
+                                Fire();
+                                countEnemy++;
+                            }
+
+                        }
+                    }
+
                     if (countEnemy == 3)
                     {
+                        countEnemy = 0;
                         break;
                     }
 
-                    if (vecinos3[j].Unit != null) //COMPRUEBA LOS ENEMIGOS DE RANGO 3 Y 1
+                    if (vecinos2[k].Unit != null) //COMPRUEBA LOS ENEMIGOS DE RANGO 2
                     {
-                        HexUnit unit = vecinos3[j].Unit;
+                        HexUnit unit = vecinos2[k].Unit;
                         if (cell.Owner == 1 && unit.tag == "EnemyUnit")
                         {
                             target = unit.transform;
@@ -85,37 +119,10 @@ public class Shoot : MonoBehaviour {
                         }
 
                     }
-                }
-
-                if (countEnemy == 3)
-                {
-                    countEnemy = 0;
-                    break;
-                }
-
-                if (vecinos2[i].Unit != null) //COMPRUEBA LOS ENEMIGOS DE RANGO 2
-                {
-                    HexUnit unit = vecinos2[i].Unit;
-                    if (cell.Owner == 1 && unit.tag == "EnemyUnit")
-                    {
-                        target = unit.transform;
-                        shoot = true;
-                        Fire();
-                        countEnemy++;
-                    }
-                    else if (cell.Owner == 2 && unit.tag == "AllyUnit")
-                    {
-                        target = unit.transform;
-                        shoot = true;
-                        Fire();
-                        countEnemy++;
-                    }
 
                 }
-
             }
         }
-
         /*if (Input.GetKeyDown("b") && destroy)
         {  // press b to shoot
             shoot = true;
@@ -169,15 +176,5 @@ public class Shoot : MonoBehaviour {
         return vel * dir.normalized;
     }
 
-    public void TakeDamage(int amount)
-    {
-        currentHealth -= amount;
-        if (currentHealth <= 0)
-        {
-            currentHealth = 0;
-            Debug.Log("Dead!");
-            //UPDATE EN EL MAPA INFLUENCIA
-            Destroy(this, 0.5f);
-        }
-    }
+    
 }
