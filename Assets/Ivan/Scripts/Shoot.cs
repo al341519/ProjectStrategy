@@ -39,6 +39,7 @@ public class Shoot : MonoBehaviour {
     void Start()
     {
         destroy = true;
+        shoot = true;
         countEnemy = 0;
         cell = gameObject.GetComponent<Health>().GetCelda();
     }
@@ -72,28 +73,36 @@ public class Shoot : MonoBehaviour {
                             break;
                         }
 
-                        //ERROR WHY?
+                       /* //ERROR WHY?
                         Debug.Log(j);
                         Debug.Log(vecinos3);
                         
                         //Debug.Log(vecinos3[j]);
-                        Debug.Log(vecinos3[j].Unit);
+                        Debug.Log(vecinos3[j].Unit);*/
 
                         if (vecinos3[j] != null && vecinos3[j].Unit != null) //COMPRUEBA LOS ENEMIGOS DE RANGO 3 Y 1
                         {
                             HexUnit unit = vecinos3[j].Unit;
 
                             //PRUEBA
-                            /*target = unit.transform;
-                            shoot = true;
-                            countEnemy++;
-                            Fire();*/
+                            target = unit.transform;
+
+                            
+
+                            if (shoot && countEnemy < 3)
+                            {
+                                shoot = false;
+                                Debug.Log("DISPARA YA");
+                                Fire();
+                                StartCoroutine(WaitForArrow());
+                                countEnemy++;
+                            }
+                           
 
                             if (cell.Owner == 1 && unit.tag == "EnemyUnit")
                             {
                                 target = unit.transform;
                                 shoot = true;
-                                Debug.Log("DISPARA");
                                 Fire();
                                 countEnemy++;
                             }
@@ -165,13 +174,15 @@ public class Shoot : MonoBehaviour {
 
         Destroy(arrow, 2);
         StartCoroutine(WaitForArrow());
-        shoot = false;
+        //shoot = false;
         destroy = true;
     }
 
     IEnumerator WaitForArrow()
     {
+
         yield return new WaitForSeconds(2);
+        shoot = true;
     }
 
     void rotateObject()
