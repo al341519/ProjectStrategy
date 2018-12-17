@@ -77,6 +77,7 @@ public class InfluenceMapSystem : MonoBehaviour {
             UpdateMap(militaryMaps, true, i, true);
         }
         hasMilitaryCoroutineEnded = true;
+        isFirstFrameRendered = true;
         isFirstTimeComputed = true;
     }
 
@@ -98,7 +99,6 @@ public class InfluenceMapSystem : MonoBehaviour {
         {
             transform.position = GetCenter(GameObject.Find("Hex Grid"));
             transform.position += new Vector3(0, _MapHeight,0);
-            isFirstFrameRendered = true;
         }
     }
 

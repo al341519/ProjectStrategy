@@ -142,7 +142,8 @@ public class HexMapEditor : MonoBehaviour {
 					DestroyUnit();
 				}
 				else {
-					CreateUnit();
+                    //CreateUnit();
+                    CreateUnidad(0);
 				}
 				return;
 			}
@@ -194,6 +195,7 @@ public class HexMapEditor : MonoBehaviour {
                     Debug.Log(cell.Position);
                     if (cell && !cell.Unit && cell.SpecialIndex ==0)
                     {
+                        //Instantiate(unidad[id], cell.Position, Quaternion.indentity)
                         hexGrid.AddUnit(Instantiate(unidad[id]), cell, UnityEngine.Random.Range(0f, 360f));
                     }
                     yield break;
