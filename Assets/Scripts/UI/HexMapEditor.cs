@@ -2,6 +2,7 @@
 using UnityEngine.EventSystems;
 using System.IO;
 using System;
+using System.Collections;
 
 public class HexMapEditor : MonoBehaviour {
 
@@ -286,6 +287,8 @@ public class HexMapEditor : MonoBehaviour {
                         cell.Owner = 1;
                         cell.SpecialIndex = activeSpecialIndex;
                     }
+                    StartCoroutine(BuildBuilding(cell.SpecialIndex, cell));
+
 
                 }
             }
@@ -333,9 +336,25 @@ public class HexMapEditor : MonoBehaviour {
 		}
         resetValues();
 	}
+
+    public IEnumerator BuildBuilding(int index, HexCell cell) {
+        Debug.Log("ENTRANDO CORRUTINA");
+        yield return new WaitForSeconds(4);
+        cell.SpecialIndex = ++index;
+        applySpecialIndex = true;
+        EditCell(cell);
+        Debug.Log("index -> " + cell.SpecialIndex);
+        Debug.Log("APLICADO EL CAMBIO");
+
+    }
+
     void resetValues() {
         walledMode = OptionalToggle.Ignore;
         activeSpecialIndex = 0;
         applySpecialIndex = false;
     }
+
+    
+
+
 }
