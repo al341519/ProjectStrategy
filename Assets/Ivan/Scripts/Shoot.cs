@@ -2,11 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tower : MonoBehaviour {
+public class Shoot : MonoBehaviour {
 
     public GameObject arrowPrefab;
     public Transform arrowSpawn;
-    public Transform target;
+    Transform target; 
+
+    //TARGET PRIVATE IF CELL FUNCIONA
+    /* Transform target;
+     * HexCell cell;
+     * HexUnit unit;
+     * HexEnemyUnit enemy;*/
 
     GameObject arrow;
     Transform pos;
@@ -24,24 +30,116 @@ public class Tower : MonoBehaviour {
     float velocityX;
     float velocityZ;
     Rigidbody rb;
+    
 
-    public const int maxHealth = 100;
-    public int currentHealth = maxHealth;
+    HexCell cell;
+    int countEnemy;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         destroy = true;
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        countEnemy = 0;
+        cell = gameObject.GetComponent<Health>().GetCelda();
+    }
 
-        if (Input.GetKeyDown("b") && destroy)
+    // Update is called once per frame
+    void Update()
+    {
+        if (cell != null)
+        {
+            HexCell[] vecinos = cell.GetVecinos();
+            Debug.Log("EMPIEZA BUCLE 1");
+
+            for (int i = 0; i < vecinos.Length; i++) //RANGO 1
+            {
+                Debug.Log(i);
+                HexCell[] vecinos2 = vecinos[i].GetVecinos();
+
+                Debug.Log("EMPIEZA BUCLE 2");
+
+                for (int k = 0; k < vecinos2.Length; k++) //RANGO 2
+                {
+                    Debug.Log(k);
+                    HexCell[] vecinos3 = vecinos2[k].GetVecinos();
+
+                    Debug.Log("EMPIEZA BUCLE 3");
+
+                    for (int j = 0; j < vecinos3.Length; j++) //RANGO 3
+                    {
+                        if (countEnemy == 3)
+                        {
+                            break;
+                        }
+
+                        //ERROR WHY?
+                        Debug.Log(j);
+                        Debug.Log(vecinos3);
+                        
+                        //Debug.Log(vecinos3[j]);
+                        Debug.Log(vecinos3[j].Unit);
+
+                        if (vecinos3[j] != null && vecinos3[j].Unit != null) //COMPRUEBA LOS ENEMIGOS DE RANGO 3 Y 1
+                        {
+                            HexUnit unit = vecinos3[j].Unit;
+                            target = unit.transform;
+                            shoot = true;
+                            countEnemy++;
+                            Fire();
+                            if (cell.Owner == 1 && unit.tag == "EnemyUnit")
+                            {
+                                target = unit.transform;
+                                shoot = true;
+                                Debug.Log("DISPARA");
+                                Fire();
+                                countEnemy++;
+                            }
+                            else if (cell.Owner == 2 && unit.tag == "AllyUnit")
+                            {
+                                target = unit.transform;
+                                shoot = true;
+                                Fire();
+                                countEnemy++;
+                            }
+
+                        }
+                    }
+
+                    if (countEnemy == 3)
+                    {
+                        countEnemy = 0;
+                        break;
+                    }
+
+                    if (vecinos2[k].Unit != null) //COMPRUEBA LOS ENEMIGOS DE RANGO 2
+                    {
+                        HexUnit unit = vecinos2[k].Unit;
+                        if (cell.Owner == 1 && unit.tag == "EnemyUnit")
+                        {
+                            target = unit.transform;
+                            shoot = true;
+                            Fire();
+                            countEnemy++;
+                        }
+                        else if (cell.Owner == 2 && unit.tag == "AllyUnit")
+                        {
+                            target = unit.transform;
+                            shoot = true;
+                            Fire();
+                            countEnemy++;
+                        }
+
+                    }
+
+                }
+            }
+        }
+        /*if (Input.GetKeyDown("b") && destroy)
         {  // press b to shoot
             shoot = true;
             destroy = false;
             Fire();
-        }
+        }*/
 
         if (shoot)
         {
@@ -50,13 +148,8 @@ public class Tower : MonoBehaviour {
 
     }
 
-    void Fire() {
-
-        /*var arrow = (GameObject)Instantiate( arrowPrefab,  arrowSpawn.position,  arrowSpawn.rotation);
-        
-        arrow.GetComponent<Rigidbody>().velocity = arrow.transform.forward * 6;
-        Destroy(arrow, 2.0f);*/
-
+    void Fire()
+    {
         arrow = Instantiate(arrowPrefab, arrowSpawn.position, Quaternion.identity);
         pos = arrow.transform;
         pos.LookAt(target.position);
@@ -67,7 +160,7 @@ public class Tower : MonoBehaviour {
         velocityY = rb.velocity.y;
         rb.AddForce(Vector3.forward * velocityY * Time.deltaTime * 2);
 
-        Destroy(arrow, 10);
+        Destroy(arrow, 2);
         shoot = false;
         destroy = true;
     }
@@ -94,15 +187,5 @@ public class Tower : MonoBehaviour {
         return vel * dir.normalized;
     }
 
-    public void TakeDamage(int amount)
-    {
-        currentHealth -= amount;
-        if (currentHealth <= 0)
-        {
-            currentHealth = 0;
-            Debug.Log("Dead!");
-            //UPDATE EN EL MAPA INFLUENCIA
-            Destroy(this, 0.5f);
-        }
-    }
+    
 }
