@@ -84,10 +84,10 @@ public class Shoot : MonoBehaviour {
                             HexUnit unit = vecinos3[j].Unit;
 
                             //PRUEBA
-                            target = unit.transform;
+                            /*target = unit.transform;
                             shoot = true;
                             countEnemy++;
-                            Fire();
+                            Fire();*/
 
                             if (cell.Owner == 1 && unit.tag == "EnemyUnit")
                             {
