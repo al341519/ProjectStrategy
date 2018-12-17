@@ -314,11 +314,12 @@ public class Enemy : MonoBehaviour
             comida -= 30;
             aldeanos++;
         }
-        else if (edificio > 6) {
-            createTroops = true;
-
-        }
         else {
+            if (edificio > 6)
+            {
+                createTroops = true;
+
+            }
             if ((castillo < 1 || edificio >= castillo * 6) && haveResourcesBuilding(Edificio.castillo))
             {
                 buildCastillo(castillo);

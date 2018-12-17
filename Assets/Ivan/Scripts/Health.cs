@@ -20,17 +20,24 @@ public class Health : MonoBehaviour {
         {
             this.tag = "edificioAliado";
 			influence.UpdateBuildingInfluence (0);
+            this.GetComponent<Influencer>()._Team = 1;
         }
         else if (cell.Owner == 2) {
             this.tag = "edificioEnemigo";
-			influence.UpdateBuildingInfluence (1);
+			influence.UpdateBuildingInfluence(1);
+            this.GetComponent<Influencer>()._Team = 2;
+
         }
-		grid = GameObject.Find ("Hex Grid").GetComponent<HexGrid>();
+        grid = GameObject.Find("Hex Grid").GetComponent<HexGrid>();
+
 
     }
 
-	// Update is called once per frame
-	void Update () {
+    // Update is called once per frame
+    void Update () {
+        grid = GameObject.Find("Hex Grid").GetComponent<HexGrid>();
+
+        Debug.Log("la celda es ZELDA ---> " + cell);
 		grid.IncreaseVisibility (cell, visionRange);
 	}
 
