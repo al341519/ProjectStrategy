@@ -56,9 +56,41 @@ public class InfluenceMapSystem : MonoBehaviour {
     }
 
 	void Update () {
+        UpdateInfluencers();
         if(hasMilitaryCoroutineEnded)
             StartCoroutine("UpdateMilitaryMap");
 	}
+
+    void UpdateInfluencers()
+    {
+        Influencer[] allInfluencers = FindObjectsOfType<Influencer>();
+        Debug.LogWarning("Influencers number: " + allInfluencers.Length);
+        Units = new List<Influencer>[_NumberOfPlayers];
+        Buildings = new List<Influencer>[_NumberOfPlayers];
+        MapResources = new List<Influencer>();
+        for (int i = 0; i < _NumberOfPlayers; i++)
+        {
+            Units[i] = new List<Influencer>();
+            Buildings[i] = new List<Influencer>();
+        }
+
+
+        foreach (Influencer inf in allInfluencers)
+        {
+            switch (inf.type)
+            {
+                case Influencer.InfluencerType.Building:
+                    Buildings[inf._Team - 1].Add(inf);
+                    break;
+                case Influencer.InfluencerType.Unit:
+                    Units[inf._Team - 1].Add(inf);
+                    break;
+                case Influencer.InfluencerType.Resource:
+                    MapResources.Add(inf);
+                    break;
+            }
+        }
+    }
 
     public void UpdateBuildingInfluence(int player)
     {

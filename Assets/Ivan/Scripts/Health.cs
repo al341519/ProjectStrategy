@@ -19,11 +19,11 @@ public class Health : MonoBehaviour {
         if (cell.Owner == 1)
         {
             this.tag = "edificioAliado";
-			influence.UpdateBuildingInfluence (1);
+			influence.UpdateBuildingInfluence (0);
         }
         else if (cell.Owner == 2) {
             this.tag = "edificioEnemigo";
-			influence.UpdateBuildingInfluence (2);
+			influence.UpdateBuildingInfluence (1);
         }
 		grid = GameObject.Find ("Hex Grid").GetComponent<HexGrid>();
 
