@@ -202,10 +202,27 @@ public class UnitClass : MonoBehaviour {
                 {
                     index = 1;
                 }
-                Debug.Log(celdaPatrulla);
+               
+
+                /*Debug.Log(celdaPatrulla);
                 Debug.Log(celdaPatrulla.influenceInfo[index]);
-                Debug.Log(celdaPatrulla.influenceInfo[index].IsBuildingFrontier);
-                //if (celdaPatrulla.influenceInfo.isFrontier())
+                Debug.Log(celdaPatrulla.influenceInfo[index].IsBuildingFrontier);*/
+
+                Debug.Log("FRONTERA");
+
+                //GetFrontier();
+
+                if (celdaPatrulla != null && celdaPatrulla.influenceInfo[index].IsBuildingFrontier && ultimaPatrulla != celdaPatrulla)
+                {
+                    Debug.Log("HA ENTRADO");
+                    ultimaPatrulla = celdaPatrulla;
+                    listGrid = new List<HexCell>();
+                    listGrid.Add(this.GetComponent<HexUnit>().Location);
+                    listGrid.Add(celdaPatrulla);
+                    this.GetComponent<HexUnit>().Travel(listGrid);
+                    cdPatrulla = false;
+                    StartCoroutine("PatrullaCD");
+                }
                 
             }
         }
@@ -264,24 +281,39 @@ public class UnitClass : MonoBehaviour {
 			cdAtack -= Time.deltaTime;
 		}
 
-        
-        if (caminar)//Activar/desactivar animaciones
+        if (type != "infantry")
         {
-            anim.SetBool("caminar", true);
-            anim.SetBool("atacar", false);
+            if (caminar)//Activar/desactivar animaciones
+            {
+                anim.SetBool("caminar", true);
+                anim.SetBool("atacar", false);
+            }
+            else
+            {
+                anim.SetBool("caminar", false);
+            }
+            if (atacar)
+            {
+                anim.SetBool("atacar", true);
+                anim.SetBool("caminar", false);
+            }
+            else
+            {
+                anim.SetBool("atacar", false);
+            }
         }
-        else
+    }
+
+    public void GetFrontier()
+    {
+        HexCell[] celdas = grid.GetCells();
+
+        foreach (HexCell celda in celdas)
         {
-            anim.SetBool("caminar", false);
-        }
-        if (atacar)
-        {
-            anim.SetBool("atacar", true);
-            anim.SetBool("caminar", false);
-        }
-        else
-        {
-            anim.SetBool("atacar", false);
+            if (celda != null && celda.influenceInfo[0].IsBuildingFrontier)
+            {
+                Debug.Log(celda.Position);
+            }
         }
     }
 

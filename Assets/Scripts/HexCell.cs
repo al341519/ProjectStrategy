@@ -23,6 +23,8 @@ public class HexCell : MonoBehaviour {
 
     [HideInInspector] public InfluenceCell[] influenceInfo;
 
+    
+
     public int Elevation {
 		get {
 			return elevation;
