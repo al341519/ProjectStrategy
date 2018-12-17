@@ -156,6 +156,7 @@ public class HexGrid : MonoBehaviour {
         return cells;
     }
 
+    
 	public HexCell GetCell (Ray ray) {
 		RaycastHit hit;
 		if (Physics.Raycast(ray, out hit)) {

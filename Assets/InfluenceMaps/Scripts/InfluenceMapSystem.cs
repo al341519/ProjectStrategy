@@ -62,7 +62,7 @@ public class InfluenceMapSystem : MonoBehaviour {
 
     void UpdateBuildingInfluence(int player)
     {
-        UpdateMap(economyMaps, false, player);
+        UpdateMap(economyMaps, false, player, true);
     }
 
     IEnumerator UpdateMilitaryMap()
@@ -74,7 +74,7 @@ public class InfluenceMapSystem : MonoBehaviour {
         for (int i = 0; i < _NumberOfPlayers; i++)
         {
             //if(isFirstTimeComputed) militaryMaps[i].WaitForJobComplete();
-            UpdateMap(militaryMaps, true, i, true);
+            UpdateMap(militaryMaps, true, i, false);
         }
         hasMilitaryCoroutineEnded = true;
         isFirstFrameRendered = true;
