@@ -116,7 +116,7 @@ GameObject:
   - component: {fileID: 114199833731932846}
   m_Layer: 0
   m_Name: Infantry 1
-  m_TagString: Untagged
+  m_TagString: AllyUnit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -839,7 +839,7 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1220353102166564}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 9000000, guid: 7a0fd93e400c283429005f9042e32f15, type: 3}
   m_Controller: {fileID: 9100000, guid: 9f2db031234eb1441bb78e7ed49e721d, type: 2}
   m_CullingMode: 1
@@ -872,12 +872,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99935a1d6f97ff54ca58278b215fa1ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiGame: {fileID: 0}
+  type: infantry
   velocity: 0
   defence: 0
   attack: 0
   life: 0
   visionRange: 0
   attackRange: 0
+  agresivo: 0
+  huidizo: 0
+  patrulla: 0
+  agresivoMov: 0
+  cdPatrulla: 1
 --- !u!137 &137093942782971402
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
