@@ -130,6 +130,7 @@ public class HexGrid : MonoBehaviour {
 		for (int z = 0, i = 0; z < cellCountZ; z++) {
 			for (int x = 0; x < cellCountX; x++) {
 				CreateCell(x, z, i++);
+
 			}
 		}
 	}
@@ -202,7 +203,8 @@ public class HexGrid : MonoBehaviour {
 		position.z = z * (HexMetrics.outerRadius * 1.5f);
 
 		HexCell cell = cells[i] = Instantiate<HexCell>(cellPrefab);
-		cell.transform.localPosition = position;
+
+        cell.transform.localPosition = position;
 		cell.coordinates = HexCoordinates.FromOffsetCoordinates(x, z);
 		cell.Index = i;
 		cell.ColumnIndex = x / HexMetrics.chunkSizeX;
@@ -211,14 +213,16 @@ public class HexGrid : MonoBehaviour {
             cell.influenceInfo[it] = new InfluenceCell();
 		cell.ShaderData = cellShaderData;
         cell.gameManager = gameManager;
+        IncreaseVisibility(cell,1);
+        DecreaseVisibility(cell, 1);
 
 
         if (wrapping) {
-			cell.Explorable = z > 0 && z < cellCountZ - 1;
+            cell.Explorable = true;//z > 0 && z < cellCountZ - 1;
 		}
 		else {
-			cell.Explorable =
-				x > 0 && z > 0 && x < cellCountX - 1 && z < cellCountZ - 1;
+            cell.Explorable = true;
+				//x > 0 && z > 0 && x < cellCountX - 1 && z < cellCountZ - 1;
 		}
 
 		if (x > 0) {
