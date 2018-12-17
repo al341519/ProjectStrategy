@@ -210,6 +210,10 @@ public class UnitClass : MonoBehaviour {
 
                 Debug.Log("FRONTERA");
 
+                Debug.Log(celdaPatrulla);
+                Debug.Log(celdaPatrulla.influenceInfo[index]);
+                Debug.Log(celdaPatrulla.influenceInfo[index].IsBuildingFrontier);
+
                 //GetFrontier();
 
                 if (celdaPatrulla != null && celdaPatrulla.influenceInfo[index].IsBuildingFrontier && ultimaPatrulla != celdaPatrulla)
