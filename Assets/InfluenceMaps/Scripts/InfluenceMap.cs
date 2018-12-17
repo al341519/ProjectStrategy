@@ -1,5 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
+using Unity.Collections;
+using Unity.Jobs;
 using UnityEngine;
 
 public class InfluenceMap{
@@ -11,6 +14,10 @@ public class InfluenceMap{
     Influencer currentInfluencer;
     HexGrid grid;
     Transform transform;
+
+    PropagationJob propJob;
+    JobHandle scheduler;
+    NativeArray<Color> nativeTexture;
 
     List<Influencer> units, enemy, resources;
     bool isEconomic = false;
@@ -36,6 +43,8 @@ public class InfluenceMap{
 
     public InfluenceMap(GameObject plane, Vector2Int size, List<Influencer> self, List<Influencer> enemy)
     {
+        propJob = new PropagationJob();
+
         isEconomic = false;
         transform = plane.transform;
 
@@ -144,9 +153,51 @@ public class InfluenceMap{
         return true;
     }
 
+    Vector4[] ColorToVector(Color[] c)
+    {
+        Vector4[] v = new Vector4[c.Length];
+        for (int i = 0; i < c.Length; i++)
+        {
+            v[i] = new Vector4(c[i].r, c[i].g, c[i].b, c[i].a);
+        }
+        return v;
+    }
+
     void DrawTexture(int x, int y, float influence, bool isResources)
     {
+        /*nativeTexture = new NativeArray<Color>(currentTexture.GetPixels(), Allocator.Persistent);
+        
+        propJob.backgroundColor = backgroundColor;
+        propJob.bounds = boxCollider.bounds;
+        propJob.currentColor = currentColor;
+        propJob.currentInfluence = 0;
+        //propJob.currentInfluencer = currentInfluencer;
+        propJob.influencePropagationRatio = currentInfluencer._InfluencePropagationRatio;
+        propJob.influenceRadius = currentInfluencer._InfluenceRadius;
+        propJob.influencerPosition = currentInfluencer.transform.position;
+
+        propJob.nativeTexture = nativeTexture;
+        propJob.width = currentTexture.width;
+        propJob.height = currentTexture.height;
+
+        propJob.influence = influence;
+        propJob.isResources = isResources;
+        propJob.transformPosition = transform.position;
+        propJob.x = x;
+        propJob.y = y;
+
+        scheduler = propJob.Schedule();
+        //scheduler.Complete();
+        //currentTexture.SetPixels(nativeTexture.ToArray());
+        //nativeTexture.Dispose();*/
         DrawTexture(x, y, 0, influence, isResources);
+    }
+
+    public void WaitForJobComplete()
+    {
+        scheduler.Complete();
+        currentTexture.SetPixels(nativeTexture.ToArray());
+        nativeTexture.Dispose();
     }
 
     void DrawTexture(int x, int y, int currentInfluence, float influence, bool isResources)

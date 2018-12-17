@@ -20,7 +20,10 @@ public class InfluenceMapSystem : MonoBehaviour {
     public int _NumberOfPlayers = 2;
     public int _MapHeight = 100;
 
+    bool hasMilitaryCoroutineEnded = true;
+
     bool isFirstFrameRendered = false;
+    bool isFirstTimeComputed = false;
 
     void Awake () {
         tag = "InfluenceSystem";
@@ -53,20 +56,38 @@ public class InfluenceMapSystem : MonoBehaviour {
     }
 
 	void Update () {
-        for (int i = 0; i < _NumberOfPlayers; i++)
-        {
-            UpdateMap(militaryMaps, true, i);
-            UpdateMap(economyMaps, false, i);
-        }
+        if(hasMilitaryCoroutineEnded)
+            StartCoroutine("UpdateMilitaryMap");
 	}
 
-    void UpdateMap(InfluenceMap[] maps, bool isMilitary, int player)
+    void UpdateBuildingInfluence(int player)
+    {
+        UpdateMap(economyMaps, false, player);
+    }
+
+    IEnumerator UpdateMilitaryMap()
+    {
+
+        hasMilitaryCoroutineEnded = false;
+
+        yield return new WaitForSeconds(1);
+        for (int i = 0; i < _NumberOfPlayers; i++)
+        {
+            //if(isFirstTimeComputed) militaryMaps[i].WaitForJobComplete();
+            UpdateMap(militaryMaps, true, i, true);
+        }
+        hasMilitaryCoroutineEnded = true;
+        isFirstTimeComputed = true;
+    }
+
+    void UpdateMap(InfluenceMap[] maps, bool isMilitary, int player, bool drawMap = false)
     {
         foreach (InfluenceMap map in maps)
         {
             map.Update();
         }
-        DrawMap(1, maps);
+        if(drawMap)
+            DrawMap(0, maps);
         ApplyMap(maps, isMilitary, player);
     }
 
