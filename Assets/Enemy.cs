@@ -14,9 +14,12 @@ public class Enemy : MonoBehaviour
 
     public enum Unidades { soldado, arquero, jinete }
 
+    public GameObject enemyUnity;
+
     public enum Edificio { castillo, aserradero, mina, molino, cuartel, arqueria, caballeria }
 
     HexCell[] castillos = new HexCell[2];
+    HexUnit[] units = new HexUnit[8];
 
     Unidades Unidad_deseada = Unidades.jinete;
 
@@ -246,21 +249,19 @@ public class Enemy : MonoBehaviour
                 {
                     build(Edificio.aserradero);
                 }
-                if ((recursos_turno[1] == 0 || recursos_turno[1] <= castillo - 1 ) && haveResources(Edificio.mina))
+                if ((recursos_turno[1] == 0 || recursos_turno[1] <= castillo - 1) && haveResources(Edificio.mina))
                 {
                     build(Edificio.mina);
                 }
-
-                if (Unidad_deseada == Unidades.jinete && haveResources(Edificio.caballeria))
+                else if ((recursos_tropas[0] == 0 || recursos_tropas[0] <= castillo - 1) && haveResources(Edificio.cuartel))
+                {
+                    build(Edificio.cuartel);
+                }
+                if ((recursos_tropas[1] == 0 || recursos_tropas[1] <= castillo - 1) && haveResources(Edificio.caballeria))
                 {
                     build(Edificio.caballeria);
                 }
-                else if (Unidad_deseada == Unidades.soldado && haveResources(Edificio.cuartel))
-                {
-                    build(Edificio.cuartel);
-
-                }
-                else if (Unidad_deseada == Unidades.arquero && haveResources(Edificio.arqueria))
+                else if ((recursos_tropas[2] == 0 || recursos_tropas[2] <= castillo - 1) && haveResources(Edificio.arqueria))
                 {
                     build(Edificio.arqueria);
                 }

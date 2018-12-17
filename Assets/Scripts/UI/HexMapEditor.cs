@@ -152,7 +152,7 @@ public class HexMapEditor : MonoBehaviour {
 					DestroyUnit();
 				}
 				else {
-					CreateUnitEmemy();
+					//CreateUnitEmemy();
 				}
 				return;
 			}
