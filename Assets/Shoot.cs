@@ -48,8 +48,9 @@ public class Shoot : MonoBehaviour {
     {
         if (cell != null)
         {
-
+            Debug.Log(cell);
             HexCell[] vecinos = cell.GetVecinos();
+
             for (int i = 0; i < vecinos.Length; i++) //RANGO 1
             {
                 
@@ -70,6 +71,7 @@ public class Shoot : MonoBehaviour {
 
                         //ERROR WHY?
                         Debug.Log(j);
+                        Debug.Log(vecinos3);
                         Debug.Log(vecinos3[j]);
                         Debug.Log(vecinos3[j].Unit);
 
@@ -80,6 +82,7 @@ public class Shoot : MonoBehaviour {
                             {
                                 target = unit.transform;
                                 shoot = true;
+                                Debug.Log("DISPARA");
                                 Fire();
                                 countEnemy++;
                             }
