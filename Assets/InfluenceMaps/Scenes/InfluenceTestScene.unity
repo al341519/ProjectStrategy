@@ -2959,7 +2959,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e6dc669fb9dc848a0f9536f4cf29c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _InfluenceRadius: 30
+  _InfluenceRadius: 10
   _InfluencePower: 1
   _InfluencePropagationRatio: 0.9
   _Team: 2
@@ -3460,7 +3460,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e6dc669fb9dc848a0f9536f4cf29c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _InfluenceRadius: 30
+  _InfluenceRadius: 10
   _InfluencePower: 1
   _InfluencePropagationRatio: 0.9
   _Team: 2
@@ -4383,7 +4383,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &547189188
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9223,7 +9223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e6dc669fb9dc848a0f9536f4cf29c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _InfluenceRadius: 30
+  _InfluenceRadius: 10
   _InfluencePower: 1
   _InfluencePropagationRatio: 0.9
   _Team: 1
@@ -10531,7 +10531,7 @@ MonoBehaviour:
   mapPlanes:
   - {fileID: 547189187}
   - {fileID: 1890683717}
-  _Size: {x: 150, y: 100}
+  _Size: {x: 90, y: 60}
   _NumberOfPlayers: 2
   _MapHeight: 100
 --- !u!1 &1280802547
@@ -14827,7 +14827,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e6dc669fb9dc848a0f9536f4cf29c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _InfluenceRadius: 30
+  _InfluenceRadius: 10
   _InfluencePower: 1
   _InfluencePropagationRatio: 0.9
   _Team: 1
@@ -14916,7 +14916,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1890683718
 Transform:
   m_ObjectHideFlags: 0
