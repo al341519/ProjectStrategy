@@ -47,9 +47,11 @@ public class UnitClass : MonoBehaviour {
 
 	private HexCell ultimaPatrulla=null;
 
+    int index;
 
-	// Use this for initialization
-	void Awake () {
+
+    // Use this for initialization
+    void Awake () {
 		uiGame = GameObject.Find("Game UI").GetComponent<HexGameUI>();
 		grid = GameObject.Find("Hex Grid").GetComponent<HexGrid>();
 		cdPatrulla = true;
@@ -185,6 +187,29 @@ public class UnitClass : MonoBehaviour {
 			}
 
 		}
+
+        if (patrulla)
+        {
+            
+            HexCell[] listaCeldas = this.GetComponent<HexUnit>().Location.GetVecinos();
+            foreach (HexCell celdaPatrulla in listaCeldas)
+            {
+                if(this.tag == "AllyUnit")
+                {
+                    index = 0;
+                }
+                else if (this.tag == "EnemyUnit")
+                {
+                    index = 1;
+                }
+                Debug.Log(celdaPatrulla);
+                Debug.Log(celdaPatrulla.influenceInfo[index]);
+                Debug.Log(celdaPatrulla.influenceInfo[index].IsBuildingFrontier);
+                //if (celdaPatrulla.influenceInfo.isFrontier())
+                
+            }
+        }
+
         /*
 		if (patrulla) {
 			//Patrullar zonas de influencia similar a la celda actual ¿Si ve un enemigo va a por el?

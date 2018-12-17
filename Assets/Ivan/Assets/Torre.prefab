@@ -206,6 +206,7 @@ GameObject:
   - component: {fileID: 114092858259413002}
   - component: {fileID: 114134980097600180}
   - component: {fileID: 114318043243990472}
+  - component: {fileID: 114560914066472886}
   m_Layer: 0
   m_Name: Torre
   m_TagString: Untagged
@@ -1762,7 +1763,6 @@ MonoBehaviour:
   arrowPrefab: {fileID: 1260135054183898, guid: e17eae7142af55d428ea7a7091dc7755,
     type: 2}
   arrowSpawn: {fileID: 4145547509745858}
-  currentHealth: 100
 --- !u!114 &114134980097600180
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1787,6 +1787,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visionRange: 0
   currentHealth: 100
+--- !u!114 &114560914066472886
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1283084555897974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3e6dc669fb9dc848a0f9536f4cf29c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _InfluenceRadius: 30
+  _InfluencePower: 1
+  _InfluencePropagationRatio: 0.9
+  _Team: 1
+  type: 1
 --- !u!198 &198039721523979010
 ParticleSystem:
   m_ObjectHideFlags: 1
