@@ -39,6 +39,7 @@ public class HexUnit : MonoBehaviour
             value.Unit = this;
 			Grid.IncreaseVisibility(value, (int)this.GetComponent<UnitClass> ().visionRange);//VisionRange
             transform.localPosition = value.Position;
+            Debug.Log(transform.localPosition);
             Grid.MakeChildOfColumn(transform, value.ColumnIndex);
         }
     }

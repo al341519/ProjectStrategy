@@ -96,11 +96,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4935042351004266}
   - component: {fileID: 95274780344941512}
-  - component: {fileID: 114732882110512596}
   - component: {fileID: 114134527652273646}
+  - component: {fileID: 114883372510638914}
   m_Layer: 0
   m_Name: Archer 1
-  m_TagString: Untagged
+  m_TagString: AllyUnit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1007,7 +1007,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 434bba114c5e84a0f8fb19ef55b2766a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114732882110512596
+--- !u!114 &114883372510638914
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1015,15 +1015,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 1245471975112554}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de08138800588db4d965a2cf8fc69c3b, type: 3}
+  m_Script: {fileID: 11500000, guid: 99935a1d6f97ff54ca58278b215fa1ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiGame: {fileID: 0}
+  type: archer
   velocity: 0
   defence: 0
   attack: 0
   life: 0
   visionRange: 0
   attackRange: 0
+  agresivo: 0
+  huidizo: 0
+  patrulla: 0
+  agresivoMov: 0
+  cdPatrulla: 1
 --- !u!137 &137298437635791624
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

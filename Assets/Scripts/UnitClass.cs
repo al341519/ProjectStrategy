@@ -172,6 +172,10 @@ public class UnitClass : MonoBehaviour {
 			}
 
 		}
+        /*if (patrulla)
+        {
+
+        }*/
         /*
 		if (patrulla) {
 			//Patrullar zonas de influencia similar a la celda actual ¿Si ve un enemigo va a por el?
