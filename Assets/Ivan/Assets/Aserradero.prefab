@@ -1277,6 +1277,7 @@ GameObject:
   - component: {fileID: 4705272938915720}
   - component: {fileID: 95401839289268712}
   - component: {fileID: 114527032010661718}
+  - component: {fileID: 114168577508091390}
   m_Layer: 0
   m_Name: Aserradero
   m_TagString: Untagged
@@ -3727,6 +3728,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114168577508091390
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1974150642326260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3e6dc669fb9dc848a0f9536f4cf29c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _InfluenceRadius: 30
+  _InfluencePower: 1
+  _InfluencePropagationRatio: 0.9
+  _Team: 1
+  type: 1
 --- !u!114 &114527032010661718
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3738,6 +3755,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0149c56c276d915449160afe46a6149c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  visionRange: 0
   currentHealth: 100
 --- !u!137 &137019265165845024
 SkinnedMeshRenderer:

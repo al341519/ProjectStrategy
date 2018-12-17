@@ -393,6 +393,7 @@ GameObject:
   - component: {fileID: 4357727116857584}
   - component: {fileID: 95303503148482566}
   - component: {fileID: 114486800683012652}
+  - component: {fileID: 114719897172780326}
   m_Layer: 0
   m_Name: Castillo
   m_TagString: edificioAliado
@@ -3717,6 +3718,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visionRange: 5
   currentHealth: 500
+--- !u!114 &114719897172780326
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1267259959536856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3e6dc669fb9dc848a0f9536f4cf29c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _InfluenceRadius: 30
+  _InfluencePower: 1
+  _InfluencePropagationRatio: 0.9
+  _Team: 1
+  type: 1
 --- !u!137 &137017324371275276
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

@@ -254,6 +254,7 @@ GameObject:
   - component: {fileID: 4450042408484958}
   - component: {fileID: 95001326622871486}
   - component: {fileID: 114282840107472684}
+  - component: {fileID: 114083484651790076}
   m_Layer: 0
   m_Name: Caballeria
   m_TagString: Untagged
@@ -4187,6 +4188,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114083484651790076
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1202790500088194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3e6dc669fb9dc848a0f9536f4cf29c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _InfluenceRadius: 30
+  _InfluencePower: 1
+  _InfluencePropagationRatio: 0.9
+  _Team: 1
+  type: 1
 --- !u!114 &114282840107472684
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4198,6 +4215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0149c56c276d915449160afe46a6149c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  visionRange: 0
   currentHealth: 100
 --- !u!198 &198130891042968208
 ParticleSystem:
