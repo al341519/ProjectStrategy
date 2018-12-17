@@ -182,12 +182,14 @@ public class HexMapEditor : MonoBehaviour {
 
     IEnumerator WaitForCell(int id)
     {
+		Debug.Log (id);
         while (true)
         {
             if (Input.GetMouseButtonDown(0))
             {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                HexCell cell = hexGrid.GetCell(ray);
+                //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                //HexCell cell = hexGrid.GetCell(ray);
+				HexCell cell=GetCellUnderCursor();
                 if (cell !=null)
                 {
                     Debug.Log(cell.Position);

@@ -204,10 +204,10 @@ GameObject:
   - component: {fileID: 4896656731183724}
   - component: {fileID: 95130939998411840}
   - component: {fileID: 114554600223355640}
-  - component: {fileID: 114953654478991624}
+  - component: {fileID: 114554547471530742}
   m_Layer: 0
   m_Name: Rider 1
-  m_TagString: Untagged
+  m_TagString: AllyUnit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -953,6 +953,30 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114554547471530742
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1326890064385190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99935a1d6f97ff54ca58278b215fa1ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiGame: {fileID: 0}
+  type: raider
+  velocity: 0
+  defence: 0
+  attack: 0
+  life: 0
+  visionRange: 0
+  attackRange: 0
+  agresivo: 0
+  huidizo: 0
+  patrulla: 0
+  agresivoMov: 0
+  cdPatrulla: 1
 --- !u!114 &114554600223355640
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -964,23 +988,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 434bba114c5e84a0f8fb19ef55b2766a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114953654478991624
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1326890064385190}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79b63e7afe870f3448389aa39dd067fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocity: 0
-  defence: 0
-  attack: 0
-  life: 0
-  visionRange: 0
-  attackRange: 0
 --- !u!137 &137084727623274194
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
