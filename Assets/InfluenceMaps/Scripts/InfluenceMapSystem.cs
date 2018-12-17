@@ -55,9 +55,23 @@ public class InfluenceMapSystem : MonoBehaviour {
         }
     }
 
+
 	void Update () {
-       // UpdateInfluencers();
-        if(hasMilitaryCoroutineEnded)
+        UpdateInfluencers();
+        for (int i = 0; i < _NumberOfPlayers; i++)
+        {
+            militaryMaps[i] = new InfluenceMap(mapPlanes[i], _Size, Units[i], Units[_NumberOfPlayers - 1 - i]);
+            militaryMaps[i].numberOfPlayers = _NumberOfPlayers;
+            militaryMaps[i].width = _Size.x;
+            militaryMaps[i].height = _Size.y;
+
+            economyMaps[i] = new InfluenceMap(mapPlanes[i], _Size, Buildings[i], Buildings[_NumberOfPlayers - 1 - i], MapResources);
+            economyMaps[i].numberOfPlayers = _NumberOfPlayers;
+            economyMaps[i].width = _Size.x;
+            economyMaps[i].height = _Size.y;
+        }
+        
+        if (hasMilitaryCoroutineEnded)
             StartCoroutine("UpdateMilitaryMap");
 	}
 

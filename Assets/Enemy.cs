@@ -32,6 +32,7 @@ public class Enemy : MonoBehaviour
     int[] offensive_building = new int[3];          //POSICIÓN 0 SOLDADO, 2 ARQUERO, 3 JINETE
     int castillo = 0;
     int edificio;
+    int tropas;
 
     float timerTurno = HexMetrics.tiempo;
 
@@ -69,8 +70,8 @@ public class Enemy : MonoBehaviour
     void Update()
     {
 
-        Debug.Log("AL ATAQUEEE --> "+ createTroops);
-        Debug.Log("md: " + madera + " pd: " + piedra + " cmd: " + comida);
+   //     Debug.Log("AL ATAQUEEE --> "+ createTroops);
+    //    Debug.Log("md: " + madera + " pd: " + piedra + " cmd: " + comida);
         if (empezado == false) { return; }
 
         timerTurno += Time.deltaTime;
@@ -130,6 +131,7 @@ public class Enemy : MonoBehaviour
                 break;
 
         }
+        tropas++;
         createTroops = false;
         
 
@@ -314,11 +316,12 @@ public class Enemy : MonoBehaviour
             comida -= 30;
             aldeanos++;
         }
-        else if (edificio > 6) {
-            createTroops = true;
-
-        }
         else {
+            if (edificio > 6 && tropas >= edificio/2)
+            {
+                createTroops = true;
+
+            }
             if ((castillo < 1 || edificio >= castillo * 6) && haveResourcesBuilding(Edificio.castillo))
             {
                 buildCastillo(castillo);
