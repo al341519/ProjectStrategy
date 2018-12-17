@@ -115,6 +115,7 @@ GameObject:
   - component: {fileID: 114037183242733872}
   - component: {fileID: 114199833731932846}
   - component: {fileID: 114560887966287534}
+  - component: {fileID: 65474020953118558}
   m_Layer: 0
   m_Name: Infantry 1
   m_TagString: AllyUnit
@@ -833,6 +834,18 @@ Transform:
   m_Father: {fileID: 4294201313724882}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &65474020953118558
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1220353102166564}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &95473358272974460
 Animator:
   serializedVersion: 3
@@ -874,6 +887,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiGame: {fileID: 0}
+  caminar: 0
+  atacar: 0
   type: infantry
   velocity: 0
   defence: 0

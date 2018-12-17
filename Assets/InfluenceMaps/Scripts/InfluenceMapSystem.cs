@@ -56,7 +56,7 @@ public class InfluenceMapSystem : MonoBehaviour {
     }
 
 	void Update () {
-        UpdateInfluencers();
+       // UpdateInfluencers();
         if(hasMilitaryCoroutineEnded)
             StartCoroutine("UpdateMilitaryMap");
 	}
