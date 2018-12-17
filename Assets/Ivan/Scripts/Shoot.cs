@@ -82,10 +82,13 @@ public class Shoot : MonoBehaviour {
                         if (vecinos3[j] != null && vecinos3[j].Unit != null) //COMPRUEBA LOS ENEMIGOS DE RANGO 3 Y 1
                         {
                             HexUnit unit = vecinos3[j].Unit;
-                            target = unit.transform;
+
+                            //PRUEBA
+                            /*target = unit.transform;
                             shoot = true;
                             countEnemy++;
-                            Fire();
+                            Fire();*/
+
                             if (cell.Owner == 1 && unit.tag == "EnemyUnit")
                             {
                                 target = unit.transform;
@@ -161,8 +164,14 @@ public class Shoot : MonoBehaviour {
         rb.AddForce(Vector3.forward * velocityY * Time.deltaTime * 2);
 
         Destroy(arrow, 2);
+        StartCoroutine(WaitForArrow());
         shoot = false;
         destroy = true;
+    }
+
+    IEnumerator WaitForArrow()
+    {
+        yield return new WaitForSeconds(2);
     }
 
     void rotateObject()
