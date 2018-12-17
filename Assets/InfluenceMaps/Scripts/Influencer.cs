@@ -63,4 +63,21 @@ public class Influencer : MonoBehaviour {
         }
         //system.Units[_Team].Add(this);
     }
+
+    private void OnDestroy()
+    {
+        switch (type)
+        {
+            case InfluencerType.Building:
+                system.Buildings[_Team-1].Remove(this);
+                break;
+            case InfluencerType.Unit:
+                system.Buildings[_Team - 1].Remove(this);
+                break;
+            case InfluencerType.Resource:
+                system.Buildings[_Team - 1].Remove(this);
+                break;
+        }
+    }
+
 }

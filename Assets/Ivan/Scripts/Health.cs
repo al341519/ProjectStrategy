@@ -11,13 +11,19 @@ public class Health : MonoBehaviour {
     private HexCell cell;
 	private HexGrid grid;
 
+	private InfluenceMapSystem influence;
+
     void Start() {
+		influence = GameObject.Find ("InfluenceMap").GetComponent<InfluenceMapSystem>();
+
         if (cell.Owner == 1)
         {
             this.tag = "edificioAliado";
+			influence.UpdateBuildingInfluence (1);
         }
         else if (cell.Owner == 2) {
             this.tag = "edificioEnemigo";
+			influence.UpdateBuildingInfluence (2);
         }
 		grid = GameObject.Find ("Hex Grid").GetComponent<HexGrid>();
 
@@ -41,6 +47,9 @@ public class Health : MonoBehaviour {
             cell.Owner = 0;
             cell.edificio = null;
 			grid.DecreaseVisibility (cell, visionRange);
+
+			//Actualizar influencia quitarlo
+
 
             Destroy(this.gameObject, 0.5f);
 
