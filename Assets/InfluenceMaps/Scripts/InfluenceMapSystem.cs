@@ -78,7 +78,6 @@ public class InfluenceMapSystem : MonoBehaviour {
     void UpdateInfluencers()
     {
         Influencer[] allInfluencers = FindObjectsOfType<Influencer>();
-        Debug.LogWarning("Influencers number: " + allInfluencers.Length);
         Units = new List<Influencer>[_NumberOfPlayers];
         Buildings = new List<Influencer>[_NumberOfPlayers];
         MapResources = new List<Influencer>();

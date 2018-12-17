@@ -289,7 +289,7 @@ public class Enemy : MonoBehaviour
         
        	foreach (HexDirection direction in Enum.GetValues(typeof(HexDirection)))
         {
-      //      castillos[castillo].GetNeighbor(direction).Walled = true;
+            castillos[castillo].GetNeighbor(direction).Walled = true;
             castillos[castillo].Owner = 2;
         }
 
