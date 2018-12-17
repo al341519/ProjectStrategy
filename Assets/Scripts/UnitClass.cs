@@ -34,14 +34,19 @@ public class UnitClass : MonoBehaviour {
 
 	private bool caminoHuida=true;
 	public bool agresivoMov=false;
-	private float rangoAgresividad;
+	public bool cdPatrulla = true;
 
+	private float rangoAgresividad;
+	private bool codigoPlayer;
+
+	private HexCell ultimaPatrulla=null;
 
 
 	// Use this for initialization
 	void Awake () {
 		uiGame = GameObject.Find("Game UI").GetComponent<HexGameUI>();
 		grid = GameObject.Find("Hex Grid").GetComponent<HexGrid>();
+		cdPatrulla = true;
 
 		switch(type){
 		case "infantry":
@@ -167,9 +172,35 @@ public class UnitClass : MonoBehaviour {
 			}
 
 		}
-
+        /*
 		if (patrulla) {
 			//Patrullar zonas de influencia similar a la celda actual ¿Si ve un enemigo va a por el?
+			HexCell[] listaCeldas= this.GetComponent<HexUnit>().Location.GetVecinos();
+			if(this.tag=="AllyUnit"){
+				codigoPlayer = true;
+			}
+			else if(this.tag=="EnemyUnit"){
+				codigoPlayer = false;
+			}
+			Debug.Log ("Codigo Player: " + codigoPlayer);
+			if(codigoPlayer){
+				foreach (HexCell celdaPatrulla in listaCeldas) {
+					if (cdPatrulla) {
+						Debug.Log ("Es frontera o no: "+celdaPatrulla.IsBuildingFrontier);
+						if (celdaPatrulla.IsBuildingFrontier && ultimaPatrulla != celdaPatrulla) {
+							ultimaPatrulla = celdaPatrulla;
+							listGrid = new List<HexCell> ();
+							listGrid.Add (this.GetComponent<HexUnit> ().Location);
+							listGrid.Add (celdaPatrulla);
+							this.GetComponent<HexUnit> ().Travel (listGrid);
+							cdPatrulla = false;
+							StartCoroutine ("PatrullaCD");
+						}
+					}
+				}
+			}else if(!codigoPlayer){
+				//copia del codigo de patrulla del ally puede que haya que tener en cuenta el color rojo en lugar del verde
+			}
 		}
 
 		if (cdAtack <= 0) {
@@ -191,10 +222,10 @@ public class UnitClass : MonoBehaviour {
 			}
 		} else {
 			cdAtack -= Time.deltaTime;
-		}
-	}
+		}*/
+    }
 
-	public void dealDMG(float damageRecive,HexUnit enemy){
+    public void dealDMG(float damageRecive,HexUnit enemy){
 		this.life -= (damageRecive / this.defence);
 
 		if (!combat){
@@ -259,5 +290,10 @@ public class UnitClass : MonoBehaviour {
 	private IEnumerator TiempoHuida(){
 		yield return new WaitForSeconds (1);
 		caminoHuida = true;
+	}
+
+	private IEnumerator PatrullaCD(){
+		yield return new WaitForSeconds (2);
+		cdPatrulla = true;
 	}
 }

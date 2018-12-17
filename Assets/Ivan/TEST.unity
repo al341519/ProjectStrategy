@@ -6070,7 +6070,7 @@ MonoBehaviour:
   Soldado: {fileID: 884399476}
   Arquero: {fileID: 746494266}
   Caballero: {fileID: 1019401907}
-  UIEspecial: {fileID: 2077206897}
+  UIStart: {fileID: 2077206897}
 --- !u!1 &687239275
 GameObject:
   m_ObjectHideFlags: 0
