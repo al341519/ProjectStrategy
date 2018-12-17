@@ -93,6 +93,7 @@ public class Shoot : MonoBehaviour {
 
                             if (shoot && countEnemy < 3)
                             {
+                                //DISPARA A AMIGO
                                 Fire();
                                 StartCoroutine(WaitForArrow());
                                 countEnemy++;
