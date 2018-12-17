@@ -138,6 +138,7 @@ public class Enemy : MonoBehaviour
     {
         foreach (HexDirection direction in Enum.GetValues(typeof(HexDirection)))
         {
+            int index = 0;
             HexCell cell = castillos[castillo - 1].GetNeighbor(direction);
             if (cell.SpecialIndex == 0)
             {
@@ -146,46 +147,48 @@ public class Enemy : MonoBehaviour
                     case Edificio.aserradero:
                         piedra -= 50;
                         aldeanos--;
-                        cell.SpecialIndex = 2;
+                        index = 2;
                         recursos_turno[0]++;
                         break;
                     case Edificio.mina:
                         madera -= 50;
                         aldeanos--;
-                        cell.SpecialIndex = 3;
+                        index = 3;
                         recursos_turno[1]++;
                         break;
                     case Edificio.molino:
                         piedra -= 25;
                         madera -= 25;
                         aldeanos--;
-                        cell.SpecialIndex = 4;
+                        index = 4;
                         recursos_turno[2]++;
                         break;
                     case Edificio.cuartel:
                         piedra -= 35;
                         madera -= 35;
-                        cell.SpecialIndex = 5;
+                        index = 5;
                         offensive_building[0]++;
                         aldeanos--;
                         break;
                     case Edificio.arqueria:
                         piedra -= 35;
                         madera -= 35;
-                        cell.SpecialIndex = 6;
+                        index = 6;
                         offensive_building[1]++;
                         aldeanos--;
                         break;
                     case Edificio.caballeria:
                         piedra -= 35;
                         madera -= 35;
-                        cell.SpecialIndex = 7;
+                        index = 7;
                         offensive_building[2]++;
                         aldeanos--;
                         break;
                     default:
                         break;
                 }
+                cell.SpecialIndex = index;
+                StartCoroutine(BuildBuilding(index, cell));
                 cell.Owner = 2;
                 edificio++;
                 break;
@@ -263,6 +266,18 @@ public class Enemy : MonoBehaviour
                 }
             }
         }
+    }
+
+
+
+    public IEnumerator BuildBuilding(int index, HexCell cell)
+    {
+        Debug.Log("ENTRANDO CORRUTINA");
+        yield return new WaitForSeconds(4);
+        //     cell.SpecialIndex = ++index;
+        Debug.Log("index -> " + cell.SpecialIndex);
+        Debug.Log("APLICADO EL CAMBIO");
+
     }
 
 }

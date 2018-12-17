@@ -348,7 +348,7 @@ public class HexMapEditor : MonoBehaviour {
     public IEnumerator BuildBuilding(int index, HexCell cell) {
         Debug.Log("ENTRANDO CORRUTINA");
         yield return new WaitForSeconds(4);
-        cell.SpecialIndex = ++index;
+   //     cell.SpecialIndex = ++index;
         applySpecialIndex = true;
         EditCell(cell);
         Debug.Log("index -> " + cell.SpecialIndex);
