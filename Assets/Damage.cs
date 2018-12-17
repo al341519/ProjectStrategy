@@ -16,9 +16,22 @@ public class Damage : MonoBehaviour {
 
     void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject.tag == "EnemyUnit")
-        {
+        //SI TUVIERAN COLLIDER
+        /* var hit = col.gameObject;
+         var vida = hit.GetComponent<UnitClass>();
 
-        }
+         if (vida != null)
+         {
+             if (hit.tag == "EnemyUnit")
+             {
+                 vida.life -= 0.5f;
+             }
+
+             else if (col.gameObject.tag == "AllyUnit")
+             {
+                 vida.life -= 0.5f;
+             }
+         }*/
+         
     }
 }

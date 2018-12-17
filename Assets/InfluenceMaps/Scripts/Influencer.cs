@@ -49,7 +49,7 @@ public class Influencer : MonoBehaviour {
     {
         grid = GameObject.Find("Hex Grid").GetComponent<HexGrid>();
         system = GameObject.FindGameObjectWithTag("InfluenceSystem").GetComponent<InfluenceMapSystem>();
-        /*switch (type)
+        switch (type)
         {
             case InfluencerType.Building:
                 system.Buildings[_Team-1].Add(this);
@@ -60,7 +60,7 @@ public class Influencer : MonoBehaviour {
             case InfluencerType.Resource:
                 system.MapResources.Add(this);
                 break;
-        }*/
+        }
         //system.Units[_Team].Add(this);
     }
 
