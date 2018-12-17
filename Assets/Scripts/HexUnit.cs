@@ -192,13 +192,13 @@ public class HexUnit : MonoBehaviour
 
             else if (pathToTravel[i].edificio)
             {
-                //Debug.Log ("he visto que hay un edificio");
+                Debug.Log ("he visto que hay un edificio");
                 if (/*pathToTravel [i].Owner!=1 &&*/ this.tag == "AllyUnit")
                 {
                     location.Unit = null;
                     location = pathToTravel[i - 1];
                     location.Unit = this;
-                    //Debug.Log ("El edificio seleccionado es: "+pathToTravel[i].edificio.name);
+                    Debug.Log ("El edificio seleccionado es: "+pathToTravel[i].edificio.name);
                     this.GetComponent<UnitClass>().targetPut(pathToTravel[i].edificio.GetComponent<Health>());
                     break;
                 }
@@ -335,10 +335,10 @@ public class HexUnit : MonoBehaviour
         {
             moveCost = 1;
         }
-		else if (fromCell.Walled != toCell.Walled )
+        /*else if (fromCell.Walled != toCell.Walled )
         {
             return -1;
-        }
+        }*/
         else {
             CellClass tCell = toCell.GetComponent<CellClass>();
             //Debug.Log ("El coste es: "+tCell.mobility);
