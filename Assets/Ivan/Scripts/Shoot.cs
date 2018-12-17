@@ -167,11 +167,14 @@ public class Shoot : MonoBehaviour {
 
     void rotateObject()
     {
-        velocityX = rb.velocity.x;
+        /*velocityX = rb.velocity.x;
         velocityZ = rb.velocity.z;
         float combVelocity = Mathf.Sqrt(velocityX * velocityX + velocityZ * velocityZ);
         float fallAngle = -1 * Mathf.Atan2(velocityY, combVelocity) * 180 / Mathf.PI;
-        pos.eulerAngles = new Vector3(fallAngle, pos.eulerAngles.y, pos.eulerAngles.z);
+        pos.eulerAngles = new Vector3(fallAngle, pos.eulerAngles.y, pos.eulerAngles.z);*/
+
+        pos.forward = rb.velocity.normalized;
+
     }
 
     Vector3 BalisticVel(Transform target, float angle)
