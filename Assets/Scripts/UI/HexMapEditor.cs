@@ -174,6 +174,17 @@ public class HexMapEditor : MonoBehaviour {
 		}
 	}
 
+    void CreateUnitEnemy() {
+        HexCell cell = GetCellUnderCursor();
+        if (cell && !cell.Unit)
+        {
+            hexGrid.AddUnit(
+                Instantiate(enemyUnitPrefab), cell, UnityEngine.Random.Range(0f, 360f)
+            );
+        }
+    }
+
+
     //NUEVO
     public void CreateUnidad(int id)
     {
