@@ -17,7 +17,7 @@ public class UnitClass : MonoBehaviour {
 	private float radiocelda = HexMetrics.innerRadius * 2;
 
 	[Header("Unit Type")]
-	public string type="infantryHOLA";//infantry,raider,archer,villager
+	public string type="infantry";//infantry,raider,archer,villager
 
 	[Header("Stats")]
 	public float velocity;
@@ -202,8 +202,8 @@ public class UnitClass : MonoBehaviour {
 				//copia del codigo de patrulla del ally puede que haya que tener en cuenta el color rojo en lugar del verde
 			}
 		}
-
-		if (cdAtack <= 0) {
+        */
+        if (cdAtack <= 0) {
 			if (combat) {//Distancia entre objetivos hay que tenerla en cuenta
 				if (target) {
 					float distancia = Mathf.Abs (Vector3.Distance (this.transform.position, target.transform.position));
@@ -222,7 +222,7 @@ public class UnitClass : MonoBehaviour {
 			}
 		} else {
 			cdAtack -= Time.deltaTime;
-		}*/
+		}
     }
 
     public void dealDMG(float damageRecive,HexUnit enemy){

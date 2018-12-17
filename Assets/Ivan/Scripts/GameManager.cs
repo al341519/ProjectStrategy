@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour {
 
         timer += Time.deltaTime;
 
-        if(timer >= 1)
+        if(timer >= HexMetrics.tiempo)
         {
             foreach (HexCell hexCell in hexGrid.GetCells()) {
                 hexCell.Do();
