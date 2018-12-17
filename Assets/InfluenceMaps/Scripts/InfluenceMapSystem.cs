@@ -60,7 +60,7 @@ public class InfluenceMapSystem : MonoBehaviour {
             StartCoroutine("UpdateMilitaryMap");
 	}
 
-    void UpdateBuildingInfluence(int player)
+    public void UpdateBuildingInfluence(int player)
     {
         UpdateMap(economyMaps, false, player);
     }
