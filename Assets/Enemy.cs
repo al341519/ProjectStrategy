@@ -9,14 +9,20 @@ public class Enemy : MonoBehaviour
     int madera, piedra, comida, aldeanos;
 
     bool empezado = false;
+    bool createTroops = false;
 
     HexGrid hexGrid;
 
     public enum Unidades { soldado, arquero, jinete }
 
+    public HexUnit[] enemyUnitPrefab = new HexUnit[3];
+
     public enum Edificio { castillo, aserradero, mina, molino, cuartel, arqueria, caballeria }
 
     HexCell[] castillos = new HexCell[2];
+    List<HexCell> recruitUnitBuildings = new List<HexCell>();
+
+    HexUnit[] units = new HexUnit[8];
 
     Unidades Unidad_deseada = Unidades.jinete;
 
@@ -64,6 +70,9 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        Debug.Log("AL ATAQUEEE --> "+ createTroops);
+        Debug.Log("md: " + madera + " pd: " + piedra + " cmd: " + comida);
         if (empezado == false) { return; }
 
         timerTurno += Time.deltaTime;
@@ -71,18 +80,61 @@ public class Enemy : MonoBehaviour
         if (timerTurno < HexMetrics.tiempo) { return; }                 //Cada segundo realiza una acción
 
         UpdateResources();
-        chooseUnit();
         chooseBuilding();
+        chooseUnit();
 
         timerTurno = 0f;
     }
 
-    void chooseUnit() {
+
+    void chooseUnit()
+    {
+        Unidad_deseada = Unidades.soldado;
+        if (createTroops) {
+            foreach(HexCell cell in recruitUnitBuildings)
+            {
+                bool finished = false;
+                foreach(HexDirection direction in Enum.GetValues(typeof(HexDirection))){
+                    if (cell.GetNeighbor(direction).SpecialIndex == 0 && !cell.GetNeighbor(direction).Unit) {
+                        if (haveResourcesUnits(Unidad_deseada))
+                        {
+                            createEnemy(cell.GetNeighbor(direction), Unidad_deseada);
+                            finished = true;
+                            break;
+                        }
+                    }
+                }
+                if (finished) {
+                    break;
+                }
+            }
+        }
+    }
+
+    void createEnemy(HexCell cell, Unidades unidad) {
+        switch(unidad)
+        {
+            case Unidades.soldado:
+                madera -= 20;    piedra -= 20;  comida -= 40;   aldeanos -= 1;
+                hexGrid.AddUnit(Instantiate(enemyUnitPrefab[0]), cell, UnityEngine.Random.Range(0f, 360f));
+                break;
+            case Unidades.arquero:
+                madera -= 45; piedra -= 25; comida -= 40; aldeanos -= 1;
+                hexGrid.AddUnit(Instantiate(enemyUnitPrefab[1]), cell, UnityEngine.Random.Range(0f, 360f));
+                break;
+            case Unidades.jinete:
+                madera -= 25; piedra -= 45; comida -= 50; aldeanos -= 1;
+                hexGrid.AddUnit(Instantiate(enemyUnitPrefab[2]), cell, UnityEngine.Random.Range(0f, 360f));
+                break;
+            default:
+                break;
+
+        }
 
     }
 
 
-    bool haveResources(Edificio name)
+    bool haveResourcesBuilding(Edificio name)
     {
         switch (name)
         {
@@ -126,9 +178,35 @@ public class Enemy : MonoBehaviour
                 {
                     return true;
                 }
-                break;
+                break;           
             default:
                 break;
+        }
+        return false;
+    }
+
+
+    bool haveResourcesUnits(Unidades unit) {
+        switch (unit)
+        {
+            case Unidades.soldado:
+                if (madera > 20 && piedra > 20 && comida> 40 && aldeanos >= 1)
+            {
+                return true;
+            }
+            break;
+            case Unidades.arquero:
+                if (madera > 45 && piedra > 25 && comida > 40 && aldeanos >= 1)
+            {
+                return true;
+            }
+            break;
+            case Unidades.jinete:
+                if (madera > 25 && piedra > 45 && comida > 50 && aldeanos >= 1)
+            {
+                return true;
+            }
+            break;
         }
         return false;
     }
@@ -169,12 +247,14 @@ public class Enemy : MonoBehaviour
                         index = 5;
                         offensive_building[0]++;
                         aldeanos--;
+                        recruitUnitBuildings.Add(cell);
                         break;
                     case Edificio.arqueria:
                         piedra -= 35;
                         madera -= 35;
                         index = 6;
                         offensive_building[1]++;
+                        recruitUnitBuildings.Add(cell);
                         aldeanos--;
                         break;
                     case Edificio.caballeria:
@@ -182,6 +262,7 @@ public class Enemy : MonoBehaviour
                         madera -= 35;
                         index = 7;
                         offensive_building[2]++;
+                        recruitUnitBuildings.Add(cell);
                         aldeanos--;
                         break;
                     default:
@@ -232,37 +313,38 @@ public class Enemy : MonoBehaviour
             aldeanos++;
         }
         else {
-            if ((castillo < 1 || edificio >= castillo * 6)&& haveResources(Edificio.castillo))
+            if ((castillo < 1 || edificio >= castillo * 6)&& haveResourcesBuilding(Edificio.castillo))
             {
                 buildCastillo(castillo);
             }        
             else
             {
-                if ((recursos_turno[2] == 0 || recursos_turno[2] <= castillo-1) && haveResources(Edificio.molino))
+                if ((recursos_turno[2] == 0 || recursos_turno[2] <= castillo-1) && haveResourcesBuilding(Edificio.molino))
                 {
                     build(Edificio.molino);
                 }
-                if ((recursos_turno[0] == 0 || recursos_turno[0] <= castillo - 1) && haveResources(Edificio.aserradero))
+                else if ((recursos_turno[0] == 0 || recursos_turno[0] <= castillo - 1) && haveResourcesBuilding(Edificio.aserradero))
                 {
                     build(Edificio.aserradero);
                 }
-                if ((recursos_turno[1] == 0 || recursos_turno[1] <= castillo - 1 ) && haveResources(Edificio.mina))
+                else if ((recursos_turno[1] == 0 || recursos_turno[1] <= castillo - 1) && haveResourcesBuilding(Edificio.mina))
                 {
                     build(Edificio.mina);
                 }
-
-                if (Unidad_deseada == Unidades.jinete && haveResources(Edificio.caballeria))
+                else if ((offensive_building[0] == 0 || offensive_building[0] <= castillo - 1) && haveResourcesBuilding(Edificio.cuartel))
+                {
+                    build(Edificio.cuartel);
+                }
+                else if ((offensive_building[1] == 0 || offensive_building[1] <= castillo - 1) && haveResourcesBuilding(Edificio.caballeria))
                 {
                     build(Edificio.caballeria);
                 }
-                else if (Unidad_deseada == Unidades.soldado && haveResources(Edificio.cuartel))
-                {
-                    build(Edificio.cuartel);
-
-                }
-                else if (Unidad_deseada == Unidades.arquero && haveResources(Edificio.arqueria))
+                else if ((offensive_building[2] == 0 || offensive_building[2] <= castillo - 1) && haveResourcesBuilding(Edificio.arqueria))
                 {
                     build(Edificio.arqueria);
+                }
+                if (offensive_building[0] != 0 && recursos_turno[1] != 0) {
+                    createTroops = true;
                 }
             }
         }
