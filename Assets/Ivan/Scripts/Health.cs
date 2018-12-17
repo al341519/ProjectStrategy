@@ -34,12 +34,15 @@ public class Health : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update () {
+    void Update()
+    {
         grid = GameObject.Find("Hex Grid").GetComponent<HexGrid>();
 
-        Debug.Log("la celda es ZELDA ---> " + cell);
-		grid.IncreaseVisibility (cell, visionRange);
-	}
+        //  Debug.Log("la celda es ZELDA ---> " + cell);
+        grid.IncreaseVisibility(cell, visionRange);
+
+    }
+
 
     public void TakeDamage(int amount)
     {

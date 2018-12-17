@@ -6,7 +6,8 @@ public class Shoot : MonoBehaviour {
 
     public GameObject arrowPrefab;
     public Transform arrowSpawn;
-    Transform target; 
+    Transform target;
+    HexUnit targetUnit;
 
     //TARGET PRIVATE IF CELL FUNCIONA
     /* Transform target;
@@ -85,20 +86,18 @@ public class Shoot : MonoBehaviour {
                             HexUnit unit = vecinos3[j].Unit;
 
                             //PRUEBA
+                            targetUnit = unit;
                             target = unit.transform;
 
-                            
+                            //Debug.Log(target.GetComponent<Health>().currentHealth);
 
                             if (shoot && countEnemy < 3)
                             {
-                                shoot = false;
-                                Debug.Log("DISPARA YA");
+                                //DISPARA A AMIGO
                                 Fire();
                                 StartCoroutine(WaitForArrow());
                                 countEnemy++;
                             }
-                           
-
                             if (cell.Owner == 1 && unit.tag == "EnemyUnit")
                             {
                                 target = unit.transform;
@@ -153,10 +152,10 @@ public class Shoot : MonoBehaviour {
             Fire();
         }*/
 
-        if (shoot)
+        /*if (shoot)
         {
             rotateObject();
-        }
+        }*/
 
     }
 
@@ -180,8 +179,9 @@ public class Shoot : MonoBehaviour {
 
     IEnumerator WaitForArrow()
     {
-
+        shoot = false;
         yield return new WaitForSeconds(2);
+        targetUnit.GetComponent<UnitClass>().life -= 0.1f;
         shoot = true;
     }
 
