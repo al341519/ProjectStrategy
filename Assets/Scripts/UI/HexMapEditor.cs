@@ -12,7 +12,7 @@ public class HexMapEditor : MonoBehaviour {
 	public HexUnit enemyUnitPrefab;
 
     //NUEVO
-    //public HexUnit[] unidad;
+    public HexUnit[] unidad;
 
     public GameManager gameManager;
 
@@ -94,15 +94,6 @@ public class HexMapEditor : MonoBehaviour {
 		activeSpecialIndex = (int)index;
 	}
 
-   /* public void SetApplyUnitIndex(bool toggle)
-    {
-        applyUnitIndex = toggle;
-    }
-
-    public void SetUnitIndex(float index)
-    {
-        activeUnitIndex = (int)index;
-    }*/
 
     public void SetBrushSize (float size) {
 		brushSize = (int)size;
@@ -183,19 +174,36 @@ public class HexMapEditor : MonoBehaviour {
 	}
 
     //NUEVO
-    public void CreateUnidad()
+    public void CreateUnidad(int id)
     {
-        HexCell cell = GetCellUnderCursor();
-        if (cell && !cell.Unit)
-        {
-            //HexUnit unit con unidad[id] e instanciar unit
-            //hexGrid.AddUnit(Instantiate(unidad[id]), cell, UnityEngine.Random.Range(0f, 360f));
-            hexGrid.AddUnit(Instantiate(HexUnit.unitPrefab), cell, UnityEngine.Random.Range(0f, 360f));
-        }
+        StartCoroutine(WaitForCell(id));
     }
 
-	//Añadido por marcos para enemigos
-	void CreateUnitEmemy () {
+    IEnumerator WaitForCell(int id)
+    {
+        while (true)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                HexCell cell = hexGrid.GetCell(ray);
+                if (cell !=null)
+                {
+                    Debug.Log(cell.Position);
+                    if (cell && !cell.Unit && cell.SpecialIndex ==0)
+                    {
+                        hexGrid.AddUnit(Instantiate(unidad[id]), cell, UnityEngine.Random.Range(0f, 360f));
+                    }
+                    yield break;
+                }
+            }
+            yield return null;
+        }
+        //not here yield return null;
+    }
+
+    //Añadido por marcos para enemigos
+    void CreateUnitEmemy () {
 		HexCell cell = GetCellUnderCursor();
 		if (cell && !cell.Unit) {
 			hexGrid.AddUnit(

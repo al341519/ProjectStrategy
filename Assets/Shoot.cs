@@ -48,19 +48,22 @@ public class Shoot : MonoBehaviour {
     {
         if (cell != null)
         {
-            Debug.Log(cell);
             HexCell[] vecinos = cell.GetVecinos();
+            Debug.Log("EMPIEZA BUCLE 1");
 
             for (int i = 0; i < vecinos.Length; i++) //RANGO 1
             {
-                
+                Debug.Log(i);
                 HexCell[] vecinos2 = vecinos[i].GetVecinos();
+
+                Debug.Log("EMPIEZA BUCLE 2");
 
                 for (int k = 0; k < vecinos2.Length; k++) //RANGO 2
                 {
                     Debug.Log(k);
                     HexCell[] vecinos3 = vecinos2[k].GetVecinos();
-                   
+
+                    Debug.Log("EMPIEZA BUCLE 3");
 
                     for (int j = 0; j < vecinos3.Length; j++) //RANGO 3
                     {
@@ -72,12 +75,17 @@ public class Shoot : MonoBehaviour {
                         //ERROR WHY?
                         Debug.Log(j);
                         Debug.Log(vecinos3);
-                        Debug.Log(vecinos3[j]);
+                        
+                        //Debug.Log(vecinos3[j]);
                         Debug.Log(vecinos3[j].Unit);
 
-                        if (vecinos3[j].Unit != null) //COMPRUEBA LOS ENEMIGOS DE RANGO 3 Y 1
+                        if (vecinos3[j] != null && vecinos3[j].Unit != null) //COMPRUEBA LOS ENEMIGOS DE RANGO 3 Y 1
                         {
                             HexUnit unit = vecinos3[j].Unit;
+                            target = unit.transform;
+                            shoot = true;
+                            countEnemy++;
+                            Fire();
                             if (cell.Owner == 1 && unit.tag == "EnemyUnit")
                             {
                                 target = unit.transform;
