@@ -16,6 +16,12 @@ public class UnitClass : MonoBehaviour {
 	private List<GameObject> unidadesEnemigas;
 	private float radiocelda = HexMetrics.innerRadius * 2;
 
+    Animator anim;//Animaciones
+   
+
+    public bool caminar;
+    public bool atacar;
+
 	[Header("Unit Type")]
 	public string type="infantry";//infantry,raider,archer,villager
 
@@ -49,6 +55,13 @@ public class UnitClass : MonoBehaviour {
 		uiGame = GameObject.Find("Game UI").GetComponent<HexGameUI>();
 		grid = GameObject.Find("Hex Grid").GetComponent<HexGrid>();
 		cdPatrulla = true;
+        if (type != "infantry") {
+            anim = this.GetComponent<Animator>();
+        }
+        
+
+        caminar = false;
+        atacar = false;
 
 		switch(type){
 		case "infantry":
@@ -174,6 +187,7 @@ public class UnitClass : MonoBehaviour {
 			}
 
 		}
+
         if (patrulla)
         {
             
@@ -195,6 +209,7 @@ public class UnitClass : MonoBehaviour {
                 
             }
         }
+
         /*
 		if (patrulla) {
 			//Patrullar zonas de influencia similar a la celda actual ¿Si ve un enemigo va a por el?
@@ -235,17 +250,39 @@ public class UnitClass : MonoBehaviour {
 						targetClass = target.GetComponent<UnitClass> ();
 						targetClass.dealDMG (this.attack, this.GetComponent<HexUnit> ());
 						cdAtack = HexMetrics.tiempo;
+                        atacar = true;
 					} 
 				}
 				else if(targetEdi){
 					targetEdi.TakeDamage ((int)this.attack);
 					cdAtack = HexMetrics.tiempo;
+                    atacar = true;
 				}
 
 			}
 		} else {
 			cdAtack -= Time.deltaTime;
 		}
+
+        
+        if (caminar)//Activar/desactivar animaciones
+        {
+            anim.SetBool("caminar", true);
+            anim.SetBool("atacar", false);
+        }
+        else
+        {
+            anim.SetBool("caminar", false);
+        }
+        if (atacar)
+        {
+            anim.SetBool("atacar", true);
+            anim.SetBool("caminar", false);
+        }
+        else
+        {
+            anim.SetBool("atacar", false);
+        }
     }
 
     public void dealDMG(float damageRecive,HexUnit enemy){

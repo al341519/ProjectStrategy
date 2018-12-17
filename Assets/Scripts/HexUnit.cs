@@ -5,7 +5,7 @@ using System.IO;
 
 public class HexUnit : MonoBehaviour
 {
-
+    
     [Header("Marcos")]//Cambio para dañar edif
     private UnitClass unidadDamage;
 	private bool huidaUnidad=false;
@@ -39,7 +39,6 @@ public class HexUnit : MonoBehaviour
             value.Unit = this;
 			Grid.IncreaseVisibility(value, (int)this.GetComponent<UnitClass> ().visionRange);//VisionRange
             transform.localPosition = value.Position;
-            Debug.Log(transform.localPosition);
             Grid.MakeChildOfColumn(transform, value.ColumnIndex);
         }
     }
@@ -131,6 +130,7 @@ public class HexUnit : MonoBehaviour
 
     IEnumerator TravelPath()
     {
+        this.GetComponent<UnitClass>().caminar = true;
 		if (this.GetComponent<UnitClass> ().huidizo) {
 			huidaUnidad = true;
 			this.GetComponent<UnitClass> ().huidizo = false;
@@ -277,6 +277,7 @@ public class HexUnit : MonoBehaviour
 			agresivoUnidad = false;
 			this.GetComponent<UnitClass> ().agresivoMov = false;
 		}
+        this.GetComponent<UnitClass>().caminar = true;
     }
 
     IEnumerator LookAt(Vector3 point)
