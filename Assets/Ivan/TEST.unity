@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -199,21 +199,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 114970822863711146, guid: c63894ac29f9a594cb827d45422f4cc6,
+    - target: {fileID: 114733811612372888, guid: c63894ac29f9a594cb827d45422f4cc6,
         type: 2}
       propertyPath: hexGrid
       value: 
       objectReference: {fileID: 1335749238}
-    - target: {fileID: 114970822863711146, guid: c63894ac29f9a594cb827d45422f4cc6,
+    - target: {fileID: 114568417169538396, guid: c63894ac29f9a594cb827d45422f4cc6,
         type: 2}
-      propertyPath: mapGenerator
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
-      objectReference: {fileID: 1332548659}
-    - target: {fileID: 114414201577439008, guid: c63894ac29f9a594cb827d45422f4cc6,
-        type: 2}
-      propertyPath: grid
-      value: 
-      objectReference: {fileID: 1335749238}
+      objectReference: {fileID: 1082604200}
     - target: {fileID: 114305410435771256, guid: c63894ac29f9a594cb827d45422f4cc6,
         type: 2}
       propertyPath: hexGrid
@@ -224,42 +219,37 @@ Prefab:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 109660051}
-    - target: {fileID: 114568417169538396, guid: c63894ac29f9a594cb827d45422f4cc6,
+    - target: {fileID: 114414201577439008, guid: c63894ac29f9a594cb827d45422f4cc6,
         type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      propertyPath: grid
       value: 
-      objectReference: {fileID: 1082604200}
-    - target: {fileID: 114733811612372888, guid: c63894ac29f9a594cb827d45422f4cc6,
+      objectReference: {fileID: 1335749238}
+    - target: {fileID: 114970822863711146, guid: c63894ac29f9a594cb827d45422f4cc6,
         type: 2}
       propertyPath: hexGrid
       value: 
       objectReference: {fileID: 1335749238}
+    - target: {fileID: 114970822863711146, guid: c63894ac29f9a594cb827d45422f4cc6,
+        type: 2}
+      propertyPath: mapGenerator
+      value: 
+      objectReference: {fileID: 1332548659}
+    - target: {fileID: 224213143538849384, guid: c63894ac29f9a594cb827d45422f4cc6,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224699658091681236, guid: c63894ac29f9a594cb827d45422f4cc6,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 224677931563892120, guid: c63894ac29f9a594cb827d45422f4cc6,
         type: 2}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224039930580721278, guid: c63894ac29f9a594cb827d45422f4cc6,
-        type: 2}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224525460277150534, guid: c63894ac29f9a594cb827d45422f4cc6,
-        type: 2}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224177240662736688, guid: c63894ac29f9a594cb827d45422f4cc6,
-        type: 2}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224764851209734936, guid: c63894ac29f9a594cb827d45422f4cc6,
-        type: 2}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224893331130192542, guid: c63894ac29f9a594cb827d45422f4cc6,
         type: 2}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -274,12 +264,32 @@ Prefab:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 224213143538849384, guid: c63894ac29f9a594cb827d45422f4cc6,
+    - target: {fileID: 224525460277150534, guid: c63894ac29f9a594cb827d45422f4cc6,
         type: 2}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 224699658091681236, guid: c63894ac29f9a594cb827d45422f4cc6,
+    - target: {fileID: 224177240662736688, guid: c63894ac29f9a594cb827d45422f4cc6,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224781843483191794, guid: c63894ac29f9a594cb827d45422f4cc6,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224494189640193416, guid: c63894ac29f9a594cb827d45422f4cc6,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224764851209734936, guid: c63894ac29f9a594cb827d45422f4cc6,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224893331130192542, guid: c63894ac29f9a594cb827d45422f4cc6,
         type: 2}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -294,14 +304,12 @@ Prefab:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 224781843483191794, guid: c63894ac29f9a594cb827d45422f4cc6,
-        type: 2}
-      propertyPath: m_AnchorMax.y
+    - target: {fileID: 1677545018879018, guid: c63894ac29f9a594cb827d45422f4cc6, type: 2}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 224494189640193416, guid: c63894ac29f9a594cb827d45422f4cc6,
-        type: 2}
-      propertyPath: m_AnchorMax.y
+    - target: {fileID: 1165287294170208, guid: c63894ac29f9a594cb827d45422f4cc6, type: 2}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -346,9 +354,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyUnitPrefab:
-  - {fileID: 114037183242733872, guid: 2e7e57ea0e0b32d4b9009d8a03549229, type: 2}
-  - {fileID: 114134527652273646, guid: 36a26803642d9654fbf595450590a3ec, type: 2}
-  - {fileID: 114554600223355640, guid: 253d3148211aa4c4dbf52985a1ee0f3d, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!4 &1082604201
 Transform:
   m_ObjectHideFlags: 0
