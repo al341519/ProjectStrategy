@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UnitClass : MonoBehaviour {
 
-	private bool combat;
+	[HideInInspector]public bool combat;
 	private HexUnit target=null;
 	private UnitClass targetClass;
 	private Health targetEdi;
@@ -109,6 +109,8 @@ public class UnitClass : MonoBehaviour {
 		if (life<=0){
 			Death();
 		}
+		if (this.GetComponent<HexUnit> ().propietario == 1) {this.tag="AllyUnit";}
+		else{this.tag="EnemyUnit";}
 		if (agresivo) {
 			//Coger enemigos a X distancia e ir a por ellos
 			if (this.tag == "AllyUnit") {
@@ -208,11 +210,11 @@ public class UnitClass : MonoBehaviour {
                 Debug.Log(celdaPatrulla.influenceInfo[index]);
                 Debug.Log(celdaPatrulla.influenceInfo[index].IsBuildingFrontier);*/
 
-                Debug.Log("FRONTERA");
+               /* Debug.Log("FRONTERA");
 
                 Debug.Log(celdaPatrulla);
                 Debug.Log(celdaPatrulla.influenceInfo[index]);
-                Debug.Log(celdaPatrulla.influenceInfo[index].IsBuildingFrontier);
+                Debug.Log(celdaPatrulla.influenceInfo[index].IsBuildingFrontier);*/
 
                 //GetFrontier();
 
@@ -231,57 +233,38 @@ public class UnitClass : MonoBehaviour {
             }
         }
 
-        /*
-		if (patrulla) {
-			//Patrullar zonas de influencia similar a la celda actual ¿Si ve un enemigo va a por el?
-			HexCell[] listaCeldas= this.GetComponent<HexUnit>().Location.GetVecinos();
-			if(this.tag=="AllyUnit"){
-				codigoPlayer = true;
-			}
-			else if(this.tag=="EnemyUnit"){
-				codigoPlayer = false;
-			}
-			Debug.Log ("Codigo Player: " + codigoPlayer);
-			if(codigoPlayer){
-				foreach (HexCell celdaPatrulla in listaCeldas) {
-					if (cdPatrulla) {
-						Debug.Log ("Es frontera o no: "+celdaPatrulla.IsBuildingFrontier);
-						if (celdaPatrulla.IsBuildingFrontier && ultimaPatrulla != celdaPatrulla) {
-							ultimaPatrulla = celdaPatrulla;
-							listGrid = new List<HexCell> ();
-							listGrid.Add (this.GetComponent<HexUnit> ().Location);
-							listGrid.Add (celdaPatrulla);
-							this.GetComponent<HexUnit> ().Travel (listGrid);
-							cdPatrulla = false;
-							StartCoroutine ("PatrullaCD");
-						}
-					}
-				}
-			}else if(!codigoPlayer){
-				//copia del codigo de patrulla del ally puede que haya que tener en cuenta el color rojo en lugar del verde
-			}
-		}
-        */
+       
         if (cdAtack <= 0) {
 			if (combat) {//Distancia entre objetivos hay que tenerla en cuenta
 				if (target) {
 					float distancia = Mathf.Abs (Vector3.Distance (this.transform.position, target.transform.position));
-					if (distancia <= attackRange * radiocelda) {
+					if (distancia <= ((attackRange * radiocelda) + 0.1f)) {
 						
 						targetClass = target.GetComponent<UnitClass> ();
 						targetClass.dealDMG (this.attack, this.GetComponent<HexUnit> ());
 						cdAtack = HexMetrics.tiempo;
-                        atacar = true;
-					} 
-				}
-				else if(targetEdi){
+						atacar = true;
+					} else {
+						listGrid = new List<HexCell> ();
+						listGrid.Add (this.GetComponent<HexUnit> ().Location);
+						listGrid.Add (target.Location);
+						this.GetComponent<HexUnit> ().Travel (listGrid);
+						atacar = false;
+
+					}
+				} else if (targetEdi) {
 					targetEdi.TakeDamage ((int)this.attack);
 					cdAtack = HexMetrics.tiempo;
-                    atacar = true;
+					atacar = true;
 				}
 
+			} else {
+				atacar = false;
+				target = null;
+				targetEdi = null;
 			}
 		} else {
+			
 			cdAtack -= Time.deltaTime;
 		}
 

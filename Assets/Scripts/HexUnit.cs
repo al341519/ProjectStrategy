@@ -11,11 +11,12 @@ public class HexUnit : MonoBehaviour
 	private bool huidaUnidad=false;
 	private bool patrullaUnidad=false;
 	private bool agresivoUnidad=false;
+	public int propietario=1;
 
 
     [Header("Code origen")]
     const float rotationSpeed = 180f;
-    const float travelSpeed = 1f;//4f original
+	float travelSpeed = 1f;//4f original y const
 
     public static HexUnit unitPrefab;
 
@@ -62,7 +63,7 @@ public class HexUnit : MonoBehaviour
     {
         get
         {
-            return 6;//origen 24
+			return 6;//origen 24
         }
     }
 
@@ -114,6 +115,7 @@ public class HexUnit : MonoBehaviour
 
     public void Travel(List<HexCell> path)
     {
+		travelSpeed = this.GetComponent<UnitClass> ().velocity / 5;
         if (!location)
         {
             location.Unit = null;
@@ -168,10 +170,10 @@ public class HexUnit : MonoBehaviour
                 Debug.Log("HOLAAAAA hay una unidad");
 				if (pathToTravel [i].Unit.tag != this.tag) {
 					//Coger el rango de ataque y en base a eso calcular
-					if (this.GetComponent<UnitClass> ().attackRange > 1/* && pathToTravel [i - 1] != location */&& i > this.GetComponent<UnitClass> ().attackRange) {
+					if (this.GetComponent<UnitClass> ().attackRange ==2 && i > this.GetComponent<UnitClass> ().attackRange) {
 						Debug.Log ("Estoy en el if del rango");
 						location.Unit = null;
-						location = pathToTravel [i - (int)this.GetComponent<UnitClass> ().attackRange];
+						location = pathToTravel [i - 2];
 						location.Unit = this;
 						this.GetComponent<UnitClass> ().targetPut (pathToTravel [i].Unit.GetComponent<HexUnit> ());
 						break;
@@ -194,14 +196,23 @@ public class HexUnit : MonoBehaviour
             else if (pathToTravel[i].edificio)
             {
                 Debug.Log ("he visto que hay un edificio");
-                if (/*pathToTravel [i].Owner!=1 &&*/ this.tag == "AllyUnit")
-                {
-                    location.Unit = null;
-                    location = pathToTravel[i - 1];
-                    location.Unit = this;
-                    Debug.Log ("El edificio seleccionado es: "+pathToTravel[i].edificio.name);
-                    this.GetComponent<UnitClass>().targetPut(pathToTravel[i].edificio.GetComponent<Health>());
-                    break;
+				if (pathToTravel[i].Owner==2 && this.tag == "AllyUnit" || pathToTravel[i].Owner==1 && this.tag=="EnemyUnit")
+				{
+					if (this.GetComponent<UnitClass> ().attackRange == 2 && i > this.GetComponent<UnitClass> ().attackRange) {
+						location.Unit = null;
+						location = pathToTravel [i - 2];
+						location.Unit = this;
+						Debug.Log ("El edificio seleccionado es: " + pathToTravel [i].edificio.name);
+						this.GetComponent<UnitClass> ().targetPut (pathToTravel [i].edificio.GetComponent<Health> ());
+						break;
+					} else {
+						location.Unit = null;
+						location = pathToTravel [i - 1];
+						location.Unit = this;
+						Debug.Log ("El edificio seleccionado es: " + pathToTravel [i].edificio.name);
+						this.GetComponent<UnitClass> ().targetPut (pathToTravel [i].edificio.GetComponent<Health> ());
+						break;
+					}
                 }
             }
 

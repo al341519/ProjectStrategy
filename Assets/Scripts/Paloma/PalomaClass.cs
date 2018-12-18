@@ -44,6 +44,8 @@ public class PalomaClass : MonoBehaviour
                 //Debug.Log ("He llegado al sitio");
                 if (unidadObjetivo)
                 {
+					
+					unidadObjetivo.GetComponent<UnitClass> ().combat = false;
                     HexCell holaCell = unidadObjetivo.Location;
                     grid.ClearPath();
                     grid.FindPath(holaCell, lastCell, unidadObjetivo);

@@ -65,6 +65,17 @@ public class HexGrid : MonoBehaviour {
         unit.Orientation = orientation;
     }
 
+	public void AddUnit(HexUnit unit, HexCell location, float orientation,int owner) {
+		units.Add(unit);
+		unit.Grid = this;
+		unit.Location = location;
+		unit.propietario = owner;
+
+		//Debug.Log(unit.Location.Position);
+
+		unit.Orientation = orientation;
+	}
+
     public void RemoveUnit(HexUnit unit) {
         units.Remove(unit);
         unit.Die();
