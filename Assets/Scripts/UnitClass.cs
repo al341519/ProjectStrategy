@@ -60,6 +60,7 @@ public class UnitClass : MonoBehaviour {
         }
         
 
+
         caminar = false;
         atacar = false;
 

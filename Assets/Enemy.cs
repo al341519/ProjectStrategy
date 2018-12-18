@@ -120,7 +120,7 @@ public class Enemy : MonoBehaviour
 			}
 		}
 
-        MoveEnemyUnits();
+        //MoveEnemyUnits();
     }
 
 
@@ -176,7 +176,7 @@ public class Enemy : MonoBehaviour
 
     }
 
-    void MoveEnemyUnits()
+    /*void MoveEnemyUnits()
     {
         //List<GameObject> unidadesEnemigas = new List<GameObject>(GameObject.FindGameObjectsWithTag("EnemyUnit"));
         
@@ -189,7 +189,7 @@ public class Enemy : MonoBehaviour
                 {
                     enemyUnit = enemy.GetComponent<HexUnit>();
                     currentCell = enemyUnit.Location;
-                    pos = new Vector3(69.3, 0.1, 120.0);
+                    pos = new Vector3(69.3f, 0.1f, 120.0f);
                     targetCell = hexGrid.GetCell(pos);
                     Debug.Log(hexGrid.GetPath());
                     if (hexGrid.GetPath() == null)
@@ -203,7 +203,7 @@ public class Enemy : MonoBehaviour
                 {
                     enemyUnit = enemy.GetComponent<HexUnit>();
                     currentCell = enemyUnit.Location;
-                    pos = new Vector3(69.3, 0.1, 120.0);
+                    pos = new Vector3(69.3f, 0.1f, 120.0f);
                     if (enemy.Location.Position == pos)
                     {
                         targetCell = hexGrid.GetCell(pos);
@@ -232,7 +232,7 @@ public class Enemy : MonoBehaviour
             }
             
         }
-    }
+    }*/
 
     bool haveResourcesBuilding(Edificio name)
     {
