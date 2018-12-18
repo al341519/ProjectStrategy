@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour
     bool empezado = false;
     bool createTroops = false;
 
-    HexGrid hexGrid;
+    public HexGrid hexGrid;
 
     public enum Unidades { soldado, arquero, jinete }
 
@@ -167,6 +167,27 @@ public class Enemy : MonoBehaviour
 
     }
 
+    void MoveEnemyUnits()
+    {
+        List<GameObject> unidadesEnemigas = new List<GameObject>(GameObject.FindGameObjectsWithTag("EnemyUnit"));
+        HexUnit enemyUnit;
+        HexCell currentCell;
+        HexCell targetCell;
+        Vector3 pos;
+        foreach(GameObject enemy in unidadesEnemigas)
+        {
+            if (enemy != null)
+            {
+                enemyUnit = enemy.GetComponent<HexUnit>();
+                currentCell = enemyUnit.Location;
+
+                pos = new Vector3(0, 0, 0);
+                targetCell = hexGrid.GetCell(pos);
+               // hexGrid.findPath(currentCell, targetCell, enemyUnit);
+            }
+            
+        }
+    }
 
     bool haveResourcesBuilding(Edificio name)
     {
