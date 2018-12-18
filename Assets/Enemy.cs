@@ -120,7 +120,7 @@ public class Enemy : MonoBehaviour
 			}
 		}
 
-        MoveEnemyUnits();
+        //MoveEnemyUnits();
     }
 
 
