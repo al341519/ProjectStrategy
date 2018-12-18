@@ -42,7 +42,10 @@ public class HexMapEditor : MonoBehaviour {
 	HexDirection dragDirection;
 	HexCell previousCell;
 
-	public void SetTerrainTypeIndex (int index) {
+    HexGameUI gameUI;
+    UnitClass unidadSelec;
+
+    public void SetTerrainTypeIndex (int index) {
 		activeTerrainTypeIndex = index;
 	}
 
@@ -115,7 +118,26 @@ public class HexMapEditor : MonoBehaviour {
 		enabled = toggle;
 	}
 
-	public void ShowGrid (bool visible) {
+    public void SetUnitModes(int mode)//Añadido por José
+    {
+        switch (mode)
+        {
+            case 0:
+                unidadSelec.Agresivo();
+                break;
+            case 1:
+                unidadSelec.Defensivo();
+                break;
+            case 2:
+                unidadSelec.Huidizo();
+                break;
+            case 3:
+                unidadSelec.Patrulla();
+                break;
+        }
+    }
+
+    public void ShowGrid (bool visible) {
 		if (visible) {
 			terrainMaterial.EnableKeyword("GRID_ON");
 		}
@@ -129,10 +151,23 @@ public class HexMapEditor : MonoBehaviour {
 		Shader.EnableKeyword("HEX_MAP_EDIT_MODE");
 		SetEditMode(true);
         player = gameManager.getPlayer(1);
-	}
+        upperPanel2 = GameObject.Find("Upper Panel 2");
+        gameUI = GameObject.Find("Game UI").GetComponent<HexGameUI>();
+    }
 
+    GameObject upperPanel2;
 	void Update () {
-		if (!EventSystem.current.IsPointerOverGameObject()) {
+        if (gameUI.selectedUnit)//Upper Panel 2
+        {
+            unidadSelec = gameUI.selectedUnit.GetComponent<UnitClass>();
+            upperPanel2.SetActive(true);
+        }
+        else
+        {
+            upperPanel2.SetActive(false);
+        }
+
+        if (!EventSystem.current.IsPointerOverGameObject()) {
 			if (Input.GetMouseButton(0)) {
 				HandleInput();
 				return;
