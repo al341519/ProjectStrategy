@@ -117,7 +117,7 @@ public class HexFeatureManager : MonoBehaviour {
     {
         HexHash hash = HexMetrics.SampleHashGrid(position);
         Transform instance = Instantiate(special[cell.SpecialIndex - 1]).transform;
-        if(cell.SpecialIndex == 1)
+        if (cell.SpecialIndex == 1)
         {
             castillo++;
             castillos[castillos - 1] = cell;

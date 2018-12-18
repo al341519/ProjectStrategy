@@ -334,6 +334,7 @@ public class HexMapEditor : MonoBehaviour {
                     {
                         cell.Owner = 1;
                         cell.SpecialIndex = activeSpecialIndex;
+
                     }
                     else if (activeSpecialIndex <= 7 && cell.Walled && player.construir(activeSpecialIndex))
 					{
