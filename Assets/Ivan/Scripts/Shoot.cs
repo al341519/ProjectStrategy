@@ -19,6 +19,7 @@ public class Shoot : MonoBehaviour {
     Transform pos;
     bool shoot;
     bool destroy;
+    bool dañoAmigo;
 
     float shootAngle = 30;
     Vector3 dir;
@@ -41,6 +42,7 @@ public class Shoot : MonoBehaviour {
     {
         destroy = true;
         shoot = true;
+        dañoAmigo = false;
         countEnemy = 0;
         cell = gameObject.GetComponent<Health>().GetCelda();
     }
@@ -48,6 +50,12 @@ public class Shoot : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+
+        if (Input.GetKeyDown("q"))
+        {
+            dañoAmigo = true;
+        }
+
         if (cell != null)
         {
             HexCell[] vecinos = cell.GetVecinos();
@@ -84,20 +92,21 @@ public class Shoot : MonoBehaviour {
                         if (vecinos3[j] != null && vecinos3[j].Unit != null) //COMPRUEBA LOS ENEMIGOS DE RANGO 3 Y 1
                         {
                             HexUnit unit = vecinos3[j].Unit;
-
-                            //PRUEBA
-                            targetUnit = unit;
-                            target = unit.transform;
-
-                            //Debug.Log(target.GetComponent<Health>().currentHealth);
-
-                            if (shoot && countEnemy < 3)
+                            
+                            if (dañoAmigo)
                             {
-                                //DISPARA A AMIGO
-                                Fire();
-                                StartCoroutine(WaitForArrow());
-                                countEnemy++;
+                                //PRUEBA
+                                targetUnit = unit;
+                                target = unit.transform;
+                                if (shoot && countEnemy < 3)
+                                {
+                                    //DISPARA A AMIGO
+                                    Fire();
+                                    StartCoroutine(WaitForArrow());
+                                    countEnemy++;
+                                }
                             }
+                            
                             if (cell.Owner == 1 && unit.tag == "EnemyUnit")
                             {
                                 target = unit.transform;
