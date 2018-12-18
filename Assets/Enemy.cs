@@ -38,13 +38,14 @@ public class Enemy : MonoBehaviour
 
     float timerTurno = HexMetrics.tiempo;
 
-	private bool defensivo=false;
+	private bool defensivo=true;
 	private List<GameObject> unidadesEnem;
 
     HexUnit enemyUnit;
     HexCell currentCell;
     HexCell targetCell;
     Vector3 pos;
+    Vector3 iniPos;
     List<HexCell> listGrid;
 
     public bool Empezado
@@ -84,7 +85,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
    //     Debug.Log("AL ATAQUEEE --> "+ createTroops);
     //    Debug.Log("md: " + madera + " pd: " + piedra + " cmd: " + comida);
         if (empezado == false) { return; }
@@ -179,20 +180,53 @@ public class Enemy : MonoBehaviour
     {
         //List<GameObject> unidadesEnemigas = new List<GameObject>(GameObject.FindGameObjectsWithTag("EnemyUnit"));
         
+
         foreach(GameObject enemy in unidadesEnem)
         {
             if (enemy != null)
             {
-                enemyUnit = enemy.GetComponent<HexUnit>();
-                currentCell = enemyUnit.Location;
-                pos = new Vector3(0, 0, 0);
-                targetCell = hexGrid.GetCell(pos);
-                Debug.Log(hexGrid.GetPath());
-                if (hexGrid.GetPath() == null)
+                if (edificio == 12)
                 {
-                    hexGrid.FindPath(currentCell, targetCell, enemyUnit);
-                    listGrid = hexGrid.GetPath();
-                    enemyUnit.Travel(listGrid);
+                    enemyUnit = enemy.GetComponent<HexUnit>();
+                    currentCell = enemyUnit.Location;
+                    pos = new Vector3(69.3, 0.1, 120.0);
+                    targetCell = hexGrid.GetCell(pos);
+                    Debug.Log(hexGrid.GetPath());
+                    if (hexGrid.GetPath() == null)
+                    {
+                        hexGrid.FindPath(currentCell, targetCell, enemyUnit);
+                        listGrid = hexGrid.GetPath();
+                        enemyUnit.Travel(listGrid);
+                    }
+                }
+                else
+                {
+                    enemyUnit = enemy.GetComponent<HexUnit>();
+                    currentCell = enemyUnit.Location;
+                    pos = new Vector3(69.3, 0.1, 120.0);
+                    if (enemy.Location.Position == pos)
+                    {
+                        targetCell = hexGrid.GetCell(pos);
+                        Debug.Log(hexGrid.GetPath());
+                        if (hexGrid.GetPath() == null)
+                        {
+                            hexGrid.FindPath(currentCell, targetCell, enemyUnit);
+                            listGrid = hexGrid.GetPath();
+                            enemyUnit.Travel(listGrid);
+                        }
+                    }
+                    else
+                    {
+                        targetCell = hexGrid.GetCell(pos);
+                        Debug.Log(hexGrid.GetPath());
+                        if (hexGrid.GetPath() == null)
+                        {
+                            hexGrid.FindPath(currentCell, targetCell, enemyUnit);
+                            listGrid = hexGrid.GetPath();
+                            enemyUnit.Travel(listGrid);
+                        }
+                    }
+                    
                 }
                 
             }
