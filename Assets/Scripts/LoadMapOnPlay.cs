@@ -17,14 +17,14 @@ public class LoadMapOnPlay : MonoBehaviour {
 
         StartCoroutine(charge());
         if(_LoadOnStart)
-            Load(Application.dataPath + "/CustomMaps/" + _FileName + ".map");
+            Load(Application.persistentDataPath + "/" + _FileName + ".map");
 	}
 
 
     IEnumerator charge()
     {
         yield return new WaitForEndOfFrame();
-        Load(Application.dataPath + "/CustomMaps/" + _FileName + ".map");
+        Load(Application.persistentDataPath +"/" + _FileName + ".map");
 
     }
 
