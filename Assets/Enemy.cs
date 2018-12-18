@@ -20,6 +20,8 @@ public class Enemy : MonoBehaviour
     public enum Edificio { castillo, aserradero, mina, molino, cuartel, arqueria, caballeria }
 
     HexCell[] castillos = new HexCell[2];
+    HexCell[] tower = new HexCell[2];
+    bool[] construido = new bool[2];
     List<HexCell> recruitUnitBuildings = new List<HexCell>();
 
     HexUnit[] units = new HexUnit[8];
@@ -59,8 +61,12 @@ public class Enemy : MonoBehaviour
         aldeanos = 1;
         hexGrid = GameObject.Find("Hex Grid").GetComponent<HexGrid>();
 
-        castillos[0] = hexGrid.GetCell(5, 12);
-        castillos[1] = hexGrid.GetCell(13, 8);
+        castillos[0] = hexGrid.GetCell(11, 12);
+        castillos[1] = hexGrid.GetCell(17, 8);
+
+
+        tower[0] = hexGrid.GetCell(8, 9);
+        tower[1] = hexGrid.GetCell(13, 3);
         
 
 
@@ -89,6 +95,7 @@ public class Enemy : MonoBehaviour
     void chooseUnit()
     {
         Unidad_deseada = Unidades.soldado;
+
         if (createTroops) {
             foreach(HexCell cell in recruitUnitBuildings)
             {
@@ -317,46 +324,57 @@ public class Enemy : MonoBehaviour
             aldeanos++;
         }
         else {
-            if (edificio > 6 && tropas >= edificio/2)
+            if (edificio > 9 && tropas <= edificio/3)
             {
                 createTroops = true;
 
             }
+
+            if (edificio == 6) {
+                tower[0].SpecialIndex = 10;
+            }
+            if (edificio == 10)
+            {
+                tower[1].SpecialIndex = 9;
+            }
             if ((castillo < 1 || edificio >= castillo * 6) && haveResourcesBuilding(Edificio.castillo))
             {
                 buildCastillo(castillo);
-
             }
             else
-            {
-                if (!createTroops)
+            {                
+                if ((recursos_turno[2] == 0 || recursos_turno[2] <= castillo - 1) && haveResourcesBuilding(Edificio.molino))
                 {
-                    if ((recursos_turno[2] == 0 || recursos_turno[2] <= castillo - 1) && haveResourcesBuilding(Edificio.molino))
-                    {
-                        build(Edificio.molino);
-                    }
-                    else if ((recursos_turno[0] == 0 || recursos_turno[0] <= castillo - 1) && haveResourcesBuilding(Edificio.aserradero))
-                    {
-                        build(Edificio.aserradero);
-                    }
-                    else if ((recursos_turno[1] == 0 || recursos_turno[1] <= castillo - 1) && haveResourcesBuilding(Edificio.mina))
-                    {
-                        build(Edificio.mina);
-                    }
-                    else if ((offensive_building[0] == 0 || offensive_building[0] <= castillo - 1) && haveResourcesBuilding(Edificio.cuartel))
-                    {
-                        build(Edificio.cuartel);
-                    }
-                    else if ((offensive_building[1] == 0 || offensive_building[1] <= castillo - 1) && haveResourcesBuilding(Edificio.caballeria))
-                    {
-                        build(Edificio.caballeria);
-                    }
-                    else if ((offensive_building[2] == 0 || offensive_building[2] <= castillo - 1) && haveResourcesBuilding(Edificio.arqueria))
-                    {
-                        build(Edificio.arqueria);
-                    }
+                    build(Edificio.molino);
                 }
-                if (offensive_building[0] != 0 && recursos_turno[1] != 0)
+                else if ((recursos_turno[0] == 0 || recursos_turno[0] <= castillo - 1) && haveResourcesBuilding(Edificio.aserradero))
+                {
+                    build(Edificio.aserradero);
+                }
+                else if ((recursos_turno[1] == 0 || recursos_turno[1] <= castillo - 1) && haveResourcesBuilding(Edificio.mina))
+                {
+                    build(Edificio.mina);
+                }
+                if (recursos_turno.Min() > 0 && construido[0])
+                {
+                    tower[0].SpecialIndex = 8;
+                    construido[0] = true;
+                }
+
+                else if ((offensive_building[0] == 0 || offensive_building[0] <= castillo - 1) && haveResourcesBuilding(Edificio.cuartel))
+                {
+                    build(Edificio.cuartel);
+                }
+                else if ((offensive_building[1] == 0 || offensive_building[1] <= castillo - 1) && haveResourcesBuilding(Edificio.caballeria))
+                {
+                    build(Edificio.caballeria);
+                }
+                else if ((offensive_building[2] == 0 || offensive_building[2] <= castillo - 1) && haveResourcesBuilding(Edificio.arqueria))
+                {
+                    build(Edificio.arqueria);
+                }
+                
+                if (offensive_building[0] != 0 && recursos_turno[1] != 0 && tropas <= edificio / 3)
                 {
                     createTroops = true;
                 }
