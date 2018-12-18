@@ -361,13 +361,13 @@ public class HexMapEditor : MonoBehaviour {
 	}
 
     public IEnumerator BuildBuilding(int index, HexCell cell) {
-        Debug.Log("ENTRANDO CORRUTINA");
+        //Debug.Log("ENTRANDO CORRUTINA");
         yield return new WaitForSeconds(4);
    //     cell.SpecialIndex = ++index;
         applySpecialIndex = true;
         EditCell(cell);
-        Debug.Log("index -> " + cell.SpecialIndex);
-        Debug.Log("APLICADO EL CAMBIO");
+        //Debug.Log("index -> " + cell.SpecialIndex);
+        //Debug.Log("APLICADO EL CAMBIO");
 
     }
 

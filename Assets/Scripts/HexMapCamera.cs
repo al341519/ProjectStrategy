@@ -91,7 +91,7 @@ public class HexMapCamera : MonoBehaviour {
 		Vector3 position = transform.localPosition;
 		position += direction * distance;
 		transform.localPosition =
-			grid.wrapping ? WrapPosition(position) : ClampPosition(position);
+			/*grid.wrapping ? WrapPosition(position) : */ClampPosition(position);
 	}
 
 	Vector3 ClampPosition (Vector3 position) {

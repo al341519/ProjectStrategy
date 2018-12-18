@@ -16,18 +16,23 @@ public class Health : MonoBehaviour {
     void Start() {
 		influence = GameObject.Find ("InfluenceMap").GetComponent<InfluenceMapSystem>();
 
-        if (cell.Owner == 1)
+        if(GetComponent<Influencer>() != null)
         {
-            this.tag = "edificioAliado";
-			influence.UpdateBuildingInfluence (0);
-            this.GetComponent<Influencer>()._Team = 1;
+            if (cell.Owner == 1)
+            {
+                this.tag = "edificioAliado";
+                influence.UpdateBuildingInfluence(0);
+                this.GetComponent<Influencer>()._Team = 1;
+            }
+            else if (cell.Owner == 2)
+            {
+                this.tag = "edificioEnemigo";
+                influence.UpdateBuildingInfluence(1);
+                print("Influencer null?: " + (GetComponent<Influencer>() == null) + " -- InfluencerType: " + GetComponent<Influencer>().type);
+                this.GetComponent<Influencer>()._Team = 2;
+            }
         }
-        else if (cell.Owner == 2) {
-            this.tag = "edificioEnemigo";
-			influence.UpdateBuildingInfluence(1);
-            this.GetComponent<Influencer>()._Team = 2;
-
-        }
+        
         grid = GameObject.Find("Hex Grid").GetComponent<HexGrid>();
 
 

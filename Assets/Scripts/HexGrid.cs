@@ -60,7 +60,7 @@ public class HexGrid : MonoBehaviour {
         unit.Grid = this;
         unit.Location = location;
 
-        Debug.Log(unit.Location.Position);
+        //Debug.Log(unit.Location.Position);
 
         unit.Orientation = orientation;
     }
@@ -110,7 +110,7 @@ public class HexGrid : MonoBehaviour {
             columns[x] = new GameObject("Column").transform;
             columns[x].SetParent(transform, false);
         }
-        Debug.Log(columns.Length);
+        //Debug.Log(columns.Length);
 
 
         chunks = new HexGridChunk[chunkCountX * chunkCountZ];

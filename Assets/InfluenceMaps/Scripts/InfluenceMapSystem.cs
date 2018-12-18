@@ -5,7 +5,7 @@ using UnityEngine;
 public class InfluenceMapSystem : MonoBehaviour {
 
     Influencer[] influencers;
-    public GameObject[] mapPlanes;
+    public GameObject mapPlane;
 
     public List<Influencer>[] Units { get; set; }
     public List<Influencer>[] Buildings { get; set; }
@@ -25,6 +25,9 @@ public class InfluenceMapSystem : MonoBehaviour {
     bool isFirstFrameRendered = false;
     bool isFirstTimeComputed = false;
 
+    [HideInInspector] public int debugPlayer = 0;   //0 --> player 1 | 1 --> player 2
+    [HideInInspector] public int debugMap = 0;      //0 --> military | 1 --> economy
+
     void Awake () {
         tag = "InfluenceSystem";
         Units = new List<Influencer>[_NumberOfPlayers];
@@ -43,12 +46,12 @@ public class InfluenceMapSystem : MonoBehaviour {
         }
         for (int i = 0; i < _NumberOfPlayers; i++)
         {
-            militaryMaps[i] = new InfluenceMap(mapPlanes[i], _Size, Units[i], Units[_NumberOfPlayers-1-i]);
+            militaryMaps[i] = new InfluenceMap(mapPlane, _Size, Units[i], Units[_NumberOfPlayers-1-i]);
             militaryMaps[i].numberOfPlayers = _NumberOfPlayers;
             militaryMaps[i].width = _Size.x;
             militaryMaps[i].height = _Size.y;
 
-            economyMaps[i] = new InfluenceMap(mapPlanes[i], _Size, Buildings[i], Buildings[_NumberOfPlayers - 1 - i], MapResources);
+            economyMaps[i] = new InfluenceMap(mapPlane, _Size, Buildings[i], Buildings[_NumberOfPlayers - 1 - i], MapResources);
             economyMaps[i].numberOfPlayers = _NumberOfPlayers;
             economyMaps[i].width = _Size.x;
             economyMaps[i].height = _Size.y;
@@ -66,12 +69,12 @@ public class InfluenceMapSystem : MonoBehaviour {
         
         for (int i = 0; i < _NumberOfPlayers; i++)
         {
-            militaryMaps[i] = new InfluenceMap(mapPlanes[i], _Size, Units[i], Units[_NumberOfPlayers - 1 - i]);
+            militaryMaps[i] = new InfluenceMap(mapPlane, _Size, Units[i], Units[_NumberOfPlayers - 1 - i]);
             militaryMaps[i].numberOfPlayers = _NumberOfPlayers;
             militaryMaps[i].width = _Size.x;
             militaryMaps[i].height = _Size.y;
 
-            economyMaps[i] = new InfluenceMap(mapPlanes[i], _Size, Buildings[i], Buildings[_NumberOfPlayers - 1 - i], MapResources);
+            economyMaps[i] = new InfluenceMap(mapPlane, _Size, Buildings[i], Buildings[_NumberOfPlayers - 1 - i], MapResources);
             economyMaps[i].numberOfPlayers = _NumberOfPlayers;
             economyMaps[i].width = _Size.x;
             economyMaps[i].height = _Size.y;
@@ -125,8 +128,13 @@ public class InfluenceMapSystem : MonoBehaviour {
         for (int i = 0; i < _NumberOfPlayers; i++)
         {
             //if(isFirstTimeComputed) militaryMaps[i].WaitForJobComplete();
-            UpdateMap(militaryMaps, true, i, false);
-            UpdateMap(economyMaps, false, i, true);
+            bool hasToDrawMap = false;
+
+            if (debugMap == 0) hasToDrawMap = true;
+            UpdateMap(militaryMaps, true, i, hasToDrawMap);
+            hasToDrawMap = false;
+            if (debugMap == 1) hasToDrawMap = true;
+            UpdateMap(economyMaps, false, i, hasToDrawMap);
         }
         hasMilitaryCoroutineEnded = true;
         isFirstFrameRendered = true;
@@ -140,7 +148,7 @@ public class InfluenceMapSystem : MonoBehaviour {
             map.Update();
         }
         if(drawMap)
-            DrawMap(0, maps);
+            DrawMap(maps);
         ApplyMap(maps, isMilitary, player);
     }
 
@@ -154,9 +162,9 @@ public class InfluenceMapSystem : MonoBehaviour {
         }
     }
 
-    void DrawMap(int player, InfluenceMap[] mapArray) //player -> 0-n
+    void DrawMap(InfluenceMap[] mapArray) //player -> 0-n
     {
-        mapPlanes[player].GetComponent<MeshRenderer>().material.SetTexture("_MainTex", mapArray[player].CurrentTexture);
+        mapPlane.GetComponent<MeshRenderer>().material.SetTexture("_MainTex", mapArray[debugPlayer].CurrentTexture);
     }
 
     void ApplyMap(InfluenceMap[] mapArray, bool isMilitary, int player)
@@ -199,7 +207,7 @@ public class InfluenceMapSystem : MonoBehaviour {
 
     Vector3 GetCenter(GameObject o)
     {
-		Debug.Log ("O es: " + o);
+		//Debug.Log ("O es: " + o);
         Vector3 center = Vector3.zero;
         MeshRenderer[] renderers = o.GetComponentsInChildren<MeshRenderer>();
         int count = 0;
@@ -212,7 +220,7 @@ public class InfluenceMapSystem : MonoBehaviour {
             }
         }
         center /= count;
-		Debug.Log ("El centro de la grid es: "+center);
+		//Debug.Log ("El centro de la grid es: "+center);
 
         return center;
     }
