@@ -185,7 +185,7 @@ public class Enemy : MonoBehaviour
 
     }
 
-    void MoveEnemyUnits()
+   /* void MoveEnemyUnits()
     {
         foreach (GameObject enemy in unidadesEnem)
         {
@@ -200,16 +200,17 @@ public class Enemy : MonoBehaviour
                 defensivo = true;
             }
         }
-    }
+    }*/
 
     void PathIAOfensiva(GameObject enemy)
     {
         //ELEGIMOS CASTILLO A ATACAR
-        castillosAlly = GameObject.Find("Hex Feauture").GetComponent<HexFeatureManager>().GetCastillos();
+        castillosAlly = GameObject.Find("Features").GetComponent<HexFeatureManager>().GetCastillos();
 
         if(castillosAlly != null)
         {
             castilloPosible = new List<HexCell>();
+            listas = new List<List<HexCell>>();
             foreach (HexCell cell in castillosAlly)
             {
                 if (cell!= null)
@@ -221,8 +222,10 @@ public class Enemy : MonoBehaviour
                     if (hexGrid.GetPath() == null)
                     {
                         hexGrid.FindPathNoShow(currentCell, targetCell, enemyUnit);
+                        Debug.Log(listGrid);
                         listGrid = hexGrid.GetPath();
                         listas.Add(listGrid);
+                        Debug.Log(listas[0]);
                         castilloPosible.Add(targetCell);
                         // enemyUnit.Travel(listGrid);
                     }
@@ -232,30 +235,34 @@ public class Enemy : MonoBehaviour
             
             int min = 0;
 
-            List<HexCell> elegido = listas[0];
-            HexCell castilloElegido = castilloPosible[0];
-
-            for (int i = 1; i < listas.Count; i++)
+            if(listas[0] != null)
             {
-                if(listas[i].Count < min)
+                List<HexCell> elegido = listas[0];
+                HexCell castilloElegido = castilloPosible[0];
+
+                for (int i = 1; i < listas.Count; i++)
                 {
-                    min = listas[i].Count;
-                    elegido = listas[i];
-                    castilloElegido = castilloPosible[i];
+                    if (listas[i].Count < min)
+                    {
+                        min = listas[i].Count;
+                        elegido = listas[i];
+                        castilloElegido = castilloPosible[i];
+                    }
                 }
+
+                //CALCULAMOS DEFINITIVO
+
+                //UN MODO: NO SE QUE HARÁN LOS PATHS
+                //enemyUnit.Travel(elegido);
+
+                //OTRO MODO: DIBUJAR DE NUEVO EL PATH
+
+                pos = castilloElegido.Position;
+                targetCell = hexGrid.GetCell(pos);
+
+                PathIA(enemyUnit, currentCell, targetCell, pos);
             }
-
-            //CALCULAMOS DEFINITIVO
-
-            //UN MODO: NO SE QUE HARÁN LOS PATHS
-            //enemyUnit.Travel(elegido);
-
-            //OTRO MODO: DIBUJAR DE NUEVO EL PATH
-
-            pos = castilloElegido.Position;
-            targetCell = hexGrid.GetCell(pos);
-
-            PathIA(enemyUnit, currentCell, targetCell, pos);
+           
 
         }
     }
@@ -271,7 +278,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    /*void MoveEnemyUnits()
+    void MoveEnemyUnits()
     {
         //Debug.Log("CANTIDAD");
         // Debug.Log(unidadesEnem.Count);
@@ -325,7 +332,7 @@ public class Enemy : MonoBehaviour
              }
 
          }
-    }*/
+    }
 
 
 
