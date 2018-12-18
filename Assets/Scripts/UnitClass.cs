@@ -67,7 +67,7 @@ public class UnitClass : MonoBehaviour {
 		switch(type){
 		case "infantry":
 			//susvalores
-			velocity = 1f;
+			velocity = 3f;
 			defence = 2f;
 			attack = 1f;
 			life = 1f;

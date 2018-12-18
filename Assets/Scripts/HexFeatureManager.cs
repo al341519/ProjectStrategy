@@ -15,7 +15,19 @@ public class HexFeatureManager : MonoBehaviour {
 
 	Transform container;
 
-	public void Clear () {
+    HexCell[] castillos = new HexCell[6];
+    int castillo;
+
+    void Start()
+    {
+        castillo = 0;
+    }
+
+    public HexCell[] GetCastillos()
+    {
+        return castillos;
+    }
+    public void Clear () {
 		if (container) {
 			Destroy(container.gameObject);
 		}
@@ -105,6 +117,11 @@ public class HexFeatureManager : MonoBehaviour {
     {
         HexHash hash = HexMetrics.SampleHashGrid(position);
         Transform instance = Instantiate(special[cell.SpecialIndex - 1]).transform;
+        if(cell.SpecialIndex == 1)
+        {
+            castillo++;
+            castillos[castillos - 1] = cell;
+        }
         instance.gameObject.GetComponent<Health>().Celda(cell);
         cell.edificio = instance.gameObject;
         instance.localPosition = HexMetrics.Perturb(position);

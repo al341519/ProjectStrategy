@@ -10,6 +10,11 @@ public class Enemy : MonoBehaviour
 
     bool empezado = false;
     bool createTroops = false;
+    bool vuelve = false;
+    bool alAtaque = false;
+
+    //PRUEBA
+    //GameObject enemy;
 
     public HexGrid hexGrid;
 
@@ -40,6 +45,9 @@ public class Enemy : MonoBehaviour
 
 	private bool defensivo=true;
 	private List<GameObject> unidadesEnem;
+    private List<GameObject> unidadesAlly;
+    HexCell[] castillosAlly;
+    HexCell[] castilloPosible;
 
     HexUnit enemyUnit;
     HexCell currentCell;
@@ -47,6 +55,7 @@ public class Enemy : MonoBehaviour
     Vector3 pos;
     Vector3 iniPos;
     List<HexCell> listGrid;
+    List<List<HexCell>> listas;
 
     public bool Empezado
     {
@@ -100,8 +109,8 @@ public class Enemy : MonoBehaviour
 
         timerTurno = 0f;
 
-
-		unidadesEnem=new List<GameObject> (GameObject.FindGameObjectsWithTag ("EnemyUnit"));
+        unidadesAlly = new List<GameObject>(GameObject.FindGameObjectsWithTag("AllyUnit"));
+        unidadesEnem =new List<GameObject> (GameObject.FindGameObjectsWithTag ("EnemyUnit"));
 		if (defensivo) {
 			foreach (GameObject unidad in unidadesEnem) {
 				if (unidad.GetComponent<UnitClass> ().type == "raider") {
@@ -120,7 +129,7 @@ public class Enemy : MonoBehaviour
 			}
 		}
 
-        //MoveEnemyUnits();
+        MoveEnemyUnits();
     }
 
 
@@ -178,63 +187,146 @@ public class Enemy : MonoBehaviour
 
     void MoveEnemyUnits()
     {
-        //List<GameObject> unidadesEnemigas = new List<GameObject>(GameObject.FindGameObjectsWithTag("EnemyUnit"));
-        
-
-        foreach(GameObject enemy in unidadesEnem)
+        foreach (GameObject enemy in unidadesEnem)
         {
-            if (enemy != null)
+            if (unidadesEnem.Count > unidadesAlly.Count)
             {
-                if (edificio == 12)
+                defensivo = false;
+                PathIAOfensiva(enemy);
+            }
+            else
+            {
+                //SE QUEDA EN ESTADO DEFENSIVO ALREDEDOR DEL CASTILLO
+                defensivo = true;
+            }
+        }
+    }
+
+    void PathIAOfensiva(GameObject enemy)
+    {
+        //ELEGIMOS CASTILLO A ATACAR
+        castillosAlly = GameObject.Find("Hex Feauture").GetComponent<HexFeautureManager>.GetCastillos();
+
+        if(castillosAlly != null)
+        {
+            foreach (HexCell cell in castillosAlly)
+            {
+                if (cell!= null)
                 {
-                    //A POR TODOS
                     enemyUnit = enemy.GetComponent<HexUnit>();
                     currentCell = enemyUnit.Location;
-                    pos = new Vector3(69, 0, 120);
+                    pos = cell.Location.Position;
                     targetCell = hexGrid.GetCell(pos);
-                    Debug.Log(hexGrid.GetPath());
                     if (hexGrid.GetPath() == null)
                     {
                         hexGrid.FindPath(currentCell, targetCell, enemyUnit);
                         listGrid = hexGrid.GetPath();
-                        enemyUnit.Travel(listGrid);
+                        listas.Add(listGrid);
+                        castilloPosible.Add(targetCell);
+                        // enemyUnit.Travel(listGrid);
                     }
+                }
+
+            }
+            
+            int min = 0;
+
+            List<HexCell> elegido = listas[0];
+            HexCell castilloElegido = castilloPosible[0];
+
+            for (int i = 1; i < listas.Count; i++)
+            {
+                if(listas[i].Count < min)
+                {
+                    min = listas[i].Count;
+                    elegido = listas[i];
+                    castilloElegido = castilloPosible[i];
+                }
+            }
+
+            //CALCULAMOS DEFINITIVO
+
+            //UN MODO: NO SE QUE HARÁN LOS PATHS
+            //enemyUnit.Travel(elegido);
+
+            //OTRO MODO: DIBUJAR DE NUEVO EL PATH
+
+            pos = castilloElegido.Location.Position;
+            targetCell = hexGrid.GetCell(pos);
+
+            PathIA(enemyUnit, currentCell, targetCell, pos);
+
+        }
+    }
+
+    void PathIA(HexUnit enemyUnit, HexCell currentCell, HexCell targetCell, Vector3 pos)
+    {
+
+        if (hexGrid.GetPath() == null)
+        {
+            hexGrid.FindPath(currentCell, targetCell, enemyUnit);
+            listGrid = hexGrid.GetPath();
+            enemyUnit.Travel(listGrid);
+        }
+    }
+
+    /*void MoveEnemyUnits()
+    {
+        //Debug.Log("CANTIDAD");
+        // Debug.Log(unidadesEnem.Count);
+
+        foreach (GameObject enemy in unidadesEnem)
+         {
+             Debug.Log("ENEMYY");
+             if (enemy != null)
+             {
+                //CALCULO VALORES
+                enemyUnit = enemy.GetComponent<HexUnit>();
+                currentCell = enemyUnit.Location;
+                pos = new Vector3(69, 0, 120);
+                targetCell = hexGrid.GetCell(pos);
+
+                if (alAtaque && edificio >= 12)
+                {
+                    //A POR TODOS
+                    PathIA(enemyUnit, currentCell, targetCell, pos);
                 }
                 else
                 {
-                    enemyUnit = enemy.GetComponent<HexUnit>();
-                    currentCell = enemyUnit.Location;
-                    
-                    pos = new Vector3(69, 0, 120);
-                    if (enemyUnit.Location.Position == pos)
-                    {
+                    //vuelve a casa
+                     if (currentCell == targetCell)
+                     {
+                         vuelve = true;
+                     }
+                     if (vuelve)
+                     {
+                        //CALCULO NUEVO VALOR
+                        iniPos = new Vector3(155, 0, 180);
                         targetCell = hexGrid.GetCell(iniPos);
-                        Debug.Log(hexGrid.GetPath());
-                        if (hexGrid.GetPath() == null)
+
+                        //VUELVE A CASA
+                        PathIA(enemyUnit, currentCell, targetCell, pos);
+
+                        //sal a por todos
+                        if (currentCell == targetCell)
                         {
-                            hexGrid.FindPath(currentCell, targetCell, enemyUnit);
-                            listGrid = hexGrid.GetPath();
-                            enemyUnit.Travel(listGrid);
+                             alAtaque = true;
                         }
-                    }
-                    else
-                    {
-                        targetCell = hexGrid.GetCell(pos);
-                        Debug.Log(hexGrid.GetPath());
-                        if (hexGrid.GetPath() == null)
-                        {
-                            hexGrid.FindPath(currentCell, targetCell, enemyUnit);
-                            listGrid = hexGrid.GetPath();
-                            enemyUnit.Travel(listGrid);
-                        }
-                    }
-                    
+                     }
+                     else
+                     {
+                        //VE A MIRAR AL PLAYER
+                        PathIA(enemyUnit, currentCell, targetCell, pos);
+                     }
+
                 }
-                
-            }
-            
-        }
-    }
+
+             }
+
+         }
+    }*/
+
+
 
     bool haveResourcesBuilding(Edificio name)
     {

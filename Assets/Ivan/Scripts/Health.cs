@@ -11,7 +11,7 @@ public class Health : MonoBehaviour {
     private HexCell cell;
 	private HexGrid grid;
 
-	private InfluenceMapSystem influence;
+    private InfluenceMapSystem influence;
 
     void Start() {
 		influence = GameObject.Find ("InfluenceMap").GetComponent<InfluenceMapSystem>();
@@ -34,7 +34,6 @@ public class Health : MonoBehaviour {
         }
         
         grid = GameObject.Find("Hex Grid").GetComponent<HexGrid>();
-
 
     }
 
@@ -100,6 +99,7 @@ public class Health : MonoBehaviour {
     public void Celda(HexCell celda)
     {
         cell = celda;
+        
     }
 
     public HexCell GetCelda()
