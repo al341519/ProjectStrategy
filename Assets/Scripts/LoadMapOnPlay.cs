@@ -14,10 +14,19 @@ public class LoadMapOnPlay : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         hexGrid = GameObject.Find("Hex Grid").GetComponent<HexGrid>();
+
+        StartCoroutine(charge());
         if(_LoadOnStart)
-            Load(Application.dataPath + "/CustomMaps/" + _FileName + ".map");
+            Load(Application.persistentDataPath + "/" + _FileName + ".map");
 	}
 
+
+    IEnumerator charge()
+    {
+        yield return new WaitForEndOfFrame();
+        Load(Application.persistentDataPath +"/" + _FileName + ".map");
+
+    }
 
     void Load(string path)
     {
