@@ -205,7 +205,7 @@ public class Enemy : MonoBehaviour
     void PathIAOfensiva(GameObject enemy)
     {
         //ELEGIMOS CASTILLO A ATACAR
-        castillosAlly = GameObject.Find("Hex Feauture").GetComponent<HexFeautureManager>.GetCastillos();
+        castillosAlly = GameObject.Find("Hex Feauture").GetComponent<HexFeatureManager>.GetCastillos();
 
         if(castillosAlly != null)
         {
