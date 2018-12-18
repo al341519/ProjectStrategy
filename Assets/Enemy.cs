@@ -123,16 +123,16 @@ public class Enemy : MonoBehaviour
             case Unidades.soldado:
                 madera -= 20;    piedra -= 20;  comida -= 40;   aldeanos -= 1;
                 Unidad_deseada = Unidades.arquero;
-                hexGrid.AddUnit(Instantiate(enemyUnitPrefab[0]), cell, UnityEngine.Random.Range(0f, 360f));
+                hexGrid.AddUnit(Instantiate(enemyUnitPrefab[0]), cell, UnityEngine.Random.Range(0f, 360f),2);
                 break;
             case Unidades.arquero:
                 madera -= 45; piedra -= 25; comida -= 40; aldeanos -= 1;
-                hexGrid.AddUnit(Instantiate(enemyUnitPrefab[1]), cell, UnityEngine.Random.Range(0f, 360f));
+                hexGrid.AddUnit(Instantiate(enemyUnitPrefab[1]), cell, UnityEngine.Random.Range(0f, 360f),2);
                 Unidad_deseada = Unidades.jinete;
                 break;
             case Unidades.jinete:
                 madera -= 25; piedra -= 45; comida -= 50; aldeanos -= 1;
-                hexGrid.AddUnit(Instantiate(enemyUnitPrefab[2]), cell, UnityEngine.Random.Range(0f, 360f));
+                hexGrid.AddUnit(Instantiate(enemyUnitPrefab[2]), cell, UnityEngine.Random.Range(0f, 360f),2);
                 break;
             default:
                 break;
