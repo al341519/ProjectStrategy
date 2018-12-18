@@ -10059,6 +10059,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 274d45f4c5a9cfd4fa67cb1e72dabc58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hexGrid: {fileID: 0}
   enemyUnitPrefab:
   - {fileID: 114037183242733872, guid: 2e7e57ea0e0b32d4b9009d8a03549229, type: 2}
   - {fileID: 114134527652273646, guid: 36a26803642d9654fbf595450590a3ec, type: 2}
