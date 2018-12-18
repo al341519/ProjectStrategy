@@ -120,7 +120,7 @@ public class HexFeatureManager : MonoBehaviour {
         if (cell.SpecialIndex == 1)
         {
             castillo++;
-            castillos[castillos - 1] = cell;
+            castillos[castillo - 1] = cell;
         }
         instance.gameObject.GetComponent<Health>().Celda(cell);
         cell.edificio = instance.gameObject;

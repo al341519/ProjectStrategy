@@ -47,7 +47,7 @@ public class Enemy : MonoBehaviour
 	private List<GameObject> unidadesEnem;
     private List<GameObject> unidadesAlly;
     HexCell[] castillosAlly;
-    HexCell[] castilloPosible;
+    List<HexCell> castilloPosible;
 
     HexUnit enemyUnit;
     HexCell currentCell;
@@ -192,7 +192,7 @@ public class Enemy : MonoBehaviour
             if (unidadesEnem.Count > unidadesAlly.Count)
             {
                 defensivo = false;
-                PathIAOfensiva(enemy);
+               // PathIAOfensiva(enemy);
             }
             else
             {
@@ -205,17 +205,18 @@ public class Enemy : MonoBehaviour
     void PathIAOfensiva(GameObject enemy)
     {
         //ELEGIMOS CASTILLO A ATACAR
-        castillosAlly = GameObject.Find("Hex Feauture").GetComponent<HexFeautureManager>.GetCastillos();
+        castillosAlly = GameObject.Find("Hex Feature").GetComponent<HexFeatureManager>().GetCastillos();
 
         if(castillosAlly != null)
         {
+            castilloPosible = new List<HexCell>();
             foreach (HexCell cell in castillosAlly)
             {
                 if (cell!= null)
                 {
                     enemyUnit = enemy.GetComponent<HexUnit>();
                     currentCell = enemyUnit.Location;
-                    pos = cell.Location.Position;
+                    pos = cell.Position;
                     targetCell = hexGrid.GetCell(pos);
                     if (hexGrid.GetPath() == null)
                     {
@@ -251,7 +252,7 @@ public class Enemy : MonoBehaviour
 
             //OTRO MODO: DIBUJAR DE NUEVO EL PATH
 
-            pos = castilloElegido.Location.Position;
+            pos = castilloElegido.Position;
             targetCell = hexGrid.GetCell(pos);
 
             PathIA(enemyUnit, currentCell, targetCell, pos);
