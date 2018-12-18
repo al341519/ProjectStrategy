@@ -38,6 +38,9 @@ public class Enemy : MonoBehaviour
 
     float timerTurno = HexMetrics.tiempo;
 
+	private bool defensivo=false;
+	private List<GameObject> unidadesEnem;
+
     public bool Empezado
     {
         get
@@ -89,6 +92,26 @@ public class Enemy : MonoBehaviour
         chooseUnit();
 
         timerTurno = 0f;
+
+
+		unidadesEnem=new List<GameObject> (GameObject.FindGameObjectsWithTag ("EnemyUnit"));
+		if (defensivo) {
+			foreach (GameObject unidad in unidadesEnem) {
+				if (unidad.GetComponent<UnitClass> ().type == "raider") {
+					unidad.GetComponent<UnitClass> ().Patrulla ();
+				} else {
+					unidad.GetComponent<UnitClass> ().Defensivo ();
+				}
+			}
+		} else {
+			foreach (GameObject unidad in unidadesEnem) {
+				if (unidad.GetComponent<UnitClass> ().type == "raider") {
+					unidad.GetComponent<UnitClass> ().Agresivo ();
+				} else {
+					unidad.GetComponent<UnitClass> ().Agresivo ();
+				}
+			}
+		}
     }
 
 
