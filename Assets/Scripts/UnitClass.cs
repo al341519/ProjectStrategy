@@ -242,7 +242,7 @@ public class UnitClass : MonoBehaviour {
 						
 						targetClass = target.GetComponent<UnitClass> ();
 						targetClass.dealDMG (this.attack, this.GetComponent<HexUnit> ());
-						cdAtack = HexMetrics.tiempo;
+						cdAtack = HexMetrics.tiempo*3;
 						atacar = true;
 					} else {
 						listGrid = new List<HexCell> ();
@@ -254,7 +254,7 @@ public class UnitClass : MonoBehaviour {
 					}
 				} else if (targetEdi) {
 					targetEdi.TakeDamage ((int)this.attack);
-					cdAtack = HexMetrics.tiempo;
+					cdAtack = HexMetrics.tiempo*3;
 					atacar = true;
 				}
 
