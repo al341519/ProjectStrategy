@@ -23,7 +23,7 @@ public class HexMapEditor : MonoBehaviour {
 
     int activeUrbanLevel, activeFarmLevel, activePlantLevel, activeSpecialIndex;//, activeUnitIndex;
 
-	int activeTerrainTypeIndex;
+	int activeTerrainTypeIndex = 1;
 
 	int brushSize;
 

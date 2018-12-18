@@ -125,20 +125,16 @@ public class UnitClass : MonoBehaviour {
 			}
 			foreach (GameObject unidad in unidadesEnemigas) {
 				float distancia= Mathf.Abs (Vector3.Distance (this.transform.position, unidad.transform.position));
-
-				if (distancia <= rangoAgresividad * radiocelda && !target) {
-					target = unidad.GetComponent<HexUnit>();
-					HexUnit thisUnit = this.GetComponent<HexUnit> ();
-					//thisUnit;
-					grid.ClearPath ();
-					grid.FindPath (thisUnit.Location, target.Location, thisUnit);
-					listGrid = grid.GetPath();
-					thisUnit.Travel(listGrid);
-					break;
-				}
-			}
-			if (target) {
-				combat = true;
+					if (distancia <= 0.5+rangoAgresividad * radiocelda && !target) {
+							target = unidad.GetComponent<HexUnit> ();
+							HexUnit thisUnit = this.GetComponent<HexUnit> ();
+							//thisUnit;
+							grid.ClearPath ();
+							grid.FindPath (thisUnit.Location, target.Location, thisUnit);
+							listGrid = grid.GetPath ();
+							thisUnit.Travel (listGrid);
+							break;
+					}
 			}
 		}
 
