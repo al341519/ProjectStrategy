@@ -728,8 +728,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1220353102166564}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_LocalPosition: {x: 313.92984, y: 205.97069, z: 255.79025}
+  m_LocalScale: {x: 0.031038, y: 0.031038, z: 0.031038}
   m_Children:
   - {fileID: 4857463271198718}
   - {fileID: 4399132713766870}
@@ -898,7 +898,7 @@ MonoBehaviour:
   attackRange: 0
   agresivo: 0
   huidizo: 0
-  patrulla: 1
+  patrulla: 0
   agresivoMov: 0
   cdPatrulla: 1
 --- !u!114 &114560887966287534

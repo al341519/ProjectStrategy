@@ -298,7 +298,6 @@ GameObject:
   - component: {fileID: 4386383586071594}
   - component: {fileID: 95924001168258790}
   - component: {fileID: 114089332536831142}
-  - component: {fileID: 114621872250933174}
   m_Layer: 0
   m_Name: Molino
   m_TagString: edificioEnemigo
@@ -1905,8 +1904,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1218923391066058}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -5.279999, y: 0, z: 0.21000671}
-  m_LocalScale: {x: 0.010000011, y: 0.01, z: 0.010000011}
+  m_LocalPosition: {x: 351.92023, y: 230.2191, z: 290.98846}
+  m_LocalScale: {x: 0.013922438, y: 0.013922423, z: 0.013922438}
   m_Children:
   - {fileID: 4351292426830810}
   - {fileID: 4390038581607402}
@@ -4307,22 +4306,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visionRange: 2
   currentHealth: 100
---- !u!114 &114621872250933174
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1218923391066058}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3e6dc669fb9dc848a0f9536f4cf29c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _InfluenceRadius: 30
-  _InfluencePower: 1
-  _InfluencePropagationRatio: 0.9
-  _Team: 1
-  type: 1
 --- !u!137 &137010838043468956
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

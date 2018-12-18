@@ -309,7 +309,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4234264288931912}
   - component: {fileID: 95273219282240878}
-  - component: {fileID: 114632650299904768}
+  - component: {fileID: 114980505490714658}
   m_Layer: 0
   m_Name: Mina
   m_TagString: Untagged
@@ -5263,7 +5263,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114632650299904768
+--- !u!114 &114980505490714658
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5271,10 +5271,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1152652269165850}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0149c56c276d915449160afe46a6149c, type: 3}
+  m_Script: {fileID: 11500000, guid: f3e6dc669fb9dc848a0f9536f4cf29c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 100
+  _InfluenceRadius: 10
+  _InfluencePower: 1
+  _InfluencePropagationRatio: 0.9
+  _Team: 1
+  type: 2
 --- !u!137 &137016295344608248
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

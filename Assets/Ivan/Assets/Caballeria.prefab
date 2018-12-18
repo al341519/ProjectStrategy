@@ -254,7 +254,6 @@ GameObject:
   - component: {fileID: 4450042408484958}
   - component: {fileID: 95001326622871486}
   - component: {fileID: 114282840107472684}
-  - component: {fileID: 114083484651790076}
   m_Layer: 0
   m_Name: Caballeria
   m_TagString: Untagged
@@ -1560,8 +1559,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1202790500088194}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.0000029504295}
-  m_LocalPosition: {x: 0.5192038, y: 3, z: -8.5343075}
-  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_LocalPosition: {x: 337.03903, y: 226.07213, z: 288.42496}
+  m_LocalScale: {x: 0.01421516, y: 0.01421516, z: 0.01421516}
   m_Children:
   - {fileID: 4596450237989474}
   - {fileID: 4524656495786154}
@@ -4188,22 +4187,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114083484651790076
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1202790500088194}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3e6dc669fb9dc848a0f9536f4cf29c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _InfluenceRadius: 30
-  _InfluencePower: 1
-  _InfluencePropagationRatio: 0.9
-  _Team: 1
-  type: 1
 --- !u!114 &114282840107472684
 MonoBehaviour:
   m_ObjectHideFlags: 1

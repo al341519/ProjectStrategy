@@ -870,8 +870,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1245471975112554}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_LocalPosition: {x: 323.27496, y: 205.9707, z: 258.85764}
+  m_LocalScale: {x: 0.031038, y: 0.031038, z: 0.031038}
   m_Children:
   - {fileID: 4823978094785934}
   - {fileID: 4347016932751658}
@@ -1036,6 +1036,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiGame: {fileID: 0}
+  caminar: 0
+  atacar: 0
   type: archer
   velocity: 0
   defence: 0

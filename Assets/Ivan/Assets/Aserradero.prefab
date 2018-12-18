@@ -1277,7 +1277,6 @@ GameObject:
   - component: {fileID: 4705272938915720}
   - component: {fileID: 95401839289268712}
   - component: {fileID: 114527032010661718}
-  - component: {fileID: 114168577508091390}
   m_Layer: 0
   m_Name: Aserradero
   m_TagString: Untagged
@@ -2280,8 +2279,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1974150642326260}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.0000029504295}
-  m_LocalPosition: {x: 2.7400055, y: 0, z: 6.22908}
-  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_LocalPosition: {x: 342.97018, y: 225.90968, z: 282.46994}
+  m_LocalScale: {x: 0.011724, y: 0.011724, z: 0.011724}
   m_Children:
   - {fileID: 4640333694955606}
   - {fileID: 4810623017099914}
@@ -3728,22 +3727,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114168577508091390
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1974150642326260}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3e6dc669fb9dc848a0f9536f4cf29c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _InfluenceRadius: 30
-  _InfluencePower: 1
-  _InfluencePropagationRatio: 0.9
-  _Team: 1
-  type: 1
 --- !u!114 &114527032010661718
 MonoBehaviour:
   m_ObjectHideFlags: 1

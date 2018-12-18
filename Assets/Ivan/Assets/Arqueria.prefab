@@ -780,7 +780,6 @@ GameObject:
   - component: {fileID: 4884088191074190}
   - component: {fileID: 114316370193939626}
   - component: {fileID: 114146982581472632}
-  - component: {fileID: 114431911320270094}
   m_Layer: 0
   m_Name: Arqueria
   m_TagString: Untagged
@@ -3134,8 +3133,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1399776201307478}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -3.5599976, y: 0, z: -5.769989}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 325.49612, y: 205.39232, z: 260.08325}
+  m_LocalScale: {x: 1.3678, y: 1.3678, z: 1.3678}
   m_Children:
   - {fileID: 4532713903096560}
   - {fileID: 4085433799241224}
@@ -4490,22 +4489,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visionRange: 2
   currentHealth: 100
---- !u!114 &114431911320270094
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1399776201307478}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3e6dc669fb9dc848a0f9536f4cf29c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _InfluenceRadius: 30
-  _InfluencePower: 1
-  _InfluencePropagationRatio: 0.9
-  _Team: 1
-  type: 1
 --- !u!137 &137023133521955410
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
