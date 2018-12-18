@@ -51,15 +51,23 @@ public class UnitClass : MonoBehaviour {
 
 
     // Use this for initialization
-    void Awake () {
+    void Start () {
 		uiGame = GameObject.Find("Game UI").GetComponent<HexGameUI>();
 		grid = GameObject.Find("Hex Grid").GetComponent<HexGrid>();
 		cdPatrulla = true;
         if (type != "infantry") {
             anim = this.GetComponent<Animator>();
         }
-        
-
+        if (this.GetComponent<HexUnit>().propietario == 1) { this.tag = "AllyUnit"; }
+        else { this.tag = "EnemyUnit"; }
+        if (tag == "AllyUnit")
+        {
+            GetComponent<Influencer>()._Team = 1;
+        }
+        if(tag == "EnemyUnit")
+        {
+            GetComponent<Influencer>()._Team = 2;
+        }
 
         caminar = false;
         atacar = false;
@@ -110,8 +118,7 @@ public class UnitClass : MonoBehaviour {
 		if (life<=0){
 			Death();
 		}
-		if (this.GetComponent<HexUnit> ().propietario == 1) {this.tag="AllyUnit";}
-		else{this.tag="EnemyUnit";}
+		
 		if (agresivo) {
 			//Coger enemigos a X distancia e ir a por ellos
 			if (this.tag == "AllyUnit") {

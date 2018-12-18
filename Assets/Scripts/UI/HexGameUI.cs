@@ -18,7 +18,7 @@ public class HexGameUI : MonoBehaviour {
 
 	HexCell currentCell;
 
-	HexUnit selectedUnit;
+	public HexUnit selectedUnit;
 
 	public void SetEditMode (bool toggle) {
 		enabled = !toggle;
