@@ -41,6 +41,12 @@ public class Enemy : MonoBehaviour
 	private bool defensivo=false;
 	private List<GameObject> unidadesEnem;
 
+    HexUnit enemyUnit;
+    HexCell currentCell;
+    HexCell targetCell;
+    Vector3 pos;
+    List<HexCell> listGrid;
+
     public bool Empezado
     {
         get
@@ -112,6 +118,8 @@ public class Enemy : MonoBehaviour
 				}
 			}
 		}
+
+        MoveEnemyUnits();
     }
 
 
@@ -169,21 +177,24 @@ public class Enemy : MonoBehaviour
 
     void MoveEnemyUnits()
     {
-        List<GameObject> unidadesEnemigas = new List<GameObject>(GameObject.FindGameObjectsWithTag("EnemyUnit"));
-        HexUnit enemyUnit;
-        HexCell currentCell;
-        HexCell targetCell;
-        Vector3 pos;
-        foreach(GameObject enemy in unidadesEnemigas)
+        //List<GameObject> unidadesEnemigas = new List<GameObject>(GameObject.FindGameObjectsWithTag("EnemyUnit"));
+        
+        foreach(GameObject enemy in unidadesEnem)
         {
             if (enemy != null)
             {
                 enemyUnit = enemy.GetComponent<HexUnit>();
                 currentCell = enemyUnit.Location;
-
                 pos = new Vector3(0, 0, 0);
                 targetCell = hexGrid.GetCell(pos);
-               // hexGrid.findPath(currentCell, targetCell, enemyUnit);
+                Debug.Log(hexGrid.GetPath());
+                if (hexGrid.GetPath() == null)
+                {
+                    hexGrid.FindPath(currentCell, targetCell, enemyUnit);
+                    listGrid = hexGrid.GetPath();
+                    enemyUnit.Travel(listGrid);
+                }
+                
             }
             
         }
@@ -376,10 +387,12 @@ public class Enemy : MonoBehaviour
 
             if (edificio == 6) {
                 tower[0].SpecialIndex = 10;
+                tower[0].Owner = 2;
             }
             if (edificio == 10)
             {
                 tower[1].SpecialIndex = 9;
+                tower[0].Owner = 2;
             }
             if ((castillo < 1 || edificio >= castillo * 6) && haveResourcesBuilding(Edificio.castillo))
             {
