@@ -117,13 +117,15 @@ public class HexFeatureManager : MonoBehaviour {
     {
         HexHash hash = HexMetrics.SampleHashGrid(position);
         Transform instance = Instantiate(special[cell.SpecialIndex - 1]).transform;
-        if (cell.SpecialIndex == 1)
+        
+        instance.gameObject.GetComponent<Health>().Celda(cell);
+        cell.edificio = instance.gameObject;
+
+        if (cell.Owner == 1 && cell.SpecialIndex == 1)
         {
             castillo++;
             castillos[castillo - 1] = cell;
         }
-        instance.gameObject.GetComponent<Health>().Celda(cell);
-        cell.edificio = instance.gameObject;
         instance.localPosition = HexMetrics.Perturb(position);
         instance.localRotation = Quaternion.Euler(0f, 360f * hash.e, 0f);
         instance.SetParent(container, false);
