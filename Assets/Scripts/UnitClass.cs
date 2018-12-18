@@ -365,6 +365,11 @@ public class UnitClass : MonoBehaviour {
 		huidizo = false;
 		patrulla = true;
 	}
+	public void Defensivo(){
+		agresivo = false;
+		huidizo = false;
+		patrulla = false;
+	}
 
 	private IEnumerator TiempoHuida(){
 		yield return new WaitForSeconds (1);
