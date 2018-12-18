@@ -219,7 +219,7 @@ public class Enemy : MonoBehaviour
                     targetCell = hexGrid.GetCell(pos);
                     if (hexGrid.GetPath() == null)
                     {
-                        hexGrid.FindPath(currentCell, targetCell, enemyUnit);
+                        hexGrid.FindPathNoShow(currentCell, targetCell, enemyUnit);
                         listGrid = hexGrid.GetPath();
                         listas.Add(listGrid);
                         castilloPosible.Add(targetCell);

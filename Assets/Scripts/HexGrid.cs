@@ -401,7 +401,16 @@ public class HexGrid : MonoBehaviour {
 		ShowPath(unit.Speed);
 	}
 
-	bool Search (HexCell fromCell, HexCell toCell, HexUnit unit) {
+    public void FindPathNoShow(HexCell fromCell, HexCell toCell, HexUnit unit)
+    {
+        ClearPath();
+        currentPathFrom = fromCell;
+        currentPathTo = toCell;
+        currentPathExists = Search(fromCell, toCell, unit);
+        //ShowPath(unit.Speed);
+    }
+
+    bool Search (HexCell fromCell, HexCell toCell, HexUnit unit) {
 		int speed = unit.Speed;
 		searchFrontierPhase += 2;
 		if (searchFrontier == null) {
