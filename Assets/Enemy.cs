@@ -320,7 +320,7 @@ public class Enemy : MonoBehaviour
        	foreach (HexDirection direction in Enum.GetValues(typeof(HexDirection)))
         {
             castillos[castillo].GetNeighbor(direction).Walled = true;
-            castillos[castillo].Owner = 2;
+			castillos[castillo].GetNeighbor(direction).Owner = 2;
         }
 
         castillos[castillo].Walled = true;
@@ -355,10 +355,12 @@ public class Enemy : MonoBehaviour
 
             if (edificio == 6) {
                 tower[0].SpecialIndex = 10;
+				tower [0].Owner = 2;
             }
             if (edificio == 10)
             {
                 tower[1].SpecialIndex = 9;
+				tower [1].Owner = 2;
             }
             if ((castillo < 1 || edificio >= castillo * 6) && haveResourcesBuilding(Edificio.castillo))
             {
