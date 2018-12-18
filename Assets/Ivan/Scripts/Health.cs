@@ -46,6 +46,32 @@ public class Health : MonoBehaviour {
         //  Debug.Log("la celda es ZELDA ---> " + cell);
         grid.IncreaseVisibility(cell, visionRange);
 
+        if (cell.Owner == 1)
+        {
+            this.tag = "edificioAliado";
+        }
+        else if (cell.Owner == 2)
+        {
+            this.tag = "edificioEnemigo";
+        }
+
+        if (GetComponent<Influencer>() != null)
+        {
+            if (cell.Owner == 1)
+            {
+                this.tag = "edificioAliado";
+                influence.UpdateBuildingInfluence(0);
+                this.GetComponent<Influencer>()._Team = 1;
+            }
+            else if (cell.Owner == 2)
+            {
+                this.tag = "edificioEnemigo";
+                influence.UpdateBuildingInfluence(1);
+                print("Influencer null?: " + (GetComponent<Influencer>() == null) + " -- InfluencerType: " + GetComponent<Influencer>().type);
+                this.GetComponent<Influencer>()._Team = 2;
+            }
+        }
+
     }
 
 

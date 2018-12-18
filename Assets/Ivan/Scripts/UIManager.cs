@@ -36,6 +36,8 @@ public class UIManager : MonoBehaviour {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             cell = grid.GetCell(ray);
+            Debug.Log("CLICADA");
+            Debug.Log(cell.Position);
 
             if (cell.SpecialIndex == 1 && cell.Owner == 1)
             {

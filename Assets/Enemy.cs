@@ -38,8 +38,15 @@ public class Enemy : MonoBehaviour
 
     float timerTurno = HexMetrics.tiempo;
 
-	private bool defensivo=false;
+	private bool defensivo=true;
 	private List<GameObject> unidadesEnem;
+
+    HexUnit enemyUnit;
+    HexCell currentCell;
+    HexCell targetCell;
+    Vector3 pos;
+    Vector3 iniPos;
+    List<HexCell> listGrid;
 
     public bool Empezado
     {
@@ -78,7 +85,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
    //     Debug.Log("AL ATAQUEEE --> "+ createTroops);
     //    Debug.Log("md: " + madera + " pd: " + piedra + " cmd: " + comida);
         if (empezado == false) { return; }
@@ -112,6 +119,8 @@ public class Enemy : MonoBehaviour
 				}
 			}
 		}
+
+        //MoveEnemyUnits();
     }
 
 
@@ -169,21 +178,59 @@ public class Enemy : MonoBehaviour
 
     void MoveEnemyUnits()
     {
-        List<GameObject> unidadesEnemigas = new List<GameObject>(GameObject.FindGameObjectsWithTag("EnemyUnit"));
-        HexUnit enemyUnit;
-        HexCell currentCell;
-        HexCell targetCell;
-        Vector3 pos;
-        foreach(GameObject enemy in unidadesEnemigas)
+        //List<GameObject> unidadesEnemigas = new List<GameObject>(GameObject.FindGameObjectsWithTag("EnemyUnit"));
+        
+
+        foreach(GameObject enemy in unidadesEnem)
         {
             if (enemy != null)
             {
-                enemyUnit = enemy.GetComponent<HexUnit>();
-                currentCell = enemyUnit.Location;
-
-                pos = new Vector3(0, 0, 0);
-                targetCell = hexGrid.GetCell(pos);
-               // hexGrid.findPath(currentCell, targetCell, enemyUnit);
+                if (edificio == 12)
+                {
+                    //A POR TODOS
+                    enemyUnit = enemy.GetComponent<HexUnit>();
+                    currentCell = enemyUnit.Location;
+                    pos = new Vector3(69, 0, 120);
+                    targetCell = hexGrid.GetCell(pos);
+                    Debug.Log(hexGrid.GetPath());
+                    if (hexGrid.GetPath() == null)
+                    {
+                        hexGrid.FindPath(currentCell, targetCell, enemyUnit);
+                        listGrid = hexGrid.GetPath();
+                        enemyUnit.Travel(listGrid);
+                    }
+                }
+                else
+                {
+                    enemyUnit = enemy.GetComponent<HexUnit>();
+                    currentCell = enemyUnit.Location;
+                    
+                    pos = new Vector3(69, 0, 120);
+                    if (enemyUnit.Location.Position == pos)
+                    {
+                        targetCell = hexGrid.GetCell(iniPos);
+                        Debug.Log(hexGrid.GetPath());
+                        if (hexGrid.GetPath() == null)
+                        {
+                            hexGrid.FindPath(currentCell, targetCell, enemyUnit);
+                            listGrid = hexGrid.GetPath();
+                            enemyUnit.Travel(listGrid);
+                        }
+                    }
+                    else
+                    {
+                        targetCell = hexGrid.GetCell(pos);
+                        Debug.Log(hexGrid.GetPath());
+                        if (hexGrid.GetPath() == null)
+                        {
+                            hexGrid.FindPath(currentCell, targetCell, enemyUnit);
+                            listGrid = hexGrid.GetPath();
+                            enemyUnit.Travel(listGrid);
+                        }
+                    }
+                    
+                }
+                
             }
             
         }
@@ -341,7 +388,7 @@ public class Enemy : MonoBehaviour
        	foreach (HexDirection direction in Enum.GetValues(typeof(HexDirection)))
         {
             castillos[castillo].GetNeighbor(direction).Walled = true;
-            castillos[castillo].Owner = 2;
+			castillos[castillo].GetNeighbor(direction).Owner = 2;
         }
 
         castillos[castillo].Walled = true;
@@ -376,10 +423,13 @@ public class Enemy : MonoBehaviour
 
             if (edificio == 6) {
                 tower[0].SpecialIndex = 10;
+                tower[0].Owner = 2;
             }
             if (edificio == 10)
             {
                 tower[1].SpecialIndex = 9;
+                tower[0].Owner = 2;
+				tower [1].Owner = 2;
             }
             if ((castillo < 1 || edificio >= castillo * 6) && haveResourcesBuilding(Edificio.castillo))
             {

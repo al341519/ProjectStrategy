@@ -51,14 +51,23 @@ public class UnitClass : MonoBehaviour {
 
 
     // Use this for initialization
-    void Awake () {
+    void Start () {
 		uiGame = GameObject.Find("Game UI").GetComponent<HexGameUI>();
 		grid = GameObject.Find("Hex Grid").GetComponent<HexGrid>();
 		cdPatrulla = true;
         if (type != "infantry") {
             anim = this.GetComponent<Animator>();
         }
-        
+        if (this.GetComponent<HexUnit>().propietario == 1) { this.tag = "AllyUnit"; }
+        else { this.tag = "EnemyUnit"; }
+        if (tag == "AllyUnit")
+        {
+            GetComponent<Influencer>()._Team = 1;
+        }
+        if(tag == "EnemyUnit")
+        {
+            GetComponent<Influencer>()._Team = 2;
+        }
 
         caminar = false;
         atacar = false;
@@ -109,8 +118,7 @@ public class UnitClass : MonoBehaviour {
 		if (life<=0){
 			Death();
 		}
-		if (this.GetComponent<HexUnit> ().propietario == 1) {this.tag="AllyUnit";}
-		else{this.tag="EnemyUnit";}
+		
 		if (agresivo) {
 			//Coger enemigos a X distancia e ir a por ellos
 			if (this.tag == "AllyUnit") {
@@ -125,20 +133,16 @@ public class UnitClass : MonoBehaviour {
 			}
 			foreach (GameObject unidad in unidadesEnemigas) {
 				float distancia= Mathf.Abs (Vector3.Distance (this.transform.position, unidad.transform.position));
-
-				if (distancia <= rangoAgresividad * radiocelda && !target) {
-					target = unidad.GetComponent<HexUnit>();
-					HexUnit thisUnit = this.GetComponent<HexUnit> ();
-					//thisUnit;
-					grid.ClearPath ();
-					grid.FindPath (thisUnit.Location, target.Location, thisUnit);
-					listGrid = grid.GetPath();
-					thisUnit.Travel(listGrid);
-					break;
-				}
-			}
-			if (target) {
-				combat = true;
+					if (distancia <= 0.5+rangoAgresividad * radiocelda && !target) {
+							target = unidad.GetComponent<HexUnit> ();
+							HexUnit thisUnit = this.GetComponent<HexUnit> ();
+							//thisUnit;
+							grid.ClearPath ();
+							grid.FindPath (thisUnit.Location, target.Location, thisUnit);
+							listGrid = grid.GetPath ();
+							thisUnit.Travel (listGrid);
+							break;
+					}
 			}
 		}
 

@@ -31,5 +31,11 @@ public class DebugMapController : MonoBehaviour {
         {
             system.debugMap = 1;
         }
+
+        //MapVisibility
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            system.mapPlane.SetActive(!system.mapPlane.activeInHierarchy);
+        }
     }
 }
